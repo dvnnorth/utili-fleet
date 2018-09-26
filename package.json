@@ -11,7 +11,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "cd client && yarn start",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn --cwd ./client install && yarn --cwd ./client build"
   },
   "dependencies": {
     "body-parser": "^1.18.3",
