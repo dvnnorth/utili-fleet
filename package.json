@@ -1,0 +1,31 @@
+{
+  "name": "utili-fleet",
+  "version": "1.0.0",
+  "description": "UtiliFleet is a fleet management application built using the MERN stack.",
+  "main": "server.js",
+  "repository": "git@github.com:dvnnorth/utili-fleet.git",
+  "author": "Devin North, Enrique Salas, Irina Machado, Ivan Pawalek, Preston Edwards",
+  "license": "MIT",
+  "scripts": {
+    "client-install": "yarn --cwd ./client install",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "cd client && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "express": "^4.16.3",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.39.0",
+    "sequelize-cli": "^4.1.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.0",
+    "dotenv": "^6.0.0",
+    "eslint": "^5.6.0",
+    "eslint-plugin-react": "^7.11.1",
+    "nodemon": "^1.18.4"
+  }
+}
