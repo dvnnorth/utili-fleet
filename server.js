@@ -35,7 +35,7 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   db.sequelize
-    .sync()
+    .authenticate()
     .then(() => {
       console.log('Connection to database has been established successfully.');
     })
