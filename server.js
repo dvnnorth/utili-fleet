@@ -3,6 +3,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+//Using bcrypt to hash
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 // Require Sequelize
 const db = require('./models/index');
 
