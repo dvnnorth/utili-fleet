@@ -6,13 +6,13 @@ const path = require('path');
 //require authentication packages
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const session = require("express-session");
-const cookieParser = require('cookie-parser')
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 // Require Sequelize
-const db = require('./models/index');
+const db = require('./models/');
 
 // Init Express app
 const app = express();
@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //this should be below the static file middleware
 app.use(
   session({
-    secret: "keyboard cat", //this should be a random string
+    secret: 'keyboard cat', //this should be a random string
     resave: false,
     saveUninitialized: true
     //cookie: { secure: true }
@@ -39,31 +39,26 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.use(
-  new LocalStrategy(function(username, password, done) {
-    db.Tutor.findOne({ where: {username: username} }, function(err, user) {
-      console.log(user);
-      //console.log(password);
-      if (err) {
-        return done(err);
-      }
-      if (!user) {
-        return done(null, false, { message: "Incorrect username." });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: "Incorrect password." });
-      }
-      //const hash = 
-      //bcrypt.compare(password, hash, function(err, res) {
 
-     // });;
-      return done(null, user);
-    });
-  })
-);
 
 // Call routes
 apiRoutes(app);
+
+passport.use(
+  new LocalStrategy(function(username, password, done) {
+    db.Employee.findOne( {where: {username: username} }).then(function(user) {
+      console.log(user);
+      if(!user)
+        return done(null);
+
+      const hash = user.dataValues.password;
+      bcrypt.compare(password, hash, function(err, res) {
+        return done(null, user);
+      });
+   
+    });
+  })
+);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
@@ -72,7 +67,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
-};
+}
 
 // Setup app listener and database connection
 app.listen(PORT, () => {

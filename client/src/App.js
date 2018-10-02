@@ -26,7 +26,7 @@ class App extends Component {
   formPost = event => {    
     event.preventDefault();
     
-    console.log('STATE AT AXIOS POST: ', this.state.value);
+    console.log('STATE AT AXIOS POST: ', this.state);
     axios.post('/register', this.state);
   };
 
