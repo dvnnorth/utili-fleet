@@ -1,23 +1,16 @@
-import React from 'react';
+import React, { Component } from "react";
 
-export default class Results extends React.Component {
+export default class Results extends Component {
+  render() {
+    const result = this.props.result;
 
-    constructor(props) {
-        super(props);
-        // propTypes: {
-        //     onDetected: PropTypes.string.isRequired
-        // }
+    if (!result) {
+      return null;
     }
-    render() {
-        const result = this.props.result;
-
-        if (!result) {
-            return null;
-        }
-        return (
-            <li>
-            {result.codeResult.code} [{result.codeResult.format}]
-            </li>
-        );
-    }
+    return (
+      <li>
+        {result.codeResult.code} [{result.codeResult.format}]
+      </li>
+    );
+  }
 }
