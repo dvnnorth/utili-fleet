@@ -1,11 +1,8 @@
-import router from 'express';
+import axios from 'axios';
 
 export default {
-    addEmployee: function () {
-        return router.post('/register');
-    }
+  addEmployee: function (data) {
+    return axios.post('/register', data);
+  }
 
-
-
-
-}
+};
