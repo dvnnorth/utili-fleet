@@ -25,8 +25,8 @@ export default class Scanner extends Component {
         numOfWorkers: 2,
         decoder: {
           readers: [
-            // "code_39_vin_reader",
-            "upc_reader"
+            "code_39_vin_reader"
+            //"upc_reader"
           ]
         },
         locate: true
