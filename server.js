@@ -9,7 +9,6 @@ const saltRounds = 10;
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-const cookieParser = require('cookie-parser');
 
 // Require Sequelize
 const db = require('./models/');
@@ -32,7 +31,7 @@ app.use(
   session({
     secret: 'keyboard cat', //this should be a random string
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false
     //cookie: { secure: true }
   })
 );
@@ -47,13 +46,20 @@ apiRoutes(app);
 passport.use(
   new LocalStrategy(function(username, password, done) {
     db.Employee.findOne( {where: {username: username} }).then(function(user) {
-      console.log(user);
-      if(!user)
-        return done(null);
-
-      const hash = user.dataValues.password;
+      //console.log(user);
+      if(!user) return done(null);
+      
+      console.log( user.dataValues.password);
+      let hash = user.dataValues.password;
       bcrypt.compare(password, hash, function(err, res) {
-        return done(null, user);
+        if(res){
+          let user_id = user.dataValues.id;
+          return done(null, res);
+        } else {
+          console.log("return err");
+          return done (null, err);
+        }
+
       });
    
     });
