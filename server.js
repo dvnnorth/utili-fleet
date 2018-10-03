@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
-};
+}
 
 // Setup app listener and database connection
 app.listen(PORT, () => {
@@ -44,3 +44,6 @@ app.listen(PORT, () => {
     });
 });
 
+if (process.env.NODE_ENV === 'test') {
+  module.exports = app;
+}
