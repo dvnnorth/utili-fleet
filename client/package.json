@@ -6,7 +6,8 @@
     "quagga": "^0.12.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "1.1.5"
+    "react-scripts": "1.1.5",
+    "vin-validator": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
