@@ -4,7 +4,31 @@ var db = require('../models/');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
 var session = require('express-session');
+const LocalStrategy = require('passport-local').Strategy;
 let user_id;
+
+passport.use(
+  new LocalStrategy(function(username, password, done) {
+    db.Employee.findOne( {where: {username: username} }).then(function(user) {
+    //console.log(user);
+      if(!user) return done(null);
+    
+      console.log( user.dataValues.password);
+      let hash = user.dataValues.password;
+      bcrypt.compare(password, hash, function(err, res) {
+        if(res){
+          let user_id = user.dataValues.id;
+          return done(null, res);
+        } else {
+          console.log('return err');
+          return done (null, err);
+        }
+
+      });
+ 
+    });
+  })
+);
 
 
 module.exports = app => {
@@ -19,9 +43,10 @@ module.exports = app => {
   });
 
   app.get('/dashboard', (req, res) => {
-    res.send('hello here');
+    console.log(req.user);
+    console.log(req.isAuthenticated());
+    res.send('Welcome to your dash');
   });
-
   app.post('/register', function(req, res) {
     var password = req.body.password;
     var hash = bcrypt.hashSync(password, 10);
@@ -30,8 +55,8 @@ module.exports = app => {
       username: req.body.username,
       password: hash,
     }).then(function(newEmployee) {
-      user_id = newEmployee.dataValues.id;
       let username = req.body.username;
+      user_id = newEmployee.dataValues.id;
       req.login(user_id, function(err){
         res.redirect('/');
         console.log(req.user);
@@ -45,12 +70,12 @@ module.exports = app => {
   });
 
   app.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/dashboard',
     failureRedirect: '/api/test'
   }));
 
   app.get('/logout', (req, res) => {
-    req.logout()
+    req.logout();
     res.redirect('/');
   });
 
@@ -70,7 +95,7 @@ module.exports = app => {
     return (req, res, next) => {
       console.log(`req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
 
-	   if (req.isAuthenticated()) return next();
+      if (req.isAuthenticated()) return next();
       else {
         res.send('You are not authorized');
       }

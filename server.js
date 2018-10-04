@@ -43,28 +43,8 @@ app.use(passport.session());
 // Call routes
 apiRoutes(app);
 
-passport.use(
-  new LocalStrategy(function(username, password, done) {
-    db.Employee.findOne( {where: {username: username} }).then(function(user) {
-      //console.log(user);
-      if(!user) return done(null);
-      
-      console.log( user.dataValues.password);
-      let hash = user.dataValues.password;
-      bcrypt.compare(password, hash, function(err, res) {
-        if(res){
-          let user_id = user.dataValues.id;
-          return done(null, res);
-        } else {
-          console.log("return err");
-          return done (null, err);
-        }
+require('./config/passport');
 
-      });
-   
-    });
-  })
-);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
@@ -86,5 +66,7 @@ app.listen(PORT, () => {
     .catch(err => {
       console.error('Unable to connect to the database:', err);
     });
+  require('./config/passport');
+  console.log("passport connected");
 });
 
