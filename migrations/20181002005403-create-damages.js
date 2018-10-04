@@ -9,7 +9,20 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       vehicle: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      section: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      claim: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      description: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,

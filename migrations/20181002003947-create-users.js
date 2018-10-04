@@ -9,7 +9,24 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       username: {
-        type: Sequelize.STRING
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        len: [1, 200],
+        isEmail: true,
+      },
+      password: {
+        type: Sequelize.STRING,
+        allowNull: false
+      }
+    }, {
+      instanceMethods: {
+        generateHash: function (password) {
+          return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
+        },
+        validPassword: function (password) {
+          return bcrypt.compareSync(password, this.password)
+        }
       },
       createdAt: {
         allowNull: false,
