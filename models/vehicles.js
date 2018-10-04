@@ -101,7 +101,7 @@ module.exports = (sequelize, DataTypes) => {
     DepreciationEnd: DataTypes.DATE,
     DepreciationRateYearly: DataTypes.DECIMAL,
     TollTagSerial: DataTypes.STRING
-  });
+  }, {});
   Vehicles.associate = function (models) {
     // associations can be defined here
   };

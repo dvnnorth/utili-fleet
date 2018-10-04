@@ -13,7 +13,7 @@ module.exports = app => {
 
   // Get all vehicles from the database
   app.get('/api/vehicles', (req, res) => {
-    db.Drivers.findAll()
+    db.Vehicles.findAll()
       .then(data => {
         res.statusCode = 200;
         res.send(data);
@@ -22,7 +22,7 @@ module.exports = app => {
   });
 
   app.get('/api/vehicles/:VIN', (req, res) => {
-    db.Drivers.findAll({
+    db.Vehicles.findAll({
       where: {
         VIN: req.params.VIN
       }
