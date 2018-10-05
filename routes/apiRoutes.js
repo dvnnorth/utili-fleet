@@ -11,6 +11,25 @@ module.exports = app => {
     }
   };
 
+  // Get all drivers from the database
+  app.get('/api/drivers', (req, res) => {
+    db.Drivers.findAll()
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  }); 
+  // Get a driver from the database
+  app.get('/api/driver/:id', (req, res) => {
+    db.Drivers.findOne( {where: {id: id} })
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  }); 
+
   // Get all vehicles from the database
   app.get('/api/vehicles', (req, res) => {
     db.Vehicles.findAll()
