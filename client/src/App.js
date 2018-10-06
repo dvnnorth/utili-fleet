@@ -33,14 +33,11 @@ class App extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
       <div className="App">
         <h1>Hello World!</h1>
         <SignUp clicked={this.formPost} handleInputChange={this.handleInputChange}/>
       </div>
-=======
       <ScannerDiv/>
->>>>>>> 3e1818f021add121aceca2501e611f023b41cc71
     );
   
   }
