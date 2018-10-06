@@ -1,13 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Drivers = sequelize.define('Drivers', {
-    employeeNumber: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      validate: {
-        len: [1, 20]
-      }
-    },
     lastname: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -83,24 +76,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: "Email address must be valid"
         }
       }
-    },
-    job_title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    access: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
-    mvr_check_date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    can_drive: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
-
+    }
   });
 
   Drivers.associate = function (models) {
