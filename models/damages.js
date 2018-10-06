@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Damages.associate = function (models) {
     // associations can be defined here
+    Damages.hasOne(models.Claims);
   };
   return Damages;
 };

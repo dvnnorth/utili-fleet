@@ -52,6 +52,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   Claims.associate = function (models) {
     // associations can be defined here
+    Claims.hasMany(models.Damages);
   };
   return Claims;
 };
