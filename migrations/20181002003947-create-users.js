@@ -18,15 +18,6 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         allowNull: false
-      }
-    }, {
-      instanceMethods: {
-        generateHash: function (password) {
-          return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null)
-        },
-        validPassword: function (password) {
-          return bcrypt.compareSync(password, this.password)
-        }
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +26,15 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      }
+    }, {
+      instanceMethods: {
+        generateHash: function (password) {
+          return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+        },
+        validPassword: function (password) {
+          return bcrypt.compareSync(password, this.password);
+        }
       }
     });
   },
