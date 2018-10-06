@@ -29,13 +29,13 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
-};
+}
 
 // Setup app listener and database connection
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   db.sequelize
-    .sync()
+    .authenticate()
     .then(() => {
       console.log('Connection to database has been established successfully.');
     })
@@ -44,3 +44,6 @@ app.listen(PORT, () => {
     });
 });
 
+if (process.env.NODE_ENV === 'test') {
+  module.exports = app;
+}
