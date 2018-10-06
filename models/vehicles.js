@@ -1,6 +1,7 @@
+
 'use strict';
-module.exports = (sequelize, DataTypes) => {
-  const Vehicles = sequelize.define('Vehicles', {
+module.exports = (sequeliize, DataTypes) => {
+  const Vehicles = sequeliize.define('Vehicles', {
     UnitNumber: {
       type: DataTypes.INTEGER,
       allowNull: false

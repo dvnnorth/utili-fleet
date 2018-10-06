@@ -65,7 +65,6 @@ app.listen(PORT, () => {
     .catch(err => {
       console.error('Unable to connect to the database:', err);
     });
-  console.log("passport connected");
 });
 
 if (process.env.NODE_ENV === 'test') {
