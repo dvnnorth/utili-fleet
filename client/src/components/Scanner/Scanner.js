@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import './Scanner.css'
 import Quagga from "quagga";
 
 export default class Scanner extends Component {
@@ -8,7 +9,7 @@ export default class Scanner extends Component {
         this._onProcessed = this._onProcessed.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount() {   
         Quagga.init(
             {
                 inputStream: {

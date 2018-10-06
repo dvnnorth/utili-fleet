@@ -58,10 +58,10 @@ export default class App extends Component {
         console.log(result);
         const vin = this.validateVin(result) // chequeo que sea un vin valido
         console.log("resultado de la llamada a la funcion para verificar el vin :" + vin)
-        while (vin) {    //mientras no sea un vin valido seguir escaneando
-            // this._scan();
-        }
-        this.setState({ vin: result }); // cuando encuentre el vin correcto actualizar el estado del componente
+        // while (vin) {    //mientras no sea un vin valido seguir escaneando
+        //     // this._scan();
+        // }
+        // this.setState({ vin: result }); // cuando encuentre el vin correcto actualizar el estado del componente
         //stop quagga      
 
 
