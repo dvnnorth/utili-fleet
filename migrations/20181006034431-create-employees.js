@@ -1,28 +1,28 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Damages', {
+    return queryInterface.createTable('Employees', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      vehicle: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      section: {
+      employeeNumber: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        allowNull: false
       },
-      claim: {
+      jobTitle: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      mvrCheckDate: {
+        type: Sequelize.DATE
+      },
+      canDrive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +35,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Damages');
+    return queryInterface.dropTable('Employees');
   }
 };
