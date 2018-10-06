@@ -7,6 +7,7 @@
   "author": "Devin North, Enrique Salas, Irina Machado, Ivan Pawalek, Preston Edwards",
   "license": "MIT",
   "scripts": {
+    "test": "mocha ./tests",
     "client-install": "yarn --cwd ./client install",
     "start": "node server.js",
     "server": "nodemon server.js",
@@ -15,18 +16,31 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false yarn --cwd ./client install && yarn --cwd ./client build"
   },
   "dependencies": {
+    "bcrypt": "^3.0.1",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "faker": "^4.1.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.2",
+    "express-session": "^1.15.6",
     "mysql2": "^1.6.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "prop-types": "^15.6.2",
     "sequelize": "^4.39.0",
     "sequelize-cli": "^4.1.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.0",
     "eslint": "^5.6.0",
     "eslint-plugin-react": "^7.11.1",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.4"
   }
 }
