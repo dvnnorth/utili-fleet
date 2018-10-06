@@ -66,7 +66,7 @@ module.exports = app => {
   var express = require('express');
   var router = express.Router();
   var db = require('../models/');
-  var bcrypt = require('bcrypt');
+  var bcrypt = require('bcryptjs');
   var passport = require('passport');
   var session = require('express-session');
   const LocalStrategy = require('passport-local').Strategy;

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 //require authentication packages
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
