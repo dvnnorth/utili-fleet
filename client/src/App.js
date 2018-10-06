@@ -6,40 +6,42 @@ import axios from 'axios';
 import ScannerDiv from "./components/Scanner"
 
 class App extends Component {
-  state = { 
-      username:'' ,
-      email: '',
-      password: ''
+  state = {
+    username: '',
+    email: '',
+    password: ''
   }
 
 
   handleInputChange = (event) => {
-    const {name, value} = event.target;
-    this.setState({ [name] : value});
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
 
-    
 
-  
+
+
   };
-  
 
 
-  formPost = event => {    
+
+  formPost = event => {
     event.preventDefault();
-    
+
     console.log('STATE AT AXIOS POST: ', this.state);
     axios.post('/register', this.state);
   };
 
   render() {
     return (
-      <div className="App">
-        <h1>Hello World!</h1>
-        <SignUp clicked={this.formPost} handleInputChange={this.handleInputChange}/>
-      </div>
-      <ScannerDiv/>
+      <React.Fragment>
+        <div className="App">
+          <h1>Hello World!</h1>
+          <SignUp clicked={this.formPost} handleInputChange={this.handleInputChange} />
+        </div>
+        <ScannerDiv />
+      </React.Fragment>
     );
-  
+
   }
 }
 
