@@ -56,6 +56,14 @@ module.exports = {
         allowNull: false,
         len: [1, 50]
       },
+      vehicleId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Vehicles',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

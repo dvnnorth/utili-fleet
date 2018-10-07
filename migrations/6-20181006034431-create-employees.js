@@ -1,28 +1,36 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Damages', {
+    return queryInterface.createTable('Employees', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      vehicle: {
-        type: DataTypes.STRING,
+      employeeNumber: {
+        type: Sequelize.INTEGER,
         allowNull: false
       },
-      section: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-      },
-      claim: {
-        type: DataTypes.STRING,
+      jobTitle: {
+        type: Sequelize.STRING,
         allowNull: false
       },
-      description: {
-        type: DataTypes.STRING,
+      mvrCheckDate: {
+        type: Sequelize.DATE
+      },
+      canDrive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        allowNull: false
+      },
+      driverId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: 'Drivers',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +43,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Damages');
+    return queryInterface.dropTable('Employees');
   }
 };
