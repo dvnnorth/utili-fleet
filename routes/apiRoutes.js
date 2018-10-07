@@ -51,7 +51,7 @@ module.exports = app => {
   };
 
   // Get all drivers from the database
-  app.get('/api/drivers', (req, res) => {
+  app.get('/api/drivers', authenticationMiddleware(), (req, res) => {
     db.Drivers.findAll()
       .then(data => {
         res.statusCode = 200;
@@ -60,7 +60,7 @@ module.exports = app => {
       .catch(err => sendError(err, res));
   }); 
   // Get a driver from the database
-  app.get('/api/driver/:id', (req, res) => {
+  app.get('/api/driver/:id', authenticationMiddleware(), (req, res) => {
     db.Drivers.findOne( {where: {id: id} })
       .then(data => {
         res.statusCode = 200;
@@ -70,34 +70,34 @@ module.exports = app => {
   }); 
 
   //Post a driver to the database
-  app.post("/api/driver/create", (req, res) =>  {
+  app.post('/api/driver/create', authenticationMiddleware(), (req, res) =>  {
     db.Driver.create(req.body)
-    .then((data) => {
-      res.statusCode = 200;
-      res.send(data);
-    }).catch(error => sendError(error, res));
+      .then((data) => {
+        res.statusCode = 200;
+        res.send(data);
+      }).catch(error => sendError(error, res));
   });
 
   //Update a driver to the database
-  app.put("/api/driver/:id", (req, res) =>  {
+  app.put('/api/driver/:id', authenticationMiddleware(),(req, res) =>  {
     db.Driver.update(req.body, {
       where: {
         id: req.body.id
       }
     })
-    .then((dbdriver) => {
-      res.json(dbdriver)
-    }).catch(error => sendError(error, res));
+      .then((dbdriver) => {
+        res.json(dbdriver);
+      }).catch(error => sendError(error, res));
   });
   // Delete a driver into the database
-  app.delete("/api/driver/:id", function (req, res) {
+  app.delete('/api/driver/:id', authenticationMiddleware(), function (req, res) {
     db.Drivers.destroy({
       where: {
         id: req.params.id
       }
     }).then(function (dbdeleteDriver) {
       res.json(dbdeleteDriver);
-    })
+    });
   });
 
   // Get all vehicles from the database
@@ -124,7 +124,7 @@ module.exports = app => {
   });
 
   // Post a vehicle into the database
-  app.post('/api/vehicle/create', (req, res) => {
+  app.post('/api/vehicle/create', authenticationMiddleware(), (req, res) => {
     db.Vehicles.create(req.body)
       .then(data => {
         res.statusCode = 200;
@@ -135,7 +135,7 @@ module.exports = app => {
 
 
   // Update a vehicle into the database
-  app.put('/api/vehicle/:id',  (req, res)  => {
+  app.put('/api/vehicle/:id', authenticationMiddleware(), (req, res)  => {
     db.Vehicles.update(req.body, {
       where: {
         id: req.body.id
@@ -143,11 +143,11 @@ module.exports = app => {
     }).then( (dbVehicle) => {
       res.json(dbVehicle);
     })
-    .catch(err => sendError(err, res));
+      .catch(err => sendError(err, res));
   });
 
   // Delete a vehicle into the database
-  app.delete("/api/vehicle/:id", function (req, res) {
+  app.delete('/api/vehicle/:id', authenticationMiddleware(), function (req, res) {
     db.Vehicles.destroy({
       where: {
         id: req.params.id
@@ -155,7 +155,7 @@ module.exports = app => {
     }).then(function (dbdeleteVehicle) {
       res.json(dbdeleteVehicle);
     })
-    .catch(err => sendError(err, res));
+      .catch(err => sendError(err, res));
   });
 
   // Get the record from the NHTSA API for a particular VIN
@@ -169,28 +169,7 @@ module.exports = app => {
   });
 
 
-  passport.use(
-    new LocalStrategy(function (username, password, done) {
-      db.Employee.findOne({ where: { username: username } }).then(function (user) {
-        //console.log(user);
-        if (!user) return done(null);
 
-        console.log(user.dataValues.password);
-        let hash = user.dataValues.password;
-        bcrypt.compare(password, hash, function (err, res) {
-          if (res) {
-            let user_id = user.dataValues.id;
-            return done(null, res);
-          } else {
-            console.log('return err');
-            return done(null, err);
-          }
-
-        });
-
-      });
-    })
-  );
 
   app.get('/', authenticationMiddleware(), (req, res) => {
     res.send('Welcome to your dashboard');
@@ -238,7 +217,7 @@ module.exports = app => {
     res.redirect('/');
   });
 
-  app.get('/api/claims', (req, res) => {
+  app.get('/api/claims', authenticationMiddleware(), (req, res) => {
     db.Claims.findAll().then(data => {
       res.statusCode = 200;
       res.send(data);
@@ -246,7 +225,7 @@ module.exports = app => {
       .catch(err => sendError(err, res));
   });
 
-  app.get('/api/claim/:id', (req, res) => {
+  app.get('/api/claim/:id', authenticationMiddleware(), (req, res) => {
     db.Claims.findAll({
       where: {
         id: req.params.id
@@ -259,7 +238,7 @@ module.exports = app => {
       .catch(err => sendError(err, res));
   });
 
-  app.put('/api/claim/:id', (req, res) => {
+  app.put('/api/claim/:id', authenticationMiddleware(), (req, res) => {
     db.Claims.update({where: {id: req.params.id}})
       .then(data => {
         res.statusCode = 200;
@@ -269,7 +248,7 @@ module.exports = app => {
   }
   );
   
-  app.post('/api/claims', (req, res) => {
+  app.post('/api/claims', authenticationMiddleware(), (req, res) => {
     db.Claims.create({
       insuranceCOmpany: req.body.insuranceCompany,
       claimNumber: req.body.claimNumber,
@@ -286,8 +265,60 @@ module.exports = app => {
       .catch(err => sendError(err, res));
   });
   
-  app.delete('/api/claim/:id', (req, res) => {
+  app.delete('/api/claim/:id', authenticationMiddleware(), (req, res) => {
     db.Claims.destroy({where: {id: req.params.id}})
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  });
+
+  app.get('/api/employee/:id', authenticationMiddleware(), (req, res) => {
+    db.Employees.findOne({where: {id: req.params.id}})
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res)); 
+  });
+  
+  app.get('/api/employee/', authenticationMiddleware(), (req, res) => {
+    db.Employees.findAll()
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res)); 
+  });
+
+  app.post('/api/employee/', authenticationMiddleware(), (req, res) => {
+    db.Employees.create({
+      employeeNumber: req.body.employeeNumber,
+      jobTitle: req.body.jobTitle,
+      mvrCheckData: req.body.mvrCheckDate,
+      canDrive: req.body.canDrive,
+      driverId: req.body.driverId
+    })
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res)); 
+  });
+
+  app.put('/api/employee/:id', authenticationMiddleware(), (req, res) => {
+    db.Employee.update({where: {id: req.params.id}})
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  }
+  );
+
+  app.delete('/api/employee/:id', authenticationMiddleware(), (req, res) => {
+    db.Employee.destroy({where: {id: req.params.id}})
       .then(data => {
         res.statusCode = 200;
         res.send(data);
