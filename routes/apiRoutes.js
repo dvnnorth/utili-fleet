@@ -84,6 +84,56 @@ module.exports = app => {
       .catch(err => sendError(err, res));
   });
 
+  // Get all damages from the database
+app.get('/api/damages', (req, res) => {
+  db.Damages.findAll()
+    .then(data => {
+      res.statusCode = 200;
+      res.send(data);
+    })
+    .catch(err => sendError(err, res));
+}); 
+// Get a damage from the database
+app.get('/api/damage/:id', (req, res) => {
+  db.Damages.findOne( {where: {id: id} })
+    .then(data => {
+      res.statusCode = 200;
+      res.send(data);
+    })
+    .catch(err => sendError(err, res));
+}); 
+
+//Post a damage to the database
+app.post("/api/damage/create", (req, res) =>  {
+  db.Damages.create(req.body)
+  .then((data) => {
+    res.statusCode = 200;
+    res.send(data);
+  }).catch(error => sendError(error, res));
+});
+
+//Update a damage to the database
+app.put("/api/damage/:id", (req, res) =>  {
+  db.Damages.update(req.body, {
+    where: {
+      id: req.body.id
+    }
+  })
+  .then((dbdamage) => {
+    res.json(dbdamage)
+  }).catch(error => sendError(error, res));
+});
+// Delete a damage into the database
+app.delete("/api/damage/:id", function (req, res) {
+  db.Damages.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function (dbdeleteDamage) {
+    res.json(dbdeleteDamage);
+  })
+});
+
   // Get the record from the NHTSA API for a particular VIN
   app.get('/api/vinCheck/:VIN', (req, res) => {
     const nhtsaEndpoint = new URL('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/' +
