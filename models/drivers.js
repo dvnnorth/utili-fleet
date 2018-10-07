@@ -38,14 +38,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     zip: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
-      len: [1, 10]
+      len: [5, 11]
     },
     telephone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
-      len: [1, 10]
+      len: [1, 15]
     },
     dob: {
       type: DataTypes.DATE,
@@ -63,7 +63,7 @@ module.exports = (sequelize, DataTypes) => {
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      //unique: true,
       validate: {
         len: {
           args: [6, 128],
