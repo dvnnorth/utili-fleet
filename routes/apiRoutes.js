@@ -41,7 +41,7 @@ module.exports = app => {
 
   //Update a driver to the database
   app.put("/api/driver/:id", (req, res) =>  {
-    db.Driver.update({
+    db.Driver.update(req.body,{
       where: {
         id: req.body.id
       }
@@ -114,7 +114,7 @@ app.post("/api/damage/create", (req, res) =>  {
 
 //Update a damage to the database
 app.put("/api/damage/:id", (req, res) =>  {
-  db.Damages.update({
+  db.Damages.update(req.body,{
     where: {
       id: req.body.id
     }
