@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import SignUp from './components/SignUp';
 import axios from 'axios';
-//import API from './utils/API';
+import API from './utils/API';
 
 
 class App extends Component {
   state = { 
-      username:'' ,
-      email: '',
-      password: ''
+    isAuthenticated: false,
+    username:'' ,
+    email: '',
+    password: '',
+    user_id: ''
   }
 
-
+  login = () => {
+    API.login (this.state.username, this.state.password);
+  }
   handleInputChange = (event) => {
     const {name, value} = event.target;
     this.setState({ [name] : value});
