@@ -58,14 +58,25 @@ if (process.env.NODE_ENV === 'production') {
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   db.sequelize
-    .authenticate()
+    .sync()
     .then(() => {
-      console.log('Connection to database has been established successfully.');
+      db.sequelize
+        .authenticate()
+        .then(() => {
+          console.log('Connection to database has been established successfully.');
+        })
+        .catch(err => {
+          console.error('Unable to connect to the database:', err);
+        });
     })
     .catch(err => {
       console.error('Unable to connect to the database:', err);
     });
+<<<<<<< HEAD
   console.log("passport connected");
+=======
+
+>>>>>>> model-dvn
 });
 
 if (process.env.NODE_ENV === 'test') {

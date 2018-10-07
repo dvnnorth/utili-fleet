@@ -8,13 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      employeeNumber: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        validate: {
-          len: [1, 20]
-        }
-      },
       lastname: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -76,7 +69,6 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-  
       email: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -90,22 +82,6 @@ module.exports = {
             msg: 'Email address must be valid'
           }
         }
-      },
-      job_title: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      access: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
-      mvr_check_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      can_drive: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
       },
       createdAt: {
         allowNull: false,
