@@ -3,8 +3,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+//require authentication packages
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
+const session = require('express-session');
+
 // Require Sequelize
-const db = require('./models/index');
+const db = require('./models/');
 
 // Init Express app
 const app = express();
@@ -13,14 +20,30 @@ const app = express();
 const apiRoutes = require('./routes/apiRoutes');
 
 // Set Listening Port
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+//this should be below the static file middleware
+app.use(
+  session({
+    secret: 'keyboard cat', //this should be a random string
+    resave: false,
+    saveUninitialized: false
+    //cookie: { secure: true }
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 // Call routes
 apiRoutes(app);
+
+
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
@@ -29,7 +52,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', function (req, res) {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
-};
+}
 
 // Setup app listener and database connection
 app.listen(PORT, () => {
@@ -42,5 +65,9 @@ app.listen(PORT, () => {
     .catch(err => {
       console.error('Unable to connect to the database:', err);
     });
+  console.log("passport connected");
 });
 
+if (process.env.NODE_ENV === 'test') {
+  module.exports = app;
+}
