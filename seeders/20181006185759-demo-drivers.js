@@ -4,7 +4,7 @@ const faker = require('faker');
 
 let drivers = [];
 
-for (let i = 0; i < 40; i++) {
+for (let i = 0; i < 50; i++) {
   drivers.push({
     lastname: faker.name.lastName(),
     firstname: faker.name.firstName(),
@@ -13,15 +13,15 @@ for (let i = 0; i < 40; i++) {
     city: faker.address.city(),
     state: faker.address.state(),
     zip: faker.address.zipCode(),
-    telephone: faker.phone.phoneNumber(),
+    telephone: faker.phone.phoneNumberFormat(2),
     dob: faker.date.past(),
-    drivers_licence: faker.random.number({min:10000000, max:99999999}),
+    drivers_licence: faker.random.number({ min: 10000000, max: 99999999 }).toString(),
     drivers_licence_expiration: faker.date.future(),
     email: faker.internet.email()
   });
+  console.log(`${i} ==================== \n`, drivers[i]);
 }
 console.log(drivers[0]);
-
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -47,6 +47,6 @@ module.exports = {
       return queryInterface.bulkDelete('Person', null, {});
     */
 
-   return queryInterface.bulkDelete('Drivers', null, {});
+    return queryInterface.bulkDelete('Drivers', null, {});
   }
 };

@@ -11,7 +11,6 @@ module.exports = {
       lastname: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
         validate: {
           len: {
             args: 3,
@@ -22,7 +21,6 @@ module.exports = {
       firstname: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
         validate: {
           len: {
             args: 3,
@@ -47,14 +45,14 @@ module.exports = {
         allowNull: false,
       },
       zip: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
-        len: [1, 10]
+        len: [5, 11]
       },
       telephone: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
-        len: [1, 10]
+        len: [1, 15]
       },
       dob: {
         type: Sequelize.DATE,
@@ -72,7 +70,7 @@ module.exports = {
       email: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true,
+        //unique: true,
         validate: {
           len: {
             args: [6, 128],
@@ -85,11 +83,13 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.fn('NOW')
       }
     });
   },
