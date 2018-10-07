@@ -79,8 +79,13 @@ module.exports = app => {
   });
 
   //Update a driver to the database
+<<<<<<< HEAD
   app.put('/api/driver/:id', authenticationMiddleware(),(req, res) =>  {
     db.Driver.update(req.body, {
+=======
+  app.put("/api/driver/:id", (req, res) =>  {
+    db.Driver.update(req.body,{
+>>>>>>> 1570cf3680c24fc1bdb3aebe6b9686d183ec8365
       where: {
         id: req.body.id
       }
@@ -157,6 +162,61 @@ module.exports = app => {
     })
       .catch(err => sendError(err, res));
   });
+  // Get all damages from the database
+app.get('/api/damages', (req, res) => {
+  db.Damages.findAll()
+    .then(data => {
+      res.statusCode = 200;
+      res.send(data);
+    })
+    .catch(err => sendError(err, res));
+}); 
+// Get a damage from the database
+app.get('/api/damage/:id', (req, res) => {
+  db.Damages.findOne( {where: {id: id} })
+    .then(data => {
+      res.statusCode = 200;
+      res.send(data);
+    })
+    .catch(err => sendError(err, res));
+}); 
+
+//Post a damage to the database
+app.post("/api/damage/create", (req, res) =>  {
+  db.Damages.create({
+    vehicle: req.body.vehicle,
+    section: req.body.section,
+    description: req.body.description,
+    claimId: req.body.claimId,
+    vehicleId: req.body.vehicleId,
+  })
+  .then((data) => {
+    rs.statusCode = 200;
+    res.send(data);
+  }).catch(error => sendError(error, res));
+});
+
+//Update a damage to the database
+app.put("/api/damage/:id", (req, res) =>  {
+  db.Damages.update({
+    where: {
+      id: req.body.id
+    }
+  })
+  .then((dbdamage) => {
+    res.json(dbdamage)
+  }).catch(error => sendError(error, res));
+});
+// Delete a damage into the database
+app.delete("/api/damage/:id", function (req, res) {
+  db.Damages.destroy({
+    where: {
+      id: req.params.id
+    }
+  }).then(function (dbdeleteDamage) {
+    res.json(dbdeleteDamage);
+  })
+});
 
   // Get the record from the NHTSA API for a particular VIN
   app.get('/api/vinCheck/:VIN', authenticationMiddleware(), (req, res) => {
