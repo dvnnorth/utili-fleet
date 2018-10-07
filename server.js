@@ -72,11 +72,6 @@ app.listen(PORT, () => {
     .catch(err => {
       console.error('Unable to connect to the database:', err);
     });
-<<<<<<< HEAD
-  console.log("passport connected");
-=======
-
->>>>>>> model-dvn
 });
 
 if (process.env.NODE_ENV === 'test') {
