@@ -11,7 +11,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 
 // Require Sequelize
-const db = require('./models/');
+const db = require('./models');
 
 // Init Express app
 const app = express();
@@ -72,11 +72,6 @@ app.listen(PORT, () => {
     .catch(err => {
       console.error('Unable to connect to the database:', err);
     });
-<<<<<<< HEAD
-  console.log("passport connected");
-=======
-
->>>>>>> model-dvn
 });
 
 if (process.env.NODE_ENV === 'test') {

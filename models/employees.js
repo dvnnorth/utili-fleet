@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       }
     }
-  }, {});
+  });
   Employees.associate = function(models) {
     // associations can be defined here
     Employees.belongsTo(models.Drivers);

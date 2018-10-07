@@ -83,25 +83,6 @@ module.exports = {
           }
         }
       },
-<<<<<<< HEAD:migrations/20180930171816-create-drivers.js
-      job_title: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      access: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
-      mvr_check_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      can_drive: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
-=======
->>>>>>> 2c1d7f4d84e913d0c4257dd1ac5998ac77425ff9:migrations/2-20180930171816-create-drivers.js
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

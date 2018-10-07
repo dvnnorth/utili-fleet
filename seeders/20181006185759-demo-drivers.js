@@ -4,22 +4,23 @@ const faker = require('faker');
 
 let drivers = [];
 
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 40; i++) {
   drivers.push({
     lastname: faker.name.lastName(),
     firstname: faker.name.firstName(),
-    address1: faker.address.secondaryAddress(),
+    address1: faker.address.streetAddress("###"),
     address2: faker.address.secondaryAddress(),
     city: faker.address.city(),
     state: faker.address.state(),
     zip: faker.address.zipCode(),
     telephone: faker.phone.phoneNumber(),
     dob: faker.date.past(),
-    drivers_licence: faker.random.number(8),
+    drivers_licence: faker.random.number({min:10000000, max:99999999}),
     drivers_licence_expiration: faker.date.future(),
     email: faker.internet.email()
   });
 }
+console.log(drivers[0]);
 
 
 module.exports = {
