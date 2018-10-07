@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import ScannerDiv from "./components/Scanner"
 import SignUp from './components/SignUp';
 import axios from 'axios';
 //import API from './utils/API';
 
-import ScannerDiv from "./components/Scanner"
 
 class App extends Component {
   state = {
@@ -33,13 +33,11 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div className="App">
-          <h1>Hello World!</h1>
-          <SignUp clicked={this.formPost} handleInputChange={this.handleInputChange} />
-        </div>
+      <div className="App">
+        <h1>Hello World!</h1>
+        <SignUp clicked={this.formPost} handleInputChange={this.handleInputChange} />
         <ScannerDiv />
-      </React.Fragment>
+      </div>
     );
 
   }
