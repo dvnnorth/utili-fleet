@@ -19,6 +19,56 @@ module.exports = app => {
     }
   };
 
+  // Get all drivers from the database
+  app.get('/api/drivers', (req, res) => {
+    db.Drivers.findAll()
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  }); 
+  // Get a driver from the database
+  app.get('/api/driver/:id', (req, res) => {
+    db.Drivers.findOne( {where: {id: id} })
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  }); 
+
+  //Post a driver to the database
+  app.post("/api/driver/create", (req, res) =>  {
+    db.Driver.create(req.body)
+    .then((data) => {
+      res.statusCode = 200;
+      res.send(data);
+    }).catch(error => sendError(error, res));
+  });
+
+  //Update a driver to the database
+  app.put("/api/driver/:id", (req, res) =>  {
+    db.Driver.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+    })
+    .then((dbdriver) => {
+      res.json(dbdriver)
+    }).catch(error => sendError(error, res));
+  });
+  // Delete a driver into the database
+  app.delete("/api/driver/:id", function (req, res) {
+    db.Drivers.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function (dbdeleteDriver) {
+      res.json(dbdeleteDriver);
+    })
+  });
+
   // Get all vehicles from the database
   app.get('/api/vehicles', (req, res) => {
     db.Vehicles.findAll()
