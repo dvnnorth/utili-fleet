@@ -100,10 +100,21 @@ module.exports = (sequelize, DataTypes) => {
     DepreciationStart: DataTypes.DATE,
     DepreciationEnd: DataTypes.DATE,
     DepreciationRateYearly: DataTypes.DECIMAL,
-    TollTagSerial: DataTypes.STRING
+    TollTagSerial: DataTypes.STRING,
+    DriverID: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      references: {
+        model: 'Drivers',
+        key: 'id'
+      }
+    }
   }, {});
   Vehicles.associate = function (models) {
     // associations can be defined here
+    Vehicles.hasMany(models.Damages);
+    Vehicles.hasMany(models.Claims);
+    Vehicles.hasOne(models.Drivers);
   };
   return Vehicles;
 };

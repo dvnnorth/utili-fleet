@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: 3,
-          msg: "Last name must be atleast 3 characters in length"
+          msg: 'Last-name must be at least 3 characters in length'
         }
       }
     },
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: 3,
-          msg: "Name must be atleast 3 characters in length"
+          msg: 'Name must be at least 3 characters in length'
         }
       }
     },
@@ -62,7 +62,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
-
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -70,10 +69,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: [6, 128],
-          msg: "Email address must be between 6 and 128 characters in length"
+          msg: 'Email address must be between 6 and 128 characters in length'
         },
         isEmail: {
-          msg: "Email address must be valid"
+          msg: 'Email address must be valid'
         }
       }
     }
@@ -81,6 +80,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Drivers.associate = function (models) {
     // associations can be defined here
+    Drivers.hasOne(models.Employees);
   };
   return Drivers;
 };
