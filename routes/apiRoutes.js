@@ -105,16 +105,22 @@ app.get('/api/damage/:id', (req, res) => {
 
 //Post a damage to the database
 app.post("/api/damage/create", (req, res) =>  {
-  db.Damages.create(req.body)
+  db.Damages.create({
+    vehicle: req.body.vehicle,
+    section: req.body.section,
+    description: req.body.description,
+    claimId: req.body.claimId,
+    vehicleId: req.body.vehicleId,
+  })
   .then((data) => {
-    res.statusCode = 200;
+    rs.statusCode = 200;
     res.send(data);
   }).catch(error => sendError(error, res));
 });
 
 //Update a damage to the database
 app.put("/api/damage/:id", (req, res) =>  {
-  db.Damages.update(req.body,{
+  db.Damages.update({
     where: {
       id: req.body.id
     }
