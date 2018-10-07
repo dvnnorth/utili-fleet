@@ -24,6 +24,14 @@ module.exports = {
         defaultValue: false,
         allowNull: false
       },
+      driverId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Drivers',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

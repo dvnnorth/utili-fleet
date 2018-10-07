@@ -105,6 +105,7 @@ module.exports = (sequelize, DataTypes) => {
   Vehicles.associate = function (models) {
     // associations can be defined here
     Vehicles.hasMany(models.Damages);
+    Vehicles.hasMany(models.Claims);
   };
   return Vehicles;
 };

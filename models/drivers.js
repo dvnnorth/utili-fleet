@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: 3,
-          msg: 'Last name must be at least 3 characters in length'
+          msg: 'Last-name must be at least 3 characters in length'
         }
       }
     },
@@ -62,7 +62,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
-
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -76,24 +75,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Email address must be valid'
         }
       }
-    },
-    job_title: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    access: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
-    mvr_check_date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    can_drive: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-    },
-
+    }
   });
 
   Drivers.associate = function (models) {
