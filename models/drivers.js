@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     drivers_licence: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       len: [1, 50]
     },
