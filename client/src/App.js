@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import ScannerDiv from "./components/Scanner"
+=======
+>>>>>>> 1fec69ed986adc160a12054723c6cee57da07e11
 import SignUp from './components/SignUp';
 import axios from 'axios';
 import API from './utils/API';
 
+<<<<<<< HEAD
+=======
+import ScannerDiv from "./components/Scanner"
+>>>>>>> 1fec69ed986adc160a12054723c6cee57da07e11
 
 class App extends Component {
   state = { 
@@ -37,11 +44,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>Hello World!</h1>
-        <SignUp clicked={this.formPost} handleInputChange={this.handleInputChange} />
+      <React.Fragment>
+        <div className="App">
+          <h1>Hello World!</h1>
+          <SignUp clicked={this.formPost} handleInputChange={this.handleInputChange} />
+        </div>
         <ScannerDiv />
-      </div>
+      </React.Fragment>
     );
 
   }

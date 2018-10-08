@@ -23,10 +23,10 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: [6, 128],
-          msg: "Email address must be between 6 and 128 characters in length"
+          msg: 'Email address must be between 6 and 128 characters in length'
         },
         isEmail: {
-          msg: "Email address must be valid"
+          msg: 'Email address must be valid'
         }
       }
     },

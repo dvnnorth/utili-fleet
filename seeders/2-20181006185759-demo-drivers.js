@@ -19,9 +19,7 @@ for (let i = 0; i < 50; i++) {
     drivers_licence_expiration: faker.date.future(),
     email: faker.internet.email()
   });
-  console.log(`${i} ==================== \n`, drivers[i]);
 }
-console.log(drivers[0]);
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

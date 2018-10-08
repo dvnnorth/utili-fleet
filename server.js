@@ -4,10 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 //require authentication packages
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
 const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 
 // Require Sequelize
@@ -17,7 +14,7 @@ const db = require('./models');
 const app = express();
 
 // Import routes
-const apiRoutes = require('./routes/apiRoutes');
+const routes = require('./routes');
 
 // Set Listening Port
 const PORT = process.env.PORT || 5000;
@@ -41,17 +38,12 @@ app.use(passport.session());
 
 
 // Call routes
-apiRoutes(app);
-
+routes(app);
 
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
-  // Handle React routing, return all requests to React app
-  app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-  });
 }
 
 // Setup app listener and database connection
