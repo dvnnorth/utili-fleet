@@ -1,4 +1,3 @@
-var express = require('express');
 var bcrypt = require('bcrypt');
 var passport = require('passport');
 var session = require('express-session');
@@ -7,14 +6,6 @@ let user_id;
 const db = require('../models/index');
 const request = require('request-promise');
 const url = require('url');
-var express = require('express');
-var router = express.Router();
-var db = require('../models/');
-var bcrypt = require('bcrypt');
-var passport = require('passport');
-var session = require('express-session');
-const LocalStrategy = require('passport-local').Strategy;
-let user_id;
 
 module.exports = app => {
 //local stragy used for signing in users
@@ -79,13 +70,8 @@ module.exports = app => {
   });
 
   //Update a driver to the database
-<<<<<<< HEAD
   app.put('/api/driver/:id', authenticationMiddleware(),(req, res) =>  {
     db.Driver.update(req.body, {
-=======
-  app.put("/api/driver/:id", (req, res) =>  {
-    db.Driver.update(req.body,{
->>>>>>> 1570cf3680c24fc1bdb3aebe6b9686d183ec8365
       where: {
         id: req.body.id
       }
