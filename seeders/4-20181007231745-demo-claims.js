@@ -1,17 +1,22 @@
 'use strict';
 const faker = require('faker');
 
-let damages = [];
+let claims = [];
 
 for (let i = 0; i < 50; i++) {
-  damages.push({
-    section: faker.name.number({min:1, max:21}),
-    description: faker.lorem.paragraph(),
-    claimId: faker.random.number({min:1, max:51}),
-    vehicleId: faker.random.number({min:1, max:51})
+  claims.push({
+    insuranceCompany: faker.company.companyName(),
+    claimNumber: faker.random.number({min:100, max:500}),
+    adjusterName: faker.name.findName(),
+    adjusterEmail: faker.internet.email(),
+    estimate: faker.random.number({min:1, max:49}),
+    finalCost: faker.random.number({min:1, max:49}),
+    openClosed: faker.random.boolean(),
+    status: faker.lorem.word(),
+    vehicleId: faker.random.number({min:1, max:50})
   });
 }
-console.log(damages[0]);
+console.log(claims[0]);
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -25,7 +30,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-   return queryInterface.bulkInsert('Damages', damages, {});
+   return queryInterface.bulkInsert('Claims', claims, {});
   },
 
   down: (queryInterface, Sequelize) => {
@@ -36,6 +41,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('Person', null, {});
     */
-   return queryInterface.bulkDelete('Damages', null, {});
+   return queryInterface.bulkDelete('Claims', null, {});
   }
 };

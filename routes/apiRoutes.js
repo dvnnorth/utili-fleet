@@ -7,14 +7,7 @@ let user_id;
 const db = require('../models/index');
 const request = require('request-promise');
 const url = require('url');
-var express = require('express');
-var router = express.Router();
-// var db = require('../models/');
-var bcrypt = require('bcrypt');
-var passport = require('passport');
-var session = require('express-session');
-const LocalStrategy = require('passport-local').Strategy;
-let user_id;
+
 
 module.exports = app => {
 //local stragy used for signing in users
