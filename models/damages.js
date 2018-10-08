@@ -1,10 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Damages = sequelize.define('Damages', {
-    vehicle: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     section: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -21,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
         key: 'id'
       },
       vehicleId: {
-        type: Sequelize.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false,
         references: {
           model: 'Vehicles',
