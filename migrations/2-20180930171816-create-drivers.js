@@ -8,13 +8,6 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      employeeNumber: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        validate: {
-          len: [1, 20]
-        }
-      },
       lastname: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -22,7 +15,7 @@ module.exports = {
         validate: {
           len: {
             args: 3,
-            msg: "Lastname must be atleast 3 characters in length"
+            msg: 'Last-name must be at least 3 characters in length'
           }
         }
       },
@@ -33,7 +26,7 @@ module.exports = {
         validate: {
           len: {
             args: 3,
-            msg: "Name must be atleast 3 characters in length"
+            msg: 'Name must be at least 3 characters in length'
           }
         }
       },
@@ -76,7 +69,6 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false,
       },
-  
       email: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -84,28 +76,12 @@ module.exports = {
         validate: {
           len: {
             args: [6, 128],
-            msg: "Email address must be between 6 and 128 characters in length"
+            msg: 'Email address must be between 6 and 128 characters in length'
           },
           isEmail: {
-            msg: "Email address must be valid"
+            msg: 'Email address must be valid'
           }
         }
-      },
-      job_title: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      access: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
-      mvr_check_date: {
-        type: Sequelize.DATE,
-        allowNull: false,
-      },
-      can_drive: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
       },
       createdAt: {
         allowNull: false,

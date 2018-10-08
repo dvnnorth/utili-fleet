@@ -4,22 +4,20 @@ module.exports = (sequelize, DataTypes) => {
     lastname: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
       validate: {
         len: {
           args: 3,
-          msg: "Last name must be atleast 3 characters in length"
+          msg: 'Last-name must be at least 3 characters in length'
         }
       }
     },
     firstname: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
       validate: {
         len: {
           args: 3,
-          msg: "Name must be atleast 3 characters in length"
+          msg: 'Name must be at least 3 characters in length'
         }
       }
     },
@@ -40,21 +38,21 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     zip: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
-      len: [1, 10]
+      len: [1, 5]
     },
     telephone: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
-      len: [1, 10]
+      len: [1, 25]
     },
     dob: {
       type: DataTypes.DATE,
       allowNull: false,
     },
     drivers_licence: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       len: [1, 50]
     },
@@ -62,18 +60,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
     },
-
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      // unique: true,
       validate: {
         len: {
           args: [6, 128],
-          msg: "Email address must be between 6 and 128 characters in length"
+          msg: 'Email address must be between 6 and 128 characters in length'
         },
         isEmail: {
-          msg: "Email address must be valid"
+          msg: 'Email address must be valid'
         }
       }
     }
@@ -81,6 +78,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Drivers.associate = function (models) {
     // associations can be defined here
+    Drivers.hasOne(models.Employees);
   };
   return Drivers;
 };

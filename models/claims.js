@@ -49,9 +49,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       len: [1, 50]
     },
+    vehicleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Vehicles',
+        key: 'id'
+      }
+    },
   });
   Claims.associate = function (models) {
     // associations can be defined here
+    Claims.hasMany(models.Damages);
+    Claims.belongsTo(models.Vehicles);
   };
   return Claims;
 };
