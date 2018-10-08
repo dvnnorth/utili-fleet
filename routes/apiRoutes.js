@@ -18,7 +18,6 @@ const authenticationMiddleware = () => {
 module.exports = app => {
 
   ////////////////////////// Auth ///////////////////////////////////////
-
   //local strategy used for signing in users
   passport.use(
     new LocalStrategy((username, password, done) => {
@@ -96,7 +95,6 @@ module.exports = app => {
 
   // Post a vehicle into the database
   app.post('/api/vehicle/create', authenticationMiddleware(), controller.vehicles.createVehicle);
-
 
   // Update a vehicle into the database
   app.put('/api/vehicle/:id', authenticationMiddleware(), controller.vehicles.updateVehicle);
