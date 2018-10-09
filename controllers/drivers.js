@@ -46,6 +46,21 @@ module.exports = {
       }).catch(error => sendError(error, res));
   },
 
+  // updateDriver: ("/driver/:id"(req, res) => {
+  //   const id = req.params.id;
+  //   const updates = req.body.updates;
+  //   db.Driver.find({
+  //     where: {
+  //       id: id}
+  //     })
+  //     .then(driver => {
+  //       return driver.updateAttributes(req.body)
+  //     })
+  //     .then(updateDriver =>{
+  //       res.json(updateOwner);
+  //     });
+  // });
+
   deleteDriver: (req, res) => {
     db.Drivers.destroy({
       where: {
