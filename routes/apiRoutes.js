@@ -126,26 +126,26 @@ module.exports = app => {
   ///////////////////// End Claims //////////////////////////////
   
   //////////////////////// Damages ///////////////////////////////////
-  app.get('/api/damages', authenticationMiddleware(), controller.damages.getAllDamages);
+  app.get('/api/damages', /*authenticationMiddleware(),*/ controller.damages.getAllDamages);
 
-  app.get('/api/damage/:id', authenticationMiddleware(), controller.damages.getDamagesId);
+  app.get('/api/damage/:id', /*authenticationMiddleware(),*/ controller.damages.getDamagesId);
 
-  app.put('/api/damage/:id', authenticationMiddleware(), controller.damages.updateDamages);
+  app.put('/api/damage/:id', /*authenticationMiddleware(),*/ controller.damages.updateDamages);
 
-  app.post('/api/damages', authenticationMiddleware(), controller.damages.createDamages);
+  app.post('/api/damages', /*authenticationMiddleware(),*/ controller.damages.createDamages);
 
-  app.delete('/api/damage/:id', authenticationMiddleware(), controller.damages.deleteDamages);
+  app.delete('/api/damage/:id', /*authenticationMiddleware(),*/ controller.damages.deleteDamages);
   ///////////////////// End Damages //////////////////////////////
 
   ///////////////////// Employees //////////////////////////////
-  app.get('/api/employees', authenticationMiddleware(), controller.employees.getAllEmployees);
+  app.get('/api/employees', /*authenticationMiddleware(),*/ controller.employees.getAllEmployees);
 
-  app.get('/api/employees/:id', authenticationMiddleware(), controller.employees.getEmployee);
+  app.get('/api/employees/:id', /*authenticationMiddleware(),*/ controller.employees.getEmployee);
 
-  app.put('/api/employees/:id', authenticationMiddleware(), controller.employees.updateEmployee);
+  app.put('/api/employees/:id', /*authenticationMiddleware(),*/ controller.employees.updateEmployee);
 
-  app.post('/api/employees', authenticationMiddleware(), controller.employees.createEmployee);
+  app.post('/api/employees', /*authenticationMiddleware(),*/ controller.employees.createEmployee);
 
-  app.delete('/api/employees/:id', authenticationMiddleware(), controller.employees.deleteEmployee3);
+  app.delete('/api/employees/:id', /*authenticationMiddleware(),*/ controller.employees.deleteEmployee);
   ///////////////////// End Emplpoyees //////////////////////////////
 };

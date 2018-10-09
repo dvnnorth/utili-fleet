@@ -28,7 +28,7 @@ module.exports = {
   },
 
   createDriver: (req, res) => {
-    db.Driver.create(req.body)
+    db.Drivers.create(req.body)
       .then((data) => {
         res.statusCode = 200;
         res.send(data);
@@ -36,7 +36,7 @@ module.exports = {
   },
 
   updateDriver: (req, res) => {
-    db.Driver.update(req.body, {
+    db.Drivers.update(req.body, {
       where: {
         id: req.body.id
       }
