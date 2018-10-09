@@ -52,7 +52,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     drivers_licence: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
       len: [1, 50]
     },
@@ -79,6 +79,7 @@ module.exports = (sequelize, DataTypes) => {
   Drivers.associate = function (models) {
     // associations can be defined here
     Drivers.hasOne(models.Employees);
+    Drivers.belongsTo(models.Vehicles, { constraints: false });
   };
   return Drivers;
 };
