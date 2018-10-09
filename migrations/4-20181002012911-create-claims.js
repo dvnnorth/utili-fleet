@@ -8,22 +8,22 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      insuranceCompany: {
+      InsuranceCompany: {
         type: Sequelize.STRING,
         allowNull: false,
         len: [1, 50]
       },
-      claimNumber: {
+      ClaimNumber: {
         type: Sequelize.INTEGER,
         allowNull: false,
         len: [1, 50]
       },
-      adjusterName: {
+      AdjusterName: {
         type: Sequelize.STRING,
         allowNull: false,
         len: [1, 50]
       },
-      adjusterEmail: {
+      AdjusterEmail: {
         type: Sequelize.STRING,
         allowNull: false,
         len: [1, 50],
@@ -37,26 +37,26 @@ module.exports = {
           }
         }
       },
-      estimate: {
+      Estimate: {
         type: Sequelize.INTEGER,
         allowNull: false,
         len: [1, 50]
       },
-      finalCost: {
+      FinalCost: {
         type: Sequelize.INTEGER,
         allowNull: false,
         len: [1, 50]
       },
-      openClosed: {
+      OpenClosed: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
       },
-      status: {
+      Status: {
         type: Sequelize.STRING,
         allowNull: false,
         len: [1, 50]
       },
-      vehicleId: {
+      VehicleId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
