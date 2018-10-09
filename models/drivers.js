@@ -1,7 +1,7 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Drivers = sequelize.define('Drivers', {
-    lastname: {
+    LastName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    firstname: {
+    FirstName: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -21,46 +21,46 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    address1: {
+    Address1: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    address2: {
+    Address2: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    city: {
+    City: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    state: {
+    State: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    zip: {
+    Zip: {
       type: DataTypes.STRING,
       allowNull: false,
       len: [5, 11]
     },
-    telephone: {
+    Telephone: {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1, 15]
     },
-    dob: {
+    DOB: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    drivers_licence: {
+    DriversLicense: {
       type: DataTypes.INTEGER,
       allowNull: false,
       len: [1, 50]
     },
-    drivers_licence_expiration: {
+    DriversLicenseExpiration: {
       type: DataTypes.DATE,
       allowNull: false,
     },
-    email: {
+    Email: {
       type: DataTypes.STRING,
       allowNull: false,
       //unique: true,

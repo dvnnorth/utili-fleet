@@ -1,21 +1,21 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Employees = sequelize.define('Employees', {
-    employeeNumber: {
+    EmployeeNumber: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    jobTitle: {
+    JobTitle: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    mvrCheckDate: DataTypes.DATE,
-    canDrive: {
+    MVRCheckDate: DataTypes.DATE,
+    CanDrive: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
     },
-    driverId: {
+    DriverId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

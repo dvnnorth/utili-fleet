@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      lastname: {
+      LastName: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
@@ -18,7 +18,7 @@ module.exports = {
           }
         }
       },
-      firstname: {
+      FirstName: {
         type: Sequelize.STRING,
         allowNull: false,
         validate: {
@@ -28,46 +28,46 @@ module.exports = {
           }
         }
       },
-      address1: {
+      Address1: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      address2: {
+      Address2: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      city: {
+      City: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      state: {
+      State: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      zip: {
+      Zip: {
         type: Sequelize.STRING,
         allowNull: false,
         len: [5, 11]
       },
-      telephone: {
+      Telephone: {
         type: Sequelize.STRING,
         allowNull: false,
         len: [1, 15]
       },
-      dob: {
+      DOB: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      drivers_licence: {
+      DriversLicense: {
         type: Sequelize.STRING,
         allowNull: false,
         len: [1, 50]
       },
-      drivers_licence_expiration: {
+      DriversLicenseExpiration: {
         type: Sequelize.DATE,
         allowNull: false,
       },
-      email: {
+      Email: {
         type: Sequelize.STRING,
         allowNull: false,
         //unique: true,

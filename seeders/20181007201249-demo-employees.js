@@ -6,14 +6,13 @@ let employees = [];
 
 for (let i = 0; i < 50; i++) {
   employees.push({
-    employeeNumber: faker.random.number({min:100, max:999}),
-    jobTitle: faker.name.jobTitle(),
-    mvrCheckDate: faker.date.recent(),
-    canDrive: faker.random.boolean(),
-    driverId: faker.random.number({min:1, max:49})
+    EmployeeNumber: faker.random.number({ min: 100, max: 999 }),
+    JobTitle: faker.name.jobTitle(),
+    MVRCheckDate: faker.date.recent(),
+    CanDrive: faker.random.boolean(),
+    DriverId: faker.random.number({ min: 1, max: 49 })
   });
 }
-console.log(employees[0]);
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -27,7 +26,7 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-   return queryInterface.bulkInsert('Employees', employees, {});
+    return queryInterface.bulkInsert('Employees', employees, {});
   },
 
   down: (queryInterface, Sequelize) => {
@@ -38,6 +37,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('Person', null, {});
     */
-   return queryInterface.bulkDelete('Employees', null, {});
+    return queryInterface.bulkDelete('Employees', null, {});
   }
 };

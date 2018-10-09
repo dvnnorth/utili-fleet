@@ -6,18 +6,18 @@ let drivers = [];
 
 for (let i = 0; i < 5000; i++) {
   drivers.push({
-    lastname: faker.name.lastName(),
-    firstname: faker.name.firstName(),
-    address1: faker.address.streetAddress("###"),
-    address2: faker.address.secondaryAddress(),
-    city: faker.address.city(),
-    state: faker.address.state(),
-    zip: faker.address.zipCode(),
-    telephone: faker.phone.phoneNumberFormat(2),
-    dob: faker.date.past(),
-    drivers_licence: faker.random.number({ min: 10000000, max: 99999999 }).toString(),
-    drivers_licence_expiration: faker.date.future(),
-    email: faker.internet.email()
+    LastName: faker.name.lastName(),
+    FirstName: faker.name.firstName(),
+    Address1: faker.address.streetAddress("###"),
+    Address2: faker.address.secondaryAddress(),
+    City: faker.address.city(),
+    State: faker.address.state(),
+    Zip: faker.address.zipCode(),
+    Telephone: faker.phone.phoneNumberFormat(2),
+    DOB: faker.date.past(),
+    DriversLicense: faker.random.number({ min: 10000000, max: 99999999 }).toString(),
+    DriversLicenseExpiration: faker.date.future(),
+    Email: faker.internet.email()
   });
 }
 
