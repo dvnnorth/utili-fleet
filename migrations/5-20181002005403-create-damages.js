@@ -8,19 +8,15 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      vehicle: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      section: {
+      Section: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      description: {
+      Description: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      claimId: {
+      ClaimId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
@@ -28,7 +24,7 @@ module.exports = {
           key: 'id'
         }
       },
-      vehicleId: {
+      VehicleId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

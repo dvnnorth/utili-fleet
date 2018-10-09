@@ -8,23 +8,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      employeeNumber: {
+      EmployeeNumber: {
         type: Sequelize.INTEGER,
         allowNull: false
       },
-      jobTitle: {
+      JobTitle: {
         type: Sequelize.STRING,
         allowNull: false
       },
-      mvrCheckDate: {
+      MVRCheckDate: {
         type: Sequelize.DATE
       },
-      canDrive: {
+      CanDrive: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,
         allowNull: false
       },
-      driverId: {
+      DriverId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

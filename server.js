@@ -8,7 +8,7 @@ const passport = require('passport');
 const session = require('express-session');
 
 // Require Sequelize
-const db = require('./models/');
+const db = require('./models');
 
 // Init Express app
 const app = express();
