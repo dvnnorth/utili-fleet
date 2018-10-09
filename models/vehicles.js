@@ -115,7 +115,7 @@ module.exports = (sequeliize, DataTypes) => {
     // associations can be defined here
     Vehicles.hasMany(models.Damages);
     Vehicles.hasMany(models.Claims);
-    Vehicles.hasOne(models.Drivers);
+    Vehicles.hasOne(models.Drivers, { constraints: false });
   };
   return Vehicles;
 };
