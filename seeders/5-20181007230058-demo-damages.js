@@ -6,12 +6,11 @@ let damages = [];
 for (let i = 0; i < 50; i++) {
   damages.push({
     section: faker.random.number({min:1, max:21}),
-    description: faker.lorem.paragraph(),
+    description: faker.lorem.sentence(5),
     claimId: faker.random.number({min:1, max:51}),
     vehicleId: faker.random.number({min:1, max:51})
   });
 }
-console.log(damages[0]);
 
 module.exports = {
   up: (queryInterface, Sequelize) => {

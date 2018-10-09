@@ -16,7 +16,6 @@ for (let i = 0; i < 50; i++) {
     vehicleId: faker.random.number({min:1, max:50})
   });
 }
-console.log(claims[0]);
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
