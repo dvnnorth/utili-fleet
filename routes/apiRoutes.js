@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+var session = require('express-session');
 const db = require('../models/index');
 const controller = require('../controllers/index');
 
@@ -123,8 +124,6 @@ module.exports = app => {
 
   app.delete('/api/claim/:id', authenticationMiddleware(), controller.claims.deleteClaim);
   ///////////////////// End Claims //////////////////////////////
-
-
   
   //////////////////////// Damages ///////////////////////////////////
   app.get('/api/damages', authenticationMiddleware(), controller.damages.getAllDamages);
@@ -137,4 +136,16 @@ module.exports = app => {
 
   app.delete('/api/damage/:id', authenticationMiddleware(), controller.damages.deleteDamages);
   ///////////////////// End Damages //////////////////////////////
+
+  ///////////////////// Employees //////////////////////////////
+  app.get('/api/employees', authenticationMiddleware(), controller.employees.getAllEmployees);
+
+  app.get('/api/employees/:id', authenticationMiddleware(), controller.employees.getEmployee);
+
+  app.put('/api/employees/:id', authenticationMiddleware(), controller.employees.updateEmployee);
+
+  app.post('/api/employees', authenticationMiddleware(), controller.employees.createEmployee);
+
+  app.delete('/api/employees/:id', authenticationMiddleware(), controller.employees.deleteEmployee3);
+  ///////////////////// End Emplpoyees //////////////////////////////
 };

@@ -19,7 +19,7 @@ module.exports = {
   },
 
   getDriver: (req, res) => {
-    db.Drivers.findOne({ where: { id: id } })
+    db.Drivers.findOne({ where: { id: req.body.id } })
       .then(data => {
         res.statusCode = 200;
         res.send(data);
@@ -42,7 +42,7 @@ module.exports = {
       }
     })
       .then((dbdriver) => {
-        res.json(dbdriver)
+        res.json(dbdriver);
       }).catch(error => sendError(error, res));
   },
 
