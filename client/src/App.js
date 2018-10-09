@@ -3,7 +3,8 @@ import SignUp from './components/SignUp';
 import axios from 'axios';
 import API from './utils/API';
 
-import ScannerDiv from "./components/Scanner"
+import ScannerDiv from "./components/Scanner";
+
 
 class App extends Component {
   state = { 
@@ -21,12 +22,7 @@ class App extends Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
 
-
-
-
   };
-
-
 
   formPost = event => {
     event.preventDefault();

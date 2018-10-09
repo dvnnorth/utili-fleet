@@ -4,7 +4,7 @@ const faker = require('faker');
 
 let drivers = [];
 
-for (let i = 0; i < 5000; i++) {
+for (let i = 0; i < 50; i++) {
   drivers.push({
     LastName: faker.name.lastName(),
     FirstName: faker.name.firstName(),
