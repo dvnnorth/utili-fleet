@@ -1,5 +1,4 @@
 const db = require('../models/index');
-const request = require('request-promise');
 const bcrypt = require('bcrypt');
 
 const sendError = (err, res) => {

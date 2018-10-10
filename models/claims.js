@@ -1,55 +1,51 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Claims = sequelize.define('Claims', {
-    insuranceCompany: {
+    InsuranceCompany: {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1, 50]
     },
-    claimNumber: {
+    ClaimNumber: {
       type: DataTypes.INTEGER,
       allowNull: false,
       len: [1, 50]
     },
-    adjusterName: {
+    AdjusterName: {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1, 50]
     },
-    adjusterEmail: {
+    AdjusterEmail: {
       type: DataTypes.STRING,
       allowNull: false,
-      len: [1, 50],
       validate: {
         len: {
           args: [6, 128],
           msg: 'Email address must be between 6 and 128 characters in length'
         },
-        isEmail: {
-          msg: 'Email address must be valid'
-        }
       }
     },
-    estimate: {
+    Estimate: {
       type: DataTypes.INTEGER,
       allowNull: false,
       len: [1, 50]
     },
-    finalCost: {
+    FinalCost: {
       type: DataTypes.INTEGER,
       allowNull: false,
       len: [1, 50]
     },
-    openClosed: {
+    OpenClosed: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    status: {
+    Status: {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1, 50]
     },
-    vehicleId: {
+    VehicleId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {

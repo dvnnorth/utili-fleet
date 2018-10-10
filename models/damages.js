@@ -1,34 +1,35 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   var Damages = sequelize.define('Damages', {
-    section: {
+    Section: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    description: {
+    Description: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    claimId: {
+    ClaimId: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
         model: 'Claims',
         key: 'id'
       },
-      vehicleId: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Vehicles',
-          key: 'id'
-        }
+    },
+    VehicleId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'Vehicles',
+        key: 'id'
       }
     }
   });
   Damages.associate = function (models) {
     // associations can be defined here]
     Damages.belongsTo(models.Claims);
+    Damages.belongsTo(models.Vehicles);
   };
   return Damages;
 };

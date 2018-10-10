@@ -32,24 +32,50 @@ module.exports = {
   },
 
   updateClaim: (req, res) => {
-    db.Claims.update({ where: { id: req.params.id } })
+    console.log(req.params.id);
+    console.log(req.params.InsuranceCompany);
+    console.log(req.params.ClaimNumber);
+    console.log(req.params.AdjusterEmail);
+    console.log(req.params.AdjusterName);
+    console.log(req.params.Estimate);
+    console.log(req.params.FinalCost);
+    console.log(req.params.OpenClosed);
+    console.log(req.params.Status);
+    console.log(req.params.VehicleId);
+    db.Claims.find({
+      where: { id: req.params.id }
+    })
       .then(data => {
-        res.statusCode = 200;
-        res.send(data);
+        return data.updateAttributes(req.body)
+      })
+      .then(updatedClaims => {
+        res.json(updatedClaims);
       })
       .catch(err => sendError(err, res));
   },
 
   createClaim: (req, res) => {
+    console.log({
+      InsuranceCompany: req.body.InsuranceCompany,
+      ClaimNumber: req.body.ClaimNumber,
+      AdjusterEmail: req.body.AdjusterEmail,
+      AdjusterName: req.body.AdjusterName,
+      Estimate: req.body.Estimate,
+      FinalCost: req.body.FinalCost,
+      OpenClosed: req.body.OpenClosed,
+      Status: req.body.Status,
+      VehicleId: req.body.VehicleId
+    });
     db.Claims.create({
-      insuranceCOmpany: req.body.insuranceCompany,
-      claimNumber: req.body.claimNumber,
-      adjusterEmail: req.body.adjusterEmail,
-      estimate: req.body.estimate,
-      finalCost: req.body.finalCost,
-      openClosed: req.body.openClosed,
-      status: req.body.status,
-      vehicleId: req.body.vehicleId,
+      InsuranceCompany: req.body.InsuranceCompany,
+      ClaimNumber: req.body.ClaimNumber,
+      AdjusterEmail: req.body.AdjusterEmail,
+      AdjusterName: req.body.AdjusterName,
+      Estimate: req.body.Estimate,
+      FinalCost: req.body.FinalCost,
+      OpenClosed: req.body.OpenClosed,
+      Status: req.body.Status,
+      VehicleId: req.body.VehicleId
     }).then(data => {
       res.statusCode = 200;
       res.send(data);
