@@ -14,8 +14,8 @@ module.exports = {
       },
       VIN: {
         type: Sequelize.STRING,
+        allowNull: false,
         validate: {
-          notNull: true,
           notEmpty: true,
           isAlphanumeric: true,
           len: [17, 17],
@@ -114,14 +114,6 @@ module.exports = {
         allowNull: false,
         defaultValue: 0
       },
-      DriverID: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Drivers',
-          key: 'id'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -131,6 +123,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
+      },
+      DriverID: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Drivers',
+          key: 'id',
+          onDelete: 'SET NULL'
+        }
       }
     });
   },

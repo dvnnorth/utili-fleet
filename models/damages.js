@@ -8,28 +8,12 @@ module.exports = (sequelize, DataTypes) => {
     Description: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    ClaimId: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'Claims',
-        key: 'id'
-      },
-    },
-    VehicleId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Vehicles',
-        key: 'id'
-      }
     }
   });
   Damages.associate = function (models) {
     // associations can be defined here]
-    Damages.belongsTo(models.Claims);
-    Damages.belongsTo(models.Vehicles);
+    Damages.belongsTo(models.Claims, { onDelete: 'SET NULL' });
+    Damages.belongsTo(models.Vehicles, { onDelete: 'CASCADE' });
   };
   return Damages;
 };

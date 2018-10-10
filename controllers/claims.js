@@ -32,7 +32,7 @@ module.exports = {
   },
 
   updateClaim: (req, res) => {
-    db.Claims.update({ where: { id: req.params.id } })
+    db.Claims.update(req.body, { where: { id: req.params.id } })
       .then(data => {
         res.statusCode = 200;
         res.send(data);
@@ -41,19 +41,11 @@ module.exports = {
   },
 
   createClaim: (req, res) => {
-    db.Claims.create({
-      insuranceCOmpany: req.body.insuranceCompany,
-      claimNumber: req.body.claimNumber,
-      adjusterEmail: req.body.adjusterEmail,
-      estimate: req.body.estimate,
-      finalCost: req.body.finalCost,
-      openClosed: req.body.openClosed,
-      status: req.body.status,
-      vehicleId: req.body.vehicleId,
-    }).then(data => {
-      res.statusCode = 200;
-      res.send(data);
-    })
+    db.Claims.create(req.body)
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
       .catch(err => sendError(err, res));
   },
 

@@ -48,20 +48,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1, 50]
-    },
-    VehicleId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Vehicles',
-        key: 'id'
-      }
-    },
+    }
   });
   Claims.associate = function (models) {
     // associations can be defined here
     Claims.hasMany(models.Damages);
-    Claims.belongsTo(models.Vehicles);
+    Claims.belongsTo(models.Vehicles, { onDelete: 'CASCADE' });
   };
   return Claims;
 };

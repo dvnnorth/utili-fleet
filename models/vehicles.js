@@ -8,8 +8,8 @@ module.exports = (sequeliize, DataTypes) => {
     },
     VIN: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
-        notNull: true,
         notEmpty: true,
         isAlphanumeric: true,
         len: [17, 17],
@@ -101,21 +101,13 @@ module.exports = (sequeliize, DataTypes) => {
     DepreciationStart: DataTypes.DATE,
     DepreciationEnd: DataTypes.DATE,
     DepreciationRateYearly: DataTypes.DECIMAL,
-    TollTagSerial: DataTypes.STRING,
-    DriverID: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'Drivers',
-        key: 'id'
-      }
-    }
+    TollTagSerial: DataTypes.STRING
   }, {});
   Vehicles.associate = function (models) {
     // associations can be defined here
     Vehicles.hasMany(models.Damages);
     Vehicles.hasMany(models.Claims);
-    Vehicles.belongsTo(models.Drivers);
+    Vehicles.belongsTo(models.Drivers, { onDelete: 'SET NULL' });
   };
   return Vehicles;
 };

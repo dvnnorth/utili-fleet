@@ -44,11 +44,15 @@ module.exports = {
   updateVehicle: (req, res) => {
     db.Vehicles.update(req.body, {
       where: {
-        id: req.body.id
-      }
-    }).then((dbVehicle) => {
-      res.json(dbVehicle);
+        id: req.params.id
+      },
+      returning: true
     })
+      .then(_ => {
+        db.Vehicles.findAll({ where: { id: req.params.id } })
+          .then(results => res.json(results))
+          .catch(err => sendError(err, res));
+      })
       .catch(err => sendError(err, res));
   },
 
@@ -57,9 +61,10 @@ module.exports = {
       where: {
         id: req.params.id
       }
-    }).then(function (dbdeleteVehicle) {
-      res.json(dbdeleteVehicle);
     })
+      .then(rowsAffected => {
+        if(rowsAffected === 1) res.sendStatus(200);
+      })
       .catch(err => sendError(err, res));
   },
 

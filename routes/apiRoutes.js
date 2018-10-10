@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-var session = require('express-session');
 const db = require('../models/index');
 const controller = require('../controllers/index');
 
