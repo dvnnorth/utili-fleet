@@ -28,7 +28,7 @@ module.exports = {
   },
 
   createDriver: (req, res) => {
-    db.Driver.create(req.body)
+    db.Drivers.create(req.body)
       .then((data) => {
         res.statusCode = 200;
         res.send(data);
@@ -36,7 +36,7 @@ module.exports = {
   },
 
   updateDriver: (req, res) => {
-    db.Driver.update(req.body, {
+    db.Drivers.update(req.body, {
       where: {
         id: req.body.id
       }
@@ -45,6 +45,21 @@ module.exports = {
         res.json(dbdriver);
       }).catch(error => sendError(error, res));
   },
+
+  // updateDriver: ("/driver/:id"(req, res) => {
+  //   const id = req.params.id;
+  //   const updates = req.body.updates;
+  //   db.Driver.find({
+  //     where: {
+  //       id: id}
+  //     })
+  //     .then(driver => {
+  //       return driver.updateAttributes(req.body)
+  //     })
+  //     .then(updateDriver =>{
+  //       res.json(updateOwner);
+  //     });
+  // });
 
   deleteDriver: (req, res) => {
     db.Drivers.destroy({
