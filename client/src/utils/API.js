@@ -3,18 +3,12 @@ import axios from 'axios';
 
 export default {
   register: function (data) {
-    return axios.post('/register', {
-      username: this.state.username,
-      password: this.state.password
-    }).then(res => {
+    return axios.post('/register', data).then(res => {
       console.log(res);
     });
   },
-  login: function (username, password) {
-    return axios.post('/signin',{
-      username: username,
-      password: password
-    }).then(res => {
+  login: function (data) {
+    return axios.post('/signin', data).then(res => {
       console.log(res);
       res.json(res);
       this.setState({isAuthenticated: true});

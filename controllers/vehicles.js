@@ -42,20 +42,17 @@ module.exports = {
   },
 
   updateVehicle: (req, res) => {
-    db.Vehicles.update(req.body, {
-      where: {
-        id: req.params.id
-      },
-      returning: true
+    db.Vehicles.find({
+      where: { id: req.params.id }
     })
-      .then(_ => {
-        db.Vehicles.findAll({ where: { id: req.params.id } })
-          .then(results => res.json(results))
-          .catch(err => sendError(err, res));
+      .then(data => {
+        return data.updateAttributes(req.body);
+      })
+      .then(updatedVehicle => {
+        res.json(updatedVehicle);
       })
       .catch(err => sendError(err, res));
   },
-
   deleteVehicle: function (req, res) {
     db.Vehicles.destroy({
       where: {
@@ -63,7 +60,7 @@ module.exports = {
       }
     })
       .then(rowsAffected => {
-        if(rowsAffected === 1) res.sendStatus(200);
+        if (rowsAffected === 1) res.sendStatus(200);
       })
       .catch(err => sendError(err, res));
   },
