@@ -71,35 +71,14 @@ module.exports = app => {
   app.get('/api/logout', controller.authentication.logout);
   ////////////////////////// End Auth ///////////////////////////////////////
 
-
-
-  ///////////////////////// Driver Routes ///////////////////////////////////
-  // Get all drivers from the database
-  app.get('/api/drivers', /*authenticationMiddleware(),*/ controller.drivers.getAllDrivers);
-
-  // Get a driver from the database
-  app.get('/api/driver/:id', /*authenticationMiddleware(),*/ controller.drivers.getDriver);
-
-  //Post a driver to the database
-  app.post('/api/driver/create', /*authenticationMiddleware(),*/ controller.drivers.createDriver);
-
-  //Update a driver to the database
-  app.put('/api/driver/:id', /*authenticationMiddleware(),*/ controller.drivers.updateDriver);
-
-  // Delete a driver into the database
-  app.delete('/api/driver/:id', /*authenticationMiddleware(),*/ controller.drivers.deleteDriver);
-  ///////////////////////// End Driver Routes ///////////////////////////////////
-
-
-
   //////////////////////// Vehicles /////////////////////////////////////////////
   // Get all vehicles from the database
   app.get('/api/vehicles', /*authenticationMiddleware(),*/ controller.vehicles.getAllVehicles);
 
-  app.get('/api/vehicles/:VIN', /*authenticationMiddleware(),*/ controller.vehicles.getVehicleByVIN);
+  app.get('/api/vehicle/:VIN', /*authenticationMiddleware(),*/ controller.vehicles.getVehicleByVIN);
 
   // Post a vehicle into the database
-  app.post('/api/vehicle/create', /*authenticationMiddleware(),*/ controller.vehicles.createVehicle);
+  app.post('/api/vehicles', /*authenticationMiddleware(),*/ controller.vehicles.createVehicle);
 
   // Update a vehicle into the database
   app.put('/api/vehicle/:id', /*authenticationMiddleware(),*/ controller.vehicles.updateVehicle);
@@ -111,7 +90,24 @@ module.exports = app => {
   app.get('/api/vinCheck/:VIN', /*authenticationMiddleware(),*/ controller.vehicles.getFromVehicleDatabase);
   //////////////////////// End Vehicles /////////////////////////////
 
-  
+
+
+  ///////////////////////// Driver Routes ///////////////////////////////////
+  // Get all drivers from the database
+  app.get('/api/drivers', /*authenticationMiddleware(),*/ controller.drivers.getAllDrivers);
+
+  // Get a driver from the database
+  app.get('/api/driver/:id', /*authenticationMiddleware(),*/ controller.drivers.getDriver);
+
+  //Post a driver to the database
+  app.post('/api/drivers', /*authenticationMiddleware(),*/ controller.drivers.createDriver);
+
+  //Update a driver to the database
+  app.put('/api/driver/:id', /*authenticationMiddleware(),*/ controller.drivers.updateDriver);
+
+  // Delete a driver into the database
+  app.delete('/api/driver/:id', /*authenticationMiddleware(),*/ controller.drivers.deleteDriver);
+  ///////////////////////// End Driver Routes ///////////////////////////////////
 
   //////////////////////// Claims ///////////////////////////////////
   app.get('/api/claims', /*authenticationMiddleware(),*/ controller.claims.getAllClaims);
@@ -124,7 +120,7 @@ module.exports = app => {
 
   app.delete('/api/claim/:id', /*authenticationMiddleware(),*/ controller.claims.deleteClaim);
   ///////////////////// End Claims //////////////////////////////
-  
+
   //////////////////////// Damages ///////////////////////////////////
   app.get('/api/damages', /*authenticationMiddleware(),*/ controller.damages.getAllDamages);
 
