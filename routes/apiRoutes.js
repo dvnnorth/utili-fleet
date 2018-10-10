@@ -140,12 +140,12 @@ module.exports = app => {
   ///////////////////// Employees //////////////////////////////
   app.get('/api/employees', /*authenticationMiddleware(),*/ controller.employees.getAllEmployees);
 
-  app.get('/api/employees/:id', /*authenticationMiddleware(),*/ controller.employees.getEmployee);
+  app.get('/api/employee/:id', /*authenticationMiddleware(),*/ controller.employees.getEmployee);
 
-  app.put('/api/employees/:id', /*authenticationMiddleware(),*/ controller.employees.updateEmployee);
+  app.put('/api/employee/:id', /*authenticationMiddleware(),*/ controller.employees.updateEmployee);
 
   app.post('/api/employees', /*authenticationMiddleware(),*/ controller.employees.createEmployee);
 
-  app.delete('/api/employees/:id', /*authenticationMiddleware(),*/ controller.employees.deleteEmployee);
+  app.delete('/api/employee/:id', /*authenticationMiddleware(),*/ controller.employees.deleteEmployee);
   ///////////////////// End Emplpoyees //////////////////////////////
 };

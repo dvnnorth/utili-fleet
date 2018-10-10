@@ -19,7 +19,7 @@ module.exports = {
   },
 
   getEmployee: (req, res) => {
-    db.Employee.findOne({ where: { id: req.params.id } })
+    db.Employees.findOne({ where: { id: req.params.id } })
       .then(data => {
         res.statusCode = 200;
         res.send(data);
@@ -54,7 +54,7 @@ module.exports = {
       .catch(err => sendError(err, res));
   },
   deleteEmployee: (req, res) => {
-    db.Employee.destroy({
+    db.Employees.destroy({
       where: {
         id: req.params.id
       }

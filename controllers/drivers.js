@@ -19,7 +19,7 @@ module.exports = {
   },
 
   getDriver: (req, res) => {
-    db.Drivers.findOne({ where: { id: req.body.id } })
+    db.Drivers.findOne({ where: { id: req.params.id } })
       .then(data => {
         res.statusCode = 200;
         res.send(data);
@@ -36,14 +36,22 @@ module.exports = {
   },
 
   updateDriver: (req, res) => {
-    db.Drivers.update(req.body, {
-      where: {
-        id: req.body.id
-      }
+    console.log(req.params.id);
+    console.log(req.body.section);
+    console.log(req.body.description);
+    console.log(req.body.claimId);
+    console.log(req.body.vehicleId);
+    
+    db.Drivers.find({
+      where: { id: req.params.id }
     })
-      .then((dbdriver) => {
-        res.json(dbdriver);
-      }).catch(error => sendError(error, res));
+      .then(data => {
+        return data.updateAttributes(req.body);
+      })
+      .then(updatedEmployee => {
+        res.json(updatedEmployee);
+      })
+      .catch(err => sendError(err, res));
   },
 
   deleteDriver: (req, res) => {
