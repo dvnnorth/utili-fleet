@@ -36,6 +36,7 @@ module.exports = {
   },
 
   updateDriver: (req, res) => {
+<<<<<<< HEAD
     console.log(req.params.id);
     console.log(req.body.section);
     console.log(req.body.description);
@@ -44,6 +45,12 @@ module.exports = {
     
     db.Drivers.find({
       where: { id: req.params.id }
+=======
+    db.Drivers.update(req.body, {
+      where: {
+        id: req.body.id
+      }
+>>>>>>> b1ed034bacf02d08482280514b7b32b54d71b4a7
     })
       .then(data => {
         return data.updateAttributes(req.body);
@@ -53,6 +60,21 @@ module.exports = {
       })
       .catch(err => sendError(err, res));
   },
+
+  // updateDriver: ("/driver/:id"(req, res) => {
+  //   const id = req.params.id;
+  //   const updates = req.body.updates;
+  //   db.Driver.find({
+  //     where: {
+  //       id: id}
+  //     })
+  //     .then(driver => {
+  //       return driver.updateAttributes(req.body)
+  //     })
+  //     .then(updateDriver =>{
+  //       res.json(updateOwner);
+  //     });
+  // });
 
   deleteDriver: (req, res) => {
     db.Drivers.destroy({
