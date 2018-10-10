@@ -79,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
   Drivers.associate = function (models) {
     // associations can be defined here
     Drivers.hasOne(models.Employees);
-    Drivers.belongsTo(models.Vehicles, { constraints: false });
+    //Drivers.belongsTo(models.Vehicles, { constraints: false });
   };
   return Drivers;
 };
