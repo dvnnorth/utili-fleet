@@ -37,12 +37,12 @@ module.exports = {
     console.log(req.body.description);
     console.log(req.body.claimId);
     console.log(req.body.vehicleId);
-
+    
     db.Damages.find({
       where: { id: req.params.id }
     })
-      .then(data => {
-        return data.updateAttributes(req.body)
+    .then(data => {
+      return data.updateAttributes(req.body)
       })
       .then(updatedDAmage => {
         res.json(updatedDAmage);
@@ -51,11 +51,17 @@ module.exports = {
   },
 
   createDamages: (req, res) => {
+    console.log({
+      Section: req.body.Section,
+      Description: req.body.Description,
+      ClaimId: req.body.ClaimId,
+      VehicleId: req.body.VehicleId
+    });
     db.Damages.create({
-      section: req.body.section,
-      description: req.body.description,
-      claimId: req.body.claimId,
-      vehicleId: req.body.vehicleId
+      Section: req.body.Section,
+      Description: req.body.Description,
+      ClaimId: req.body.ClaimId,
+      VehicleId: req.body.VehicleId
     }).then(data => {
       res.statusCode = 200;
       res.send(data);

@@ -19,15 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     AdjusterEmail: {
       type: DataTypes.STRING,
       allowNull: false,
-      len: [1, 50],
       validate: {
         len: {
           args: [6, 128],
           msg: 'Email address must be between 6 and 128 characters in length'
         },
-        isEmail: {
-          msg: 'Email address must be valid'
-        }
       }
     },
     Estimate: {

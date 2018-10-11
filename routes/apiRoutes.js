@@ -31,7 +31,7 @@ module.exports = app => {
           // Content (User object) is in res.dataValues
           let user = res.dataValues;
           // Password in the user.password field is already hashed. Store in variable hash
-          let hash = user.password; 
+          let hash = user.password;
           // Compare the password (using the hash in session)
           bcrypt.compare(password, hash, (err, res) => {
             // res is the results of the comparison (true or false)

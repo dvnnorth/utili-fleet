@@ -32,10 +32,14 @@ module.exports = {
   },
 
   updateClaim: (req, res) => {
-    db.Claims.update(req.body, { where: { id: req.params.id } })
+    db.Claims.find({
+      where: { id: req.params.id }
+    })
       .then(data => {
-        res.statusCode = 200;
-        res.send(data);
+        return data.updateAttributes(req.body)
+      })
+      .then(updatedClaims => {
+        res.json(updatedClaims);
       })
       .catch(err => sendError(err, res));
   },
