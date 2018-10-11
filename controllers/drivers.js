@@ -19,7 +19,10 @@ module.exports = {
   },
 
   getDriver: (req, res) => {
-    db.Drivers.findOne({ where: { id: req.body.id } })
+    db.Drivers.findAll({ 
+      where: { id: req.params.id 
+      } 
+    })
       .then(data => {
         res.statusCode = 200;
         res.send(data);
