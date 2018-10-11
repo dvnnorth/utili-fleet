@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import axios from "axios";
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -28,7 +30,9 @@ class LoginPage extends React.Component {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
+      username: "",
+      password: ""
     };
   }
   componentDidMount() {
@@ -44,6 +48,22 @@ class LoginPage extends React.Component {
     clearTimeout(this.timeOutFunction);
     this.timeOutFunction = null;
   }
+
+  loginHandler = (event) => {
+    const {name, value} = event.target;
+    this.setState({ [name] : value}); 
+  };
+  submitHandler = () => {
+    console.log(this.state);
+    axios.post('/api/login', {
+      username: this.state.username,
+      password: this.state.password
+    }).then(
+      response => {
+        console.log(response);
+      });
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -69,6 +89,7 @@ class LoginPage extends React.Component {
                           justIcon
                           key={key}
                           className={classes.customButtonClass}
+                          click={this.submitHandler}
                         >
                           <i className={prop} />
                         </Button>
@@ -93,10 +114,12 @@ class LoginPage extends React.Component {
                   />
                   <CustomInput
                     labelText="Email..."
+                    name="username"
                     id="email"
                     formControlProps={{
                       fullWidth: true
                     }}
+                    onChange={this.loginHandler}
                     inputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -107,10 +130,12 @@ class LoginPage extends React.Component {
                   />
                   <CustomInput
                     labelText="Password"
+                    name="password"
                     id="password"
                     formControlProps={{
                       fullWidth: true
                     }}
+                    onChange={this.loginHandler}
                     inputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -123,7 +148,7 @@ class LoginPage extends React.Component {
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button color="rose" simple size="lg" block>
+                  <Button color="rose" simple size="lg" block onClick={this.submitHandler}>
                     Let's Go
                   </Button>
                 </CardFooter>

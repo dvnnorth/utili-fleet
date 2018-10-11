@@ -1,4 +1,3 @@
-/*
 import axios from 'axios';
 
 export default {
@@ -11,7 +10,6 @@ export default {
     return axios.post('/signin', data).then(res => {
       console.log(res);
       res.json(res);
-      this.setState({isAuthenticated: true});
     });
   },
   logout: function () {
@@ -24,4 +22,3 @@ export default {
   }
 };
 
-*/
