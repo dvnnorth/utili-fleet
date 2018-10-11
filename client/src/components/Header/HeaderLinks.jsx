@@ -5,22 +5,24 @@ import PropTypes from "prop-types";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import MenuItem from "@material-ui/core/MenuItem";
-import MenuList from "@material-ui/core/MenuList";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Paper from "@material-ui/core/Paper";
-import Grow from "@material-ui/core/Grow";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import MenuList from "@material-ui/core/MenuList";
+// import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+// import Paper from "@material-ui/core/Paper";
+// import Grow from "@material-ui/core/Grow";
 import Hidden from "@material-ui/core/Hidden";
-import Popper from "@material-ui/core/Popper";
+// import Popper from "@material-ui/core/Popper";
 
 // @material-ui/icons
-import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Dashboard";
-import Search from "@material-ui/icons/Search";
+// import Person from "@material-ui/icons/Person";
+// import Notifications from "@material-ui/icons/Notifications";
+// import Dashboard from "@material-ui/icons/Dashboard";
+// import Search from "@material-ui/icons/Search";
+import Lock from "@material-ui/icons/Lock";
+import LogOff from "@material-ui/icons/PowerSettingsNew";
 
 // core components
-import CustomInput from "components/CustomInput/CustomInput.jsx";
+// import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 
 import headerLinksStyle from "assets/jss/material-dashboard-pro-react/components/headerLinksStyle";
@@ -59,7 +61,7 @@ class HeaderLinks extends React.Component {
     });
     return (
       <div className={wrapper}>
-        <CustomInput
+        {/* <CustomInput
           rtlActive={rtlActive}
           formControlProps={{
             className: classes.top + " " + classes.search
@@ -82,8 +84,8 @@ class HeaderLinks extends React.Component {
           <Search
             className={classes.headerLinksSvg + " " + classes.searchIcon}
           />
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           color="transparent"
           simple
           aria-label="Dashboard"
@@ -107,8 +109,33 @@ class HeaderLinks extends React.Component {
               {rtlActive ? "لوحة القيادة" : "Dashboard"}
             </span>
           </Hidden>
+        </Button> */}
+        <Button
+          color="transparent"
+          simple
+          aria-label="Lock"
+          justIcon
+          className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
+          muiClasses={{
+            label: rtlActive ? classes.labelRTL : ""
+          }}
+        >
+          <Lock
+            className={
+              classes.headerLinksSvg +
+              " " +
+              (rtlActive
+                ? classes.links + " " + classes.linksRTL
+                : classes.links)
+            }
+          />
+          <Hidden mdUp implementation="css">
+            <span className={classes.linkText}>
+              {rtlActive ? "لوحة القيادة" : "Lock"}
+            </span>
+          </Hidden>
         </Button>
-        <div className={managerClasses}>
+        {/* <div className={managerClasses}>
           <Button
             color="transparent"
             justIcon
@@ -203,17 +230,17 @@ class HeaderLinks extends React.Component {
               </Grow>
             )}
           </Popper>
-        </div>
+        </div> */}
         <Button
           color="transparent"
-          aria-label="Person"
+          aria-label="Log Off"
           justIcon
           className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
           muiClasses={{
             label: rtlActive ? classes.labelRTL : ""
           }}
         >
-          <Person
+          <LogOff
             className={
               classes.headerLinksSvg +
               " " +
@@ -224,7 +251,7 @@ class HeaderLinks extends React.Component {
           />
           <Hidden mdUp implementation="css">
             <span className={classes.linkText}>
-              {rtlActive ? "الملف الشخصي" : "Profile"}
+              {rtlActive ? "الملف الشخصي" : "Log Off"}
             </span>
           </Hidden>
         </Button>
