@@ -14,7 +14,7 @@ const db = require('./models');
 const app = express();
 
 // Import routes
-const routes = require('./routes');
+const routes = require('./routes/apiRoutes');
 
 // Set Listening Port
 const PORT = process.env.PORT || 5000;
@@ -40,10 +40,14 @@ app.use(passport.session());
 // Call routes
 routes(app);
 
-
+// If the application is running in the production environment,
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
+  // Route all requests to the react application
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
 }
 
 // Setup app listener and database connection

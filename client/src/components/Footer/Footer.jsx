@@ -31,11 +31,11 @@ function Footer({ ...props }) {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a href="#home" className={block}>
-                {rtlActive ? "الصفحة الرئيسية" : "Home"}
+              <a href="/" className={block}>
+                {rtlActive ? "الصفحة الرئيسية" : "Dashboard"}
               </a>
             </ListItem>
-            <ListItem className={classes.inlineBlock}>
+            {/* <ListItem className={classes.inlineBlock}>
               <a href="#company" className={block}>
                 {rtlActive ? "شركة" : "Company"}
               </a>
@@ -44,22 +44,22 @@ function Footer({ ...props }) {
               <a href="#portfolio" className={block}>
                 {rtlActive ? "بعدسة" : "Portfolio"}
               </a>
-            </ListItem>
+            </ListItem> */}
             <ListItem className={classes.inlineBlock}>
-              <a href="#blog" className={block}>
-                {rtlActive ? "مدونة" : "Blog"}
+              <a href="/admin" className={block}>
+                {rtlActive ? "مدونة" : "Admin"}
               </a>
             </ListItem>
           </List>
         </div>
         <p className={classes.right}>
           &copy; {1900 + new Date().getYear()}{" "}
-          <a href="https://www.creative-tim.com" className={anchor}>
-            {rtlActive ? "توقيت الإبداعية" : "Creative Tim"}
+          <a href="/" className={anchor}>
+            {rtlActive ? "توقيت الإبداعية" : "UtiliFleet"}
           </a>
           {rtlActive
             ? ", مصنوعة مع الحب لشبكة الإنترنت أفضل"
-            : ", made with love for a better web"}
+            : ", moving your business"}
         </p>
       </div>
     </footer>
