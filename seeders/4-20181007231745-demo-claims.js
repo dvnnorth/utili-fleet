@@ -1,35 +1,27 @@
 'use strict';
 const faker = require('faker');
 
-let claims = [];
-
-for (let i = 0; i < 50; i++) {
-  claims.push({
-    insuranceCompany: faker.company.companyName(),
-    claimNumber: faker.random.number({min:100, max:500}),
-    adjusterName: faker.name.findName(),
-    adjusterEmail: faker.internet.email(),
-    estimate: faker.random.number({min:1, max:49}),
-    finalCost: faker.random.number({min:1, max:49}),
-    openClosed: faker.random.boolean(),
-    status: faker.lorem.word(),
-    vehicleId: faker.random.number({min:1, max:50})
-  });
-}
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+    let claims = [];
 
-      Example:
-      return queryInterface.bulkInsert('Person', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
-   return queryInterface.bulkInsert('Claims', claims, {});
+    for (let i = 0; i < 50; i++) {
+      claims.push({
+        InsuranceCompany: faker.company.companyName(),
+        ClaimNumber: faker.random.number({ min: 100, max: 500 }),
+        AdjusterName: faker.name.findName(),
+        AdjusterEmail: faker.internet.email(),
+        Estimate: faker.random.number({ min: 1, max: 49 }),
+        FinalCost: faker.random.number({ min: 1, max: 49 }),
+        OpenClosed: faker.random.boolean(),
+        Status: faker.lorem.word(),
+        VehicleId: faker.random.number({ min: 1, max: 50 }),
+        createdAt: Sequelize.fn('NOW'),
+        updatedAt: Sequelize.fn('NOW')
+      });
+    }
+
+    return queryInterface.bulkInsert('Claims', claims, {});
   },
 
   down: (queryInterface, Sequelize) => {
@@ -40,6 +32,6 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('Person', null, {});
     */
-   return queryInterface.bulkDelete('Claims', null, {});
+    return queryInterface.bulkDelete('Claims', null, {});
   }
 };

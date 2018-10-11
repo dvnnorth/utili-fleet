@@ -24,14 +24,6 @@ module.exports = {
         defaultValue: false,
         allowNull: false
       },
-      DriverId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Drivers',
-          key: 'id'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -41,6 +33,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
+      },
+      DriverId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Drivers',
+          key: 'id',
+          onDelete: 'CASCADE'
+        }
       }
     });
   },

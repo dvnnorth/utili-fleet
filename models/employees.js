@@ -14,19 +14,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: false
-    },
-    DriverId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Drivers',
-        key: 'id'
-      }
     }
   });
-  Employees.associate = function(models) {
+  Employees.associate = function (models) {
     // associations can be defined here
-    Employees.belongsTo(models.Drivers);
+    Employees.belongsTo(models.Drivers, { onDelete: 'CASCADE' });
   };
   return Employees;
 };

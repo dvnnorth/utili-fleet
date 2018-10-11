@@ -32,40 +32,24 @@ module.exports = {
   },
 
   updateClaim: (req, res) => {
-    db.Claims.update({ where: { id: req.params.id } })
+    db.Claims.find({
+      where: { id: req.params.id }
+    })
       .then(data => {
-        res.statusCode = 200;
-        res.send(data);
+        return data.updateAttributes(req.body)
+      })
+      .then(updatedClaims => {
+        res.json(updatedClaims);
       })
       .catch(err => sendError(err, res));
   },
 
   createClaim: (req, res) => {
-    console.log({
-      InsuranceCompany: req.body.InsuranceCompany,
-      ClaimNumber: req.body.ClaimNumber,
-      AdjusterEmail: req.body.AdjusterEmail,
-      AdjusterName: req.body.AdjusterName,
-      Estimate: req.body.Estimate,
-      FinalCost: req.body.FinalCost,
-      OpenClosed: req.body.OpenClosed,
-      Status: req.body.Status,
-      VehicleId: req.body.VehicleId
-    });
-    db.Claims.create({
-      InsuranceCompany: req.body.InsuranceCompany,
-      ClaimNumber: req.body.ClaimNumber,
-      AdjusterEmail: req.body.AdjusterEmail,
-      AdjusterName: req.body.AdjusterName,
-      Estimate: req.body.Estimate,
-      FinalCost: req.body.FinalCost,
-      OpenClosed: req.body.OpenClosed,
-      Status: req.body.Status,
-      VehicleId: req.body.VehicleId
-    }).then(data => {
-      res.statusCode = 200;
-      res.send(data);
-    })
+    db.Claims.create(req.body)
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
       .catch(err => sendError(err, res));
   },
 

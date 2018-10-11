@@ -16,22 +16,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      ClaimId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Claims',
-          key: 'id'
-        }
-      },
-      VehicleId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Vehicles',
-          key: 'id'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -41,6 +25,24 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
+      },
+      ClaimId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Claims',
+          key: 'id',
+          onDelete: 'SET NULL'
+        }
+      },
+      VehicleId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Vehicles',
+          key: 'id',
+          onDelete: 'CASCADE'
+        }
       }
     });
   },

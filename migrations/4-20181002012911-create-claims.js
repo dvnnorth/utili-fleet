@@ -56,14 +56,6 @@ module.exports = {
         allowNull: false,
         len: [1, 50]
       },
-      VehicleId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: 'Vehicles',
-          key: 'id'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -73,6 +65,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
         defaultValue: Sequelize.fn('NOW')
+      },
+      VehicleId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Vehicles',
+          key: 'id',
+          onDelete: 'CASCADE'
+        }
       }
     });
   },

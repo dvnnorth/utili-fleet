@@ -19,15 +19,11 @@ module.exports = (sequelize, DataTypes) => {
     AdjusterEmail: {
       type: DataTypes.STRING,
       allowNull: false,
-      len: [1, 50],
       validate: {
         len: {
           args: [6, 128],
           msg: 'Email address must be between 6 and 128 characters in length'
         },
-        isEmail: {
-          msg: 'Email address must be valid'
-        }
       }
     },
     Estimate: {
@@ -48,20 +44,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1, 50]
-    },
-    VehicleId: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'Vehicles',
-        key: 'id'
-      }
-    },
+    }
   });
   Claims.associate = function (models) {
     // associations can be defined here
     Claims.hasMany(models.Damages);
-    Claims.belongsTo(models.Vehicles);
+    Claims.belongsTo(models.Vehicles, { onDelete: 'CASCADE' });
   };
   return Claims;
 };

@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     Address2: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
+    }, 
     City: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -79,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
   Drivers.associate = function (models) {
     // associations can be defined here
     Drivers.hasOne(models.Employees);
-    //Drivers.belongsTo(models.Vehicles, { constraints: false });
+    Drivers.hasOne(models.Vehicles);
   };
   return Drivers;
 };

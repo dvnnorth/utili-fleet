@@ -19,10 +19,7 @@ module.exports = {
   },
 
   getDriver: (req, res) => {
-    db.Drivers.findAll({ 
-      where: { id: req.params.id 
-      } 
-    })
+    db.Drivers.findOne({ where: { id: req.params.id } })
       .then(data => {
         res.statusCode = 200;
         res.send(data);
@@ -41,28 +38,15 @@ module.exports = {
   updateDriver: (req, res) => {
     db.Drivers.update(req.body, {
       where: {
-        id: req.body.id
+        id: req.params.id
       }
     })
-      .then((dbdriver) => {
-        res.json(dbdriver);
-      }).catch(error => sendError(error, res));
+      .then(dbdriver => {
+        res.statusCode = 200;
+        res.send(dbdriver);
+      })
+      .catch(error => sendError(error, res));
   },
-
-  // updateDriver: ("/driver/:id"(req, res) => {
-  //   const id = req.params.id;
-  //   const updates = req.body.updates;
-  //   db.Driver.find({
-  //     where: {
-  //       id: id}
-  //     })
-  //     .then(driver => {
-  //       return driver.updateAttributes(req.body)
-  //     })
-  //     .then(updateDriver =>{
-  //       res.json(updateOwner);
-  //     });
-  // });
 
   deleteDriver: (req, res) => {
     db.Drivers.destroy({

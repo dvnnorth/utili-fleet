@@ -2,30 +2,22 @@
 
 const faker = require('faker');
 
-let employees = [];
-
-for (let i = 0; i < 50; i++) {
-  employees.push({
-    EmployeeNumber: faker.random.number({ min: 100, max: 999 }),
-    JobTitle: faker.name.jobTitle(),
-    MVRCheckDate: faker.date.recent(),
-    CanDrive: faker.random.boolean(),
-    DriverId: faker.random.number({ min: 1, max: 49 })
-  });
-}
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
+    let employees = [];
 
-      Example:
-      return queryInterface.bulkInsert('Person', [{
-        name: 'John Doe',
-        isBetaMember: false
-      }], {});
-    */
+    for (let i = 0; i < 50; i++) {
+      employees.push({
+        EmployeeNumber: faker.random.number({ min: 100, max: 999 }),
+        JobTitle: faker.name.jobTitle(),
+        MVRCheckDate: faker.date.recent(),
+        CanDrive: faker.random.boolean(),
+        DriverId: faker.random.number({ min: 1, max: 49 }),
+        createdAt: Sequelize.fn('NOW'),
+        updatedAt: Sequelize.fn('NOW')
+      });
+    }
+    
     return queryInterface.bulkInsert('Employees', employees, {});
   },
 
