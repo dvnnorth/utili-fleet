@@ -110,6 +110,7 @@ class LoginPage extends React.Component {
                       marginLeft: "auto",
                       marginRight: "auto",
                       marginTop: "1rem",
+                      marginBottom: "1rem",
                       display: "block"
                     }}
                   />
