@@ -49,6 +49,9 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
 }
+else {
+  app.get('/', require('./controllers/testing').loggedOut);
+}
 
 // Setup app listener and database connection
 app.listen(PORT, () => {

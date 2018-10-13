@@ -47,6 +47,15 @@ const loginPageStyle = theme => ({
   },
   socialLine: {
     padding: "0.9375rem 0"
+  },
+  parent: {
+    display: "table",
+    width: "100%"
+  },
+  formLogin: {
+    display: "table-cell",
+    textAlign: "center",
+    verticalAlign: "middle"
   }
 });
 

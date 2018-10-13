@@ -1,8 +1,8 @@
 module.exports = {
   ////////////// Testing //////////////////
-  successTest: (req, res) => {
+  loggedOut: (req, res) => {
     res.statusCode = 200;
-    res.send(`You did it! What a success! Great moves, proud of you.`);
+    res.send(`Hey guy, you're logged out`);
   },
   ////////////// End Testing ///////////////
 };

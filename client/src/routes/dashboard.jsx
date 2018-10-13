@@ -9,7 +9,9 @@ import GridSystem from "views/Components/GridSystem.jsx";
 import RegularForms from "views/Forms/RegularForms.jsx";
 import ExtendedForms from "views/Forms/ExtendedForms.jsx";
 import ValidationForms from "views/Forms/ValidationForms.jsx";
-import Wizard from "views/Forms/Wizard.jsx";
+//import Wizard from "views/Forms/Wizard.jsx";
+import CheckInWizard from "views/Forms/CheckInWizard.jsx";
+import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 // import ExtendedTables from "views/Tables/ExtendedTables.jsx";
 // import ReactTables from "views/Tables/ReactTables.jsx";
@@ -77,13 +79,13 @@ var dashRoutes = [
     path: "/checkin",
     name: "Check-in",
     icon: ArrowDownward,
-    component: Dashboard
+    component: CheckInWizard
   },
   {
     path: "/checkout",
     name: "Check-out",
     icon: ArrowUpward,
-    component: Dashboard
+    component: CheckOutWizard
   },
   // {
   //   collapse: true,
@@ -150,7 +152,7 @@ var dashRoutes = [
         path: "/forms/agreements",
         name: "Agreements",
         mini: "A",
-        component: Wizard
+        component: Dashboard
       },
       {
         path: "/reports/claims",
