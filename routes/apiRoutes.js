@@ -109,7 +109,7 @@ module.exports = app => {
   ///////////////////////// End Driver Routes ///////////////////////////////////
 
   //////////////////////// Claims ///////////////////////////////////
-  app.get('/api/claims', authenticationMiddleware(), controller.claims.getAllClaims);
+  app.get('/api/claims', controller.claims.getAllClaims);
 
   app.get('/api/claim/:id', authenticationMiddleware(), controller.claims.getClaimById);
 

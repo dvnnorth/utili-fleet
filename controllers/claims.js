@@ -13,7 +13,7 @@ module.exports = {
     db.Claims.findAll()
       .then(data => {
         res.statusCode = 200;
-        res.send(data);
+        res.json(data);
       })
       .catch(err => sendError(err, res));
   },
