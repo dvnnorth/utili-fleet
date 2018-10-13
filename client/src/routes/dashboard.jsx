@@ -23,7 +23,7 @@ import Wizard from "views/Forms/Wizard.jsx";
 //import TimelinePage from "views/Pages/Timeline.jsx";
 //import RTLSupport from "views/Pages/RTLSupport.jsx";
 
-import pagesRoutes from "./pages.jsx";
+// import pagesRoutes from "./pages.jsx";
 
 // @material-ui/icons
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -39,32 +39,32 @@ import DirectionsCar from "@material-ui/icons/DirectionsCar";
 // import Timeline from "@material-ui/icons/Timeline";
 // import DateRange from "@material-ui/icons/DateRange";
 
-var pages = [
-  // {
-  //   path: "/timeline-page",
-  //   name: "Timeline Page",
-  //   mini: "TP",
-  //   component: TimelinePage
-  // },
-  // {
-  //   path: "/user-page",
-  //   name: "User Profile",
-  //   mini: "UP",
-  //   component: UserProfile
-  // },
-  // {
-  //   path: "/user-page",
-  //   name: "Test Page",
-  //   mini: "TP",
-  //   component: UserProfile
-  // },
-  // {
-  //   path: "/rtl/rtl-support-page",
-  //   name: "RTL Support",
-  //   mini: "RS",
-  //   component: RTLSupport
-  // }
-].concat(pagesRoutes);
+// var pages = [
+//   {
+//     path: "/timeline-page",
+//     name: "Timeline Page",
+//     mini: "TP",
+//     component: TimelinePage
+//   },
+//   {
+//     path: "/user-page",
+//     name: "User Profile",
+//     mini: "UP",
+//     component: UserProfile
+//   },
+//   {
+//     path: "/user-page",
+//     name: "Test Page",
+//     mini: "TP",
+//     component: UserProfile
+//   },
+//   {
+//     path: "/rtl/rtl-support-page",
+//     name: "RTL Support",
+//     mini: "RS",
+//     component: RTLSupport
+//   }
+// ].concat(pagesRoutes);
 
 var dashRoutes = [
   {
