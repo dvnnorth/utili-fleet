@@ -9,7 +9,8 @@ import GridSystem from "views/Components/GridSystem.jsx";
 // import RegularForms from "views/Forms/RegularForms.jsx";
 // import ExtendedForms from "views/Forms/ExtendedForms.jsx";
 // import ValidationForms from "views/Forms/ValidationForms.jsx";
-import Wizard from "views/Forms/Wizard.jsx";
+import CheckInWizard from "views/Forms/CheckInWizard.jsx";
+import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 // import ExtendedTables from "views/Tables/ExtendedTables.jsx";
 import ReactTables from "views/Tables/ReactTables.jsx";
@@ -104,13 +105,13 @@ var dashRoutes = [
         path: "/vehicles/add",
         name: "Add",
         mini: "A",
-        component: Wizard
+        component: Dashboard
       },
       {
         path: "/vehicles/view",
         name: "View",
         mini: "V",
-        component: Wizard
+        component: Dashboard
       },
       // {
       //   path: "/components/panels",
@@ -229,6 +230,5 @@ var dashRoutes = [
   // { path: "/widgets", name: "Widgets", icon: WidgetsIcon, component: Widgets },
   // { path: "/charts", name: "Charts", icon: Timeline, component: Charts },
   // { path: "/calendar", name: "Calendar", icon: DateRange, component: Calendar },
-  { redirect: true, path: "/", pathTo: "/pages/login-page", name: "login-page" }
 ];
 export default dashRoutes;

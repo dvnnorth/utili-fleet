@@ -1,7 +1,6 @@
 {
   "name": "utili-fleet",
   "version": "1.0.0",
-  "proxy": "http://localhost:5000",
   "description": "UtiliFleet is a fleet management application built using the MERN stack.",
   "main": "server.js",
   "repository": "git@github.com:dvnnorth/utili-fleet.git",
