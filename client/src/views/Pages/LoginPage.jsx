@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 
 // Import API
-import API from "../../utils/API";
+import API from "utils/API";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -12,6 +12,7 @@ import Icon from "@material-ui/core/Icon";
 import Typography from "@material-ui/core/Typography";
 
 // @material-ui/icons
+// import Face from "@material-ui/icons/Face";
 import PermIdentity from "@material-ui/icons/PermIdentity";
 // import LockOutline from "@material-ui/icons/LockOutline";
 
@@ -22,10 +23,13 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
+// import CardHeader from ;"components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
 import loginPageStyle from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx";
+
+import loginLogo from "assets/img/logoWithText.svg";
+// import CardIcon from "../../components/Card/CardIcon";
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -62,7 +66,7 @@ class LoginPage extends React.Component {
         console.log(res);
         this.props.setAuth();
       })
-      .catch(err => this.setState({ errorMessage: "Login Failed" }));
+      .catch(err => this.setState({ errorMessage: "Login Failed" + err.toString()}));
   };
   handleChange = event => {
     this.setState({ [event.target.getAttribute("id")]: event.target.value });
@@ -75,7 +79,7 @@ class LoginPage extends React.Component {
           <GridItem xs={12} sm={6} md={4}>
             <form>
               <Card login className={classes[this.state.cardAnimaton]}>
-                <CardHeader
+                {/* <CardHeader
                   className={`${classes.cardHeader} ${classes.textCenter}`}
                   color="rose"
                 >
@@ -85,9 +89,60 @@ class LoginPage extends React.Component {
                   <CustomInput
                     labelText="User Name"
                     id="username"
+                  <div className={classes.socialLine}>
+                    {[
+                      "fab fa-facebook-square",
+                      "fab fa-twitter",
+                      "fab fa-google-plus"
+                    ].map((prop, key) => {
+                      return (
+                        <Button
+                          color="transparent"
+                          justIcon
+                          key={key}
+                          className={classes.customButtonClass}
+                          click={this.submitHandler}
+                        >
+                          <i className={prop} />
+                        </Button>
+                      );
+                    })}
+                  </div>
+                </CardHeader> */}
+                <CardBody className={classes.cardBodyImg}>
+                  <img
+                    src={loginLogo}
+                    alt="UtiliFleet Logo"
+                    width="80%"
+                    style={{
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      marginTop: "1rem",
+                      display: "block"
+                    }}
+                  />
+                  {/* <CustomInput
+                    labelText="First Name.."
+                    id="firstname"
                     formControlProps={{
                       fullWidth: true
                     }}
+                    inputProps={{
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          <Face className={classes.inputAdornmentIcon} />
+                        </InputAdornment>
+                      )
+                    }}
+                  /> */}
+                  <CustomInput
+                    labelText="Email..."
+                    name="username"
+                    id="email"
+                    formControlProps={{
+                      fullWidth: true
+                    }}
+                    onChange={this.loginHandler}
                     inputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
@@ -101,10 +156,12 @@ class LoginPage extends React.Component {
                   />
                   <CustomInput
                     labelText="Password"
+                    name="password"
                     id="password"
                     formControlProps={{
                       fullWidth: true
                     }}
+                    onChange={this.loginHandler}
                     inputProps={{
                       endAdornment: (
                         <InputAdornment position="end">

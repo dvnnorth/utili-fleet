@@ -20,7 +20,7 @@ class App extends Component {
       isAuthenticated: false
     };
   }
-  setAuth = callback => {
+  setAuth = () => {
     this.setState({ isAuthenticated: true });
   };
   render() {
@@ -30,11 +30,25 @@ class App extends Component {
           <Route
             exact
             path="/"
-            component={() => <Pages setAuth={this.setAuth} isAuth={this.state.isAuthenticated}/>}
+            component={() => (
+              <Pages
+                setAuth={this.setAuth}
+                isAuth={this.state.isAuthenticated}
+              />
+            )}
           />
           <Route
             path="/dashboard"
-            component={this.state.isAuthenticated ? Dashboard : () => <Pages setAuth={this.setAuth} isAuth={this.state.isAuthenticated} />}
+            component={
+              this.state.isAuthenticated
+                ? Dashboard
+                : () => (
+                    <Pages
+                      setAuth={this.setAuth}
+                      isAuth={this.state.isAuthenticated}
+                    />
+                  )
+            }
           />
           {dashboardRoutes.map((prop, key) => {
             if (prop.views) {

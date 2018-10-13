@@ -13,7 +13,7 @@ import CheckInWizard from "views/Forms/CheckInWizard.jsx";
 import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 // import ExtendedTables from "views/Tables/ExtendedTables.jsx";
-// import ReactTables from "views/Tables/ReactTables.jsx";
+import ReactTables from "views/Tables/ReactTables.jsx";
 // import GoogleMaps from "views/Maps/GoogleMaps.jsx";
 // import FullScreenMap from "views/Maps/FullScreenMap.jsx";
 // import VectorMap from "views/Maps/VectorMap.jsx";
@@ -24,7 +24,7 @@ import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
 //import TimelinePage from "views/Pages/Timeline.jsx";
 //import RTLSupport from "views/Pages/RTLSupport.jsx";
 
-import pagesRoutes from "./pages.jsx";
+// import pagesRoutes from "./pages.jsx";
 
 // @material-ui/icons
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -71,7 +71,7 @@ var dashRoutes = [
         path: "/vehicles/add",
         name: "Add",
         mini: "A",
-        component: Buttons
+        component: GridSystem
       },
       {
         path: "/vehicles/view",
@@ -98,19 +98,19 @@ var dashRoutes = [
         path: "/reports/claims",
         name: "Claims",
         mini: "C",
-        component: ExtendedForms
+        component: ReactTables
       },
       {
         path: "/reports/maint",
         name: "Maintenance",
         mini: "M",
-        component: RegularForms
+        component: ReactTables
       },
       {
         path: "/forms/vehiclelist",
         name: "Vehicle List",
         mini: "VL",
-        component: ValidationForms
+        component: ReactTables
       }
     ]
   }

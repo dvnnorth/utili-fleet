@@ -36,17 +36,38 @@ module.exports = {
   },
 
   updateDriver: (req, res) => {
-    db.Drivers.update(req.body, {
-      where: {
-        id: req.params.id
-      }
+    console.log(req.params.id);
+    console.log(req.body.section);
+    console.log(req.body.description);
+    console.log(req.body.claimId);
+    console.log(req.body.vehicleId);
+    
+    db.Drivers.find({
+      where: { id: req.params.id }
     })
-      .then(dbdriver => {
-        res.statusCode = 200;
-        res.send(dbdriver);
+      .then(data => {
+        return data.updateAttributes(req.body);
       })
-      .catch(error => sendError(error, res));
+      .then(updatedEmployee => {
+        res.json(updatedEmployee);
+      })
+      .catch(err => sendError(err, res));
   },
+
+  // updateDriver: ("/driver/:id"(req, res) => {
+  //   const id = req.params.id;
+  //   const updates = req.body.updates;
+  //   db.Driver.find({
+  //     where: {
+  //       id: id}
+  //     })
+  //     .then(driver => {
+  //       return driver.updateAttributes(req.body)
+  //     })
+  //     .then(updateDriver =>{
+  //       res.json(updateOwner);
+  //     });
+  // });
 
   deleteDriver: (req, res) => {
     db.Drivers.destroy({

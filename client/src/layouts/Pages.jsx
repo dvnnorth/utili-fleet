@@ -6,13 +6,14 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // core components
-import LoginPageHeader from "components/Header/LoginPageHeader";
+import LoginPageHeader from "components/Header/LoginPageHeader.jsx";
 import LoginPageFooter from "components/Footer/LoginPageFooter.jsx";
 import LoginPage from "views/Pages/LoginPage.jsx";
 
 import pagesStyle from "assets/jss/material-dashboard-pro-react/layouts/pagesStyle.jsx";
 
-import bgImage from "assets/img/register.jpeg";
+// import bgImage from "assets/img/register.jpeg";
+import bgVideo from "assets/img/bgvideoSuperHQ.mp4";
 
 class Pages extends React.Component {
   componentDidMount() {
@@ -24,36 +25,39 @@ class Pages extends React.Component {
       return <Redirect to="/dashboard" />;
     }
     return (
-      <div>
-        <LoginPageHeader {...rest} />
-        <div className={classes.wrapper} ref="wrapper">
-          <div
-            className={classes.fullPage}
-            style={{ backgroundImage: "url(" + bgImage + ")" }}
-          >
-            <LoginPage setAuth={this.props.setAuth} />
-            {/* <Switch>
-              {pagesRoutes.map((prop, key) => {
-                if (prop.collapse) {
-                  return null;
-                }
-                if (prop.redirect) {
-                  return (
-                    <Redirect from={prop.path} to={prop.pathTo} key={key} />
-                  );
-                }
-                return (
-                  <Route
-                    path={prop.path}
-                    component={prop.component}
-                    key={key}
-                  />
-                );
-              })}
-            </Switch> */}
-            <LoginPageFooter white />
-          </div>
-        </div>
+      <div
+        className={classes.wrapper}
+        ref="wrapper"
+        style={{ marginTop: "5rem" }}
+      >
+        <LoginPage setAuth={this.props.setAuth} />
+        <LoginPageFooter white />
+        <video
+          playsInline
+          autoPlay
+          muted
+          loop
+          poster=""
+          id="bgvid"
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            minWidth: "100%",
+            minHeight: "100%",
+            width: "auto",
+            height: "auto",
+            zIndex: "-100",
+            msTransform: "translateX(-50%) translateY(-50%)",
+            MozTranform: "translateX(-50%) translateY(-50%)",
+            WebkitTransform: "translateX(-50%) translateY(-50%)",
+            transform: "translateX(-50%) translateY(-50%)",
+            background: "url() no-repeat",
+            backgroundSize: "cover"
+          }}
+        >
+          <source src={bgVideo} type="video/mp4" />
+        </video>
       </div>
     );
   }

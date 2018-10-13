@@ -31,6 +31,7 @@ module.exports = {
   },
 
   login: (req, res) => {
+    console.log(req.body);
     if (req.isAuthenticated) {
       db.Users.findOne({ where: { username: req.body.username } })
         .then(data => {

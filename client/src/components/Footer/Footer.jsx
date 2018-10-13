@@ -31,7 +31,7 @@ function Footer({ ...props }) {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a href="/" className={block}>
+              <a href="/dashboard" className={block}>
                 {rtlActive ? "الصفحة الرئيسية" : "Dashboard"}
               </a>
             </ListItem>

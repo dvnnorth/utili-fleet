@@ -406,7 +406,8 @@ class Sidebar extends React.Component {
           <img src={logo} alt="logo" className={classes.img} />
         </a>
         <a href="http://www.utilifleet.com" className={logoNormal}>
-          {logoText}
+          <b>{logoText.substr(0, 5)}</b>
+          {logoText.substr(5)}
         </a>
       </div>
     );

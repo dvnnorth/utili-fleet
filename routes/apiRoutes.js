@@ -23,8 +23,10 @@ module.exports = app => {
     new LocalStrategy((username, password, done) => {
       // Retrieve a User object from the database using Sequelize 
       // by username
-      db.Users.findOne({ where: { username: username } })
+      //where: { username: username } 
+      db.Users.findOne({where: {username: username}})
         .then((res) => {
+          //console.log(res);
           // res is the response from Sequelize in the promise
           // If there's no response, give error message
           if (!res) return done(null, false, { message: 'Incorrect username' });
@@ -37,6 +39,7 @@ module.exports = app => {
             // res is the results of the comparison (true or false)
             if (err) return done(err);
             if (res) {
+              //console.log(user);
               return done(null, user);
             }
             else {
