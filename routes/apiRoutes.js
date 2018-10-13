@@ -16,6 +16,7 @@ const authenticationMiddleware = () => {
 };
 
 module.exports = app => {
+  let usernamed;
 
   ////////////////////////// Auth ///////////////////////////////////////
   //local strategy used for signing in users
@@ -40,6 +41,7 @@ module.exports = app => {
             if (err) return done(err);
             if (res) {
               //console.log(user);
+              usernamed = user.username;
               return done(null, user);
             }
             else {
@@ -65,10 +67,19 @@ module.exports = app => {
 
   app.post('/api/register', controller.authentication.register);
 
-  app.post('/api/login', passport.authenticate('local', {
-    successRedirect: '/app', // Application route
+  app.post('/api/login/', passport.authenticate('local', {
+    successRedirect: '/dashboard', // Application route
     failureRedirect: '/'
   }));
+  
+  app.get('/dashboard', (req, res) => {
+    db.Users.findOne({ where: { username: usernamed} })
+      .then(response => {
+        res.statusCode = 200;
+        res.send(response);
+      });
+  });
+  //app.get('/dashboard', controller.authentication.success ); 
 
   app.get('/api/logout', controller.authentication.logout);
   ////////////////////////// End Auth ///////////////////////////////////////

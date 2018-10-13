@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 
 import axios from "axios";
 
@@ -32,7 +33,8 @@ class LoginPage extends React.Component {
     this.state = {
       cardAnimaton: "cardHidden",
       username: "",
-      password: ""
+      password: "",
+      toDashboard: false
     };
   }
   componentDidMount() {
@@ -49,22 +51,32 @@ class LoginPage extends React.Component {
     this.timeOutFunction = null;
   }
 
-  loginHandler = (event) => {
-    const {name, value} = event.target;
-    this.setState({ [name] : value}); 
+  loginHandler = event => {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
   submitHandler = () => {
-    console.log(this.state);
-    axios.post('/api/login', {
-      username: this.state.username,
-      password: this.state.password
-    }).then(
-      response => {
-        console.log(response);
+    //console.log(this.state);
+    axios
+      .post(`/api/login/`, {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(response => {
+        console.log(response.data);
+        console.log(response.data.id);
+        this.setState({toDashboard: true});
+        console.log(this.state);
+        //console.log(response.config.data);
+        //console.log(response.config.data.username);
+
       });
   };
 
   render() {
+    if (this.state.toDashboard === true) {
+      <Redirect to="/dashboard" />;
+    }
     const { classes } = this.props;
     return (
       <div className={classes.container}>
@@ -148,7 +160,13 @@ class LoginPage extends React.Component {
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button color="rose" simple size="lg" block onClick={this.submitHandler}>
+                  <Button
+                    color="rose"
+                    simple
+                    size="lg"
+                    block
+                    onClick={this.submitHandler}
+                  >
                     Let's Go
                   </Button>
                 </CardFooter>

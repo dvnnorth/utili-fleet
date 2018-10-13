@@ -29,6 +29,16 @@ module.exports = {
       })
       .catch(err => sendError(err, res));
   },
+  
+  success: (req, res) => {
+    db.Users.findOne({ where: { username: req.params.username} })
+      .then(response => {
+        res.statusCode = 200;
+        res.send(response);
+      })
+      .catch(err => sendError(err, res));
+  },
+  
 
   logout: (req, res) => {
     req.logout();
