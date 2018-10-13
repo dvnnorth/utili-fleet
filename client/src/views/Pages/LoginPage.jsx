@@ -1,13 +1,18 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
+
+// Import API
+import API from "../../utils/API";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
+import Typography from "@material-ui/core/Typography";
 
 // @material-ui/icons
-import Email from "@material-ui/icons/Email";
+import PermIdentity from "@material-ui/icons/PermIdentity";
 // import LockOutline from "@material-ui/icons/LockOutline";
 
 // core components
@@ -27,7 +32,10 @@ class LoginPage extends React.Component {
     super(props);
     // we use this to make the card to appear after the page has been rendered
     this.state = {
-      cardAnimaton: "cardHidden"
+      cardAnimaton: "cardHidden",
+      username: "",
+      password: "",
+      errorMessage: ""
     };
   }
   componentDidMount() {
@@ -43,7 +51,28 @@ class LoginPage extends React.Component {
     clearTimeout(this.timeOutFunction);
     this.timeOutFunction = null;
   }
-  logIn = () => {};
+  logIn = event => {
+    event.preventDefault();
+    API.login({
+      username: this.state.username,
+      password: this.state.password
+    })
+      .then(res => {
+        return (
+          <Redirect
+            to={{
+              pathname: "/dashboard"
+            }}
+          />
+        );
+      })
+      .catch(err =>
+        this.setState({ errorMessage: "Login Failed - " + err.toString() })
+      );
+  };
+  handleChange = event => {
+    this.setState({ [event.target.getAttribute("id")]: event.target.value });
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -60,17 +89,20 @@ class LoginPage extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <CustomInput
-                    labelText="Email..."
-                    id="email"
+                    labelText="User Name"
+                    id="username"
                     formControlProps={{
                       fullWidth: true
                     }}
                     inputProps={{
                       endAdornment: (
                         <InputAdornment position="end">
-                          <Email className={classes.inputAdornmentIcon} />
+                          <PermIdentity
+                            className={classes.inputAdornmentIcon}
+                          />
                         </InputAdornment>
-                      )
+                      ),
+                      onChange: this.handleChange
                     }}
                   />
                   <CustomInput
@@ -86,13 +118,20 @@ class LoginPage extends React.Component {
                             lock_outline
                           </Icon>
                         </InputAdornment>
-                      )
+                      ),
+                      onChange: this.handleChange,
+                      type: "Password"
                     }}
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
+                  {this.state.errorMessage === "" || (
+                    <Typography color="error">
+                      {this.state.errorMessage}
+                    </Typography>
+                  )}
                   <Button
-                    onClick={this.logIn()}
+                    onClick={event => this.logIn(event)}
                     color="rose"
                     simple
                     size="lg"

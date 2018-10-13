@@ -62,10 +62,13 @@ module.exports = app => {
 
   app.post('/api/register', controller.authentication.register);
 
-  app.post('/api/login', passport.authenticate('local', {
-    successRedirect: '/app', // Application route
-    failureRedirect: '/'
-  }));
+  app.post('/api/login', passport.authenticate('local'), (req, res) => {
+    res.redirect('/dash');
+  });
+  // {
+  //   successRedirect: '/app', // Application route
+  //   failureRedirect: '/'
+  // }));
 
   app.get('/api/logout', controller.authentication.logout);
   ////////////////////////// End Auth ///////////////////////////////////////

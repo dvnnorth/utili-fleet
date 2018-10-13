@@ -8,8 +8,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import LoginPageHeader from "components/Header/LoginPageHeader";
 import LoginPageFooter from "components/Footer/LoginPageFooter.jsx";
-
-import pagesRoutes from "routes/pages.jsx";
+import LoginPage from "views/Pages/LoginPage.jsx";
 
 import pagesStyle from "assets/jss/material-dashboard-pro-react/layouts/pagesStyle.jsx";
 
@@ -30,7 +29,8 @@ class Pages extends React.Component {
             className={classes.fullPage}
             style={{ backgroundImage: "url(" + bgImage + ")" }}
           >
-            <Switch>
+          <LoginPage />
+            {/* <Switch>
               {pagesRoutes.map((prop, key) => {
                 if (prop.collapse) {
                   return null;
@@ -48,7 +48,7 @@ class Pages extends React.Component {
                   />
                 );
               })}
-            </Switch>
+            </Switch> */}
             <LoginPageFooter white />
           </div>
         </div>
