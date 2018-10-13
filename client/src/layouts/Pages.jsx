@@ -14,13 +14,15 @@ import pagesStyle from "assets/jss/material-dashboard-pro-react/layouts/pagesSty
 
 import bgImage from "assets/img/register.jpeg";
 
-
 class Pages extends React.Component {
   componentDidMount() {
     document.body.style.overflow = "unset";
   }
   render() {
     const { classes, ...rest } = this.props;
+    if (this.props.isAuth) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <div>
         <LoginPageHeader {...rest} />
@@ -29,7 +31,7 @@ class Pages extends React.Component {
             className={classes.fullPage}
             style={{ backgroundImage: "url(" + bgImage + ")" }}
           >
-          <LoginPage />
+            <LoginPage setAuth={this.props.setAuth} />
             {/* <Switch>
               {pagesRoutes.map((prop, key) => {
                 if (prop.collapse) {

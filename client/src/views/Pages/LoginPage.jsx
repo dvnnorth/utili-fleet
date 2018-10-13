@@ -30,6 +30,7 @@ import loginPageStyle from "assets/jss/material-dashboard-pro-react/views/loginP
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
+    this.props = props;
     // we use this to make the card to appear after the page has been rendered
     this.state = {
       cardAnimaton: "cardHidden",
@@ -58,17 +59,10 @@ class LoginPage extends React.Component {
       password: this.state.password
     })
       .then(res => {
-        return (
-          <Redirect
-            to={{
-              pathname: "/dashboard"
-            }}
-          />
-        );
+        console.log(res);
+        this.props.setAuth();
       })
-      .catch(err =>
-        this.setState({ errorMessage: "Login Failed - " + err.toString() })
-      );
+      .catch(err => this.setState({ errorMessage: "Login Failed" }));
   };
   handleChange = event => {
     this.setState({ [event.target.getAttribute("id")]: event.target.value });
