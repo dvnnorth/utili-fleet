@@ -6,13 +6,13 @@ import GridSystem from "views/Components/GridSystem.jsx";
 //import Notifications from "views/Components/Notifications.jsx";
 //import Icons from "views/Components/Icons.jsx";
 //import Typography from "views/Components/Typography.jsx";
-import RegularForms from "views/Forms/RegularForms.jsx";
-import ExtendedForms from "views/Forms/ExtendedForms.jsx";
-import ValidationForms from "views/Forms/ValidationForms.jsx";
+// import RegularForms from "views/Forms/RegularForms.jsx";
+// import ExtendedForms from "views/Forms/ExtendedForms.jsx";
+// import ValidationForms from "views/Forms/ValidationForms.jsx";
 import Wizard from "views/Forms/Wizard.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 // import ExtendedTables from "views/Tables/ExtendedTables.jsx";
-// import ReactTables from "views/Tables/ReactTables.jsx";
+import ReactTables from "views/Tables/ReactTables.jsx";
 // import GoogleMaps from "views/Maps/GoogleMaps.jsx";
 // import FullScreenMap from "views/Maps/FullScreenMap.jsx";
 // import VectorMap from "views/Maps/VectorMap.jsx";
@@ -104,13 +104,13 @@ var dashRoutes = [
         path: "/vehicles/add",
         name: "Add",
         mini: "A",
-        component: Buttons
+        component: Wizard
       },
       {
         path: "/vehicles/view",
         name: "View",
         mini: "V",
-        component: GridSystem
+        component: Wizard
       },
       // {
       //   path: "/components/panels",
@@ -150,25 +150,25 @@ var dashRoutes = [
         path: "/forms/agreements",
         name: "Agreements",
         mini: "A",
-        component: Wizard
+        component: ReactTables
       },
       {
         path: "/reports/claims",
         name: "Claims",
         mini: "C",
-        component: ExtendedForms
+        component: ReactTables
       },
       {
         path: "/reports/maint",
         name: "Maintenance",
         mini: "M",
-        component: RegularForms
+        component: ReactTables
       },
       {
         path: "/forms/vehiclelist",
         name: "Vehicle List",
         mini: "VL",
-        component: ValidationForms
+        component: ReactTables
       }
     ]
   },
