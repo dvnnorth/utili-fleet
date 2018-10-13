@@ -55,14 +55,37 @@ class App extends Component {
                   <Route
                     exact
                     path={prop.path}
-                    component={Dashboard}
+                    component={
+                      this.state.isAuthenticated
+                        ? Dashboard
+                        : () => (
+                            <Pages
+                              setAuth={this.setAuth}
+                              isAuth={this.state.isAuthenticated}
+                            />
+                          )
+                    }
                     key={key}
                   />
                 );
               });
             }
             return (
-              <Route exact path={prop.path} component={Dashboard} key={key} />
+              <Route
+                exact
+                path={prop.path}
+                component={
+                  this.state.isAuthenticated
+                    ? Dashboard
+                    : () => (
+                        <Pages
+                          setAuth={this.setAuth}
+                          isAuth={this.state.isAuthenticated}
+                        />
+                      )
+                }
+                key={key}
+              />
             );
           })}
         </Switch>
