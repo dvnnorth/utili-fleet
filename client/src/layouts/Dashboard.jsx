@@ -14,6 +14,11 @@ import Header from "components/Header/Header.jsx";
 import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
+// Views
+import DashboardView from "views/Dashboard/Dashboard.jsx";
+import Buttons from "views/Components/Buttons.jsx";
+import GridSystem from "views/Components/GridSystem.jsx";
+
 import dashboardRoutes from "routes/dashboard.jsx";
 
 import appStyle from "assets/jss/material-dashboard-pro-react/layouts/dashboardStyle.jsx";
@@ -28,11 +33,9 @@ const switchRoutes = (
         return <Redirect from={prop.path} to={prop.pathTo} key={key} />;
       if (prop.collapse)
         return prop.views.map((prop, key) => {
-          return (
-            <Route path={prop.path} component={prop.component} key={key} />
-          );
+          return prop.component.render;
         });
-      return <Route path={prop.path} component={prop.component} key={key} />;
+      return prop.component.render;
     })}
   </Switch>
 );
@@ -44,7 +47,8 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       mobileOpen: false,
-      miniActive: false
+      miniActive: false,
+      viewComponent: <DashboardView />
     };
     this.resizeFunction = this.resizeFunction.bind(this);
   }
@@ -119,13 +123,7 @@ class Dashboard extends React.Component {
             {...rest}
           />
           {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
-          {this.getRoute() ? (
-            <div className={classes.content}>
-              <div className={classes.container}>{switchRoutes}</div>
-            </div>
-          ) : (
-            <div className={classes.map}>{switchRoutes}</div>
-          )}
+          {this.state.viewComponent}
           {this.getRoute() ? <Footer fluid /> : null}
         </div>
       </div>
