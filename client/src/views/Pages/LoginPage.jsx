@@ -106,7 +106,12 @@ class LoginPage extends React.Component {
                     src={loginLogo}
                     alt="UtiliFleet Logo"
                     width="80%"
-                    style={{ margin: "auto", display: "block" }}
+                    style={{
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      marginTop: "1rem",
+                      display: "block"
+                    }}
                   />
                   {/* <CustomInput
                     labelText="First Name.."
@@ -158,7 +163,16 @@ class LoginPage extends React.Component {
                   />
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
-                  <Button color="rose" simple size="lg" block onClick={this.submitHandler}>
+                  <Button
+                    color="gray"
+                    simple
+                    size="lg"
+                    block
+                    onClick={this.submitHandler}
+                    style={{
+                      textTransform: "uppercase"
+                    }}
+                  >
                     Login
                   </Button>
                 </CardFooter>
