@@ -12,7 +12,6 @@ export default {
   logout: function () {
     return axios.get("/logout");
   },
-
   getAllVehicles: function () {
     return axios.get("/api/vehicles");
   }

@@ -6,9 +6,9 @@ import GridSystem from "views/Components/GridSystem.jsx";
 //import Notifications from "views/Components/Notifications.jsx";
 //import Icons from "views/Components/Icons.jsx";
 //import Typography from "views/Components/Typography.jsx";
-import RegularForms from "views/Forms/RegularForms.jsx";
-import ExtendedForms from "views/Forms/ExtendedForms.jsx";
-import ValidationForms from "views/Forms/ValidationForms.jsx";
+// import RegularForms from "views/Forms/RegularForms.jsx";
+// import ExtendedForms from "views/Forms/ExtendedForms.jsx";
+// import ValidationForms from "views/Forms/ValidationForms.jsx";
 import CheckInWizard from "views/Forms/CheckInWizard.jsx";
 import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
@@ -40,6 +40,32 @@ import DirectionsCar from "@material-ui/icons/DirectionsCar";
 // import Timeline from "@material-ui/icons/Timeline";
 // import DateRange from "@material-ui/icons/DateRange";
 
+// var pages = [
+//   {
+//     path: "/timeline-page",
+//     name: "Timeline Page",
+//     mini: "TP",
+//     component: TimelinePage
+//   },
+//   {
+//     path: "/user-page",
+//     name: "User Profile",
+//     mini: "UP",
+//     component: UserProfile
+//   },
+//   {
+//     path: "/user-page",
+//     name: "Test Page",
+//     mini: "TP",
+//     component: UserProfile
+//   },
+//   {
+//     path: "/rtl/rtl-support-page",
+//     name: "RTL Support",
+//     mini: "RS",
+//     component: RTLSupport
+//   }
+// ].concat(pagesRoutes);
 
 var dashRoutes = [
   {
@@ -52,7 +78,7 @@ var dashRoutes = [
     path: "/checkin",
     name: "Check-in",
     icon: ArrowDownward,
-    component: CheckInWizard
+    component: Dashboard
   },
   {
     path: "/checkout",
@@ -60,6 +86,14 @@ var dashRoutes = [
     icon: ArrowUpward,
     component: Dashboard
   },
+  // {
+  //   collapse: true,
+  //   path: "-page",
+  //   name: "Pages",
+  //   state: "openPages",
+  //   icon: Image,
+  //   views: pages
+  // },
   {
     collapse: true,
     path: "/vehicles",
@@ -71,14 +105,39 @@ var dashRoutes = [
         path: "/vehicles/add",
         name: "Add",
         mini: "A",
-        component: GridSystem
+        component: Dashboard
       },
       {
         path: "/vehicles/view",
         name: "View",
         mini: "V",
-        component: GridSystem
-      }
+        component: Dashboard
+      },
+      // {
+      //   path: "/components/panels",
+      //   name: "Panels",
+      //   mini: "P",
+      //   component: Panels
+      // },
+      // {
+      //   path: "/components/sweet-alert",
+      //   name: "Sweet Alert",
+      //   mini: "SA",
+      //   component: SweetAlert
+      // },
+      // {
+      //   path: "/components/notifications",
+      //   name: "Notifications",
+      //   mini: "N",
+      //   component: Notifications
+      // },
+      // { path: "/components/icons", name: "Icons", mini: "I", component: Icons },
+      // {
+      //   path: "/components/typography",
+      //   name: "Typography",
+      //   mini: "T",
+      //   component: Typography
+      // }
     ]
   },
   {
@@ -92,7 +151,7 @@ var dashRoutes = [
         path: "/forms/agreements",
         name: "Agreements",
         mini: "A",
-        component: ExtendedForms
+        component: ReactTables
       },
       {
         path: "/reports/claims",
@@ -113,6 +172,63 @@ var dashRoutes = [
         component: ReactTables
       }
     ]
-  }
+  },
+  // {
+  //   collapse: true,
+  //   path: "/tables",
+  //   name: "Tables",
+  //   state: "openTables",
+  //   icon: GridOn,
+  //   views: [
+  //     {
+  //       path: "/tables/regular-tables",
+  //       name: "Regular Tables",
+  //       mini: "RT",
+  //       component: RegularTables
+  //     },
+  //     {
+  //       path: "/tables/extended-tables",
+  //       name: "Extended Tables",
+  //       mini: "ET",
+  //       component: ExtendedTables
+  //     },
+  //     {
+  //       path: "/tables/react-tables",
+  //       name: "React Tables",
+  //       mini: "RT",
+  //       component: ReactTables
+  //     }
+  //   ]
+  // },
+  // {
+  //   collapse: true,
+  //   path: "/maps",
+  //   name: "Maps",
+  //   state: "openMaps",
+  //   icon: Place,
+  //   views: [
+  //     {
+  //       path: "/maps/google-maps",
+  //       name: "Google Maps",
+  //       mini: "GM",
+  //       component: GoogleMaps
+  //     },
+  //     {
+  //       path: "/maps/full-screen-maps",
+  //       name: "Full Screen Map",
+  //       mini: "FSM",
+  //       component: FullScreenMap
+  //     },
+  //     {
+  //       path: "/maps/vector-maps",
+  //       name: "Vector Map",
+  //       mini: "VM",
+  //       component: VectorMap
+  //     }
+  //   ]
+  // },
+  // { path: "/widgets", name: "Widgets", icon: WidgetsIcon, component: Widgets },
+  // { path: "/charts", name: "Charts", icon: Timeline, component: Charts },
+  // { path: "/calendar", name: "Calendar", icon: DateRange, component: Calendar },
 ];
 export default dashRoutes;

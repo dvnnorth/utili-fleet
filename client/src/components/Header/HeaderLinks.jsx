@@ -61,6 +61,7 @@ class HeaderLinks extends React.Component {
     // });
     return (
       <div className={wrapper}>
+        Logged in as USERNAME!&nbsp;&nbsp;
         {/* <CustomInput
           rtlActive={rtlActive}
           formControlProps={{

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 
 import dashboardRoutes from "routes/dashboard.jsx";
 
@@ -8,8 +8,6 @@ import Pages from "layouts/Pages.jsx";
 import Dashboard from "layouts/Dashboard.jsx";
 
 import "assets/scss/material-dashboard-pro-react.css?v=1.4.0";
-
-import API from "./utils/API";
 
 const hist = createBrowserHistory();
 

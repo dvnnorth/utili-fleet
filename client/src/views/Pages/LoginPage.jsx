@@ -1,6 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
-import PropTypes from "prop-types";
 
 // Import API
 import API from "utils/API";
@@ -136,9 +134,9 @@ class LoginPage extends React.Component {
                     }}
                   /> */}
                   <CustomInput
-                    labelText="Email..."
+                    labelText="Username..."
                     name="username"
-                    id="email"
+                    id="username"
                     formControlProps={{
                       fullWidth: true
                     }}
@@ -199,9 +197,5 @@ class LoginPage extends React.Component {
     );
   }
 }
-
-LoginPage.propTypes = {
-  classes: PropTypes.object.isRequired
-};
 
 export default withStyles(loginPageStyle)(LoginPage);
