@@ -1,18 +1,23 @@
 import Dashboard from "views/Dashboard/Dashboard.jsx";
-import Buttons from "views/Components/Buttons.jsx";
-import GridSystem from "views/Components/GridSystem.jsx";
+//import Buttons from "views/Components/Buttons.jsx";
+//import GridSystem from "views/Components/GridSystem.jsx";
 //import Panels from "views/Components/Panels.jsx";
 //import SweetAlert from "views/Components/SweetAlert.jsx";
 //import Notifications from "views/Components/Notifications.jsx";
 //import Icons from "views/Components/Icons.jsx";
 //import Typography from "views/Components/Typography.jsx";
-import RegularForms from "views/Forms/RegularForms.jsx";
-import ExtendedForms from "views/Forms/ExtendedForms.jsx";
-import ValidationForms from "views/Forms/ValidationForms.jsx";
-import Wizard from "views/Forms/Wizard.jsx";
+// import RegularForms from "views/Forms/RegularForms.jsx";
+//import ExtendedForms from "views/Forms/ExtendedForms.jsx";
+// import ValidationForms from "views/Forms/ValidationForms.jsx";
+import CheckInWizard from "views/Forms/CheckInWizard.jsx";
+import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
-// import ExtendedTables from "views/Tables/ExtendedTables.jsx";
-// import ReactTables from "views/Tables/ReactTables.jsx";
+//import ExtendedTables from "views/Tables/ExtendedTables.jsx";
+//import ReactTables from "views/Tables/ReactTables.jsx";
+import Agreements from "views/Tables/Agreements.jsx";
+import Claims from "views/Tables/Claims.jsx";
+import Maintenance from "views/Tables/Maintenance.jsx";
+import VehicleList from "views/Tables/VehicleList.jsx";
 // import GoogleMaps from "views/Maps/GoogleMaps.jsx";
 // import FullScreenMap from "views/Maps/FullScreenMap.jsx";
 // import VectorMap from "views/Maps/VectorMap.jsx";
@@ -23,7 +28,7 @@ import Wizard from "views/Forms/Wizard.jsx";
 //import TimelinePage from "views/Pages/Timeline.jsx";
 //import RTLSupport from "views/Pages/RTLSupport.jsx";
 
-import pagesRoutes from "./pages.jsx";
+// import pagesRoutes from "./pages.jsx";
 
 // @material-ui/icons
 import DashboardIcon from "@material-ui/icons/Dashboard";
@@ -39,32 +44,32 @@ import DirectionsCar from "@material-ui/icons/DirectionsCar";
 // import Timeline from "@material-ui/icons/Timeline";
 // import DateRange from "@material-ui/icons/DateRange";
 
-var pages = [
-  // {
-  //   path: "/timeline-page",
-  //   name: "Timeline Page",
-  //   mini: "TP",
-  //   component: TimelinePage
-  // },
-  // {
-  //   path: "/user-page",
-  //   name: "User Profile",
-  //   mini: "UP",
-  //   component: UserProfile
-  // },
-  // {
-  //   path: "/user-page",
-  //   name: "Test Page",
-  //   mini: "TP",
-  //   component: UserProfile
-  // },
-  // {
-  //   path: "/rtl/rtl-support-page",
-  //   name: "RTL Support",
-  //   mini: "RS",
-  //   component: RTLSupport
-  // }
-].concat(pagesRoutes);
+// var pages = [
+//   {
+//     path: "/timeline-page",
+//     name: "Timeline Page",
+//     mini: "TP",
+//     component: TimelinePage
+//   },
+//   {
+//     path: "/user-page",
+//     name: "User Profile",
+//     mini: "UP",
+//     component: UserProfile
+//   },
+//   {
+//     path: "/user-page",
+//     name: "Test Page",
+//     mini: "TP",
+//     component: UserProfile
+//   },
+//   {
+//     path: "/rtl/rtl-support-page",
+//     name: "RTL Support",
+//     mini: "RS",
+//     component: RTLSupport
+//   }
+// ].concat(pagesRoutes);
 
 var dashRoutes = [
   {
@@ -77,13 +82,13 @@ var dashRoutes = [
     path: "/checkin",
     name: "Check-in",
     icon: ArrowDownward,
-    component: Dashboard
+    component: CheckInWizard
   },
   {
     path: "/checkout",
     name: "Check-out",
     icon: ArrowUpward,
-    component: Dashboard
+    component: CheckOutWizard
   },
   // {
   //   collapse: true,
@@ -104,13 +109,13 @@ var dashRoutes = [
         path: "/vehicles/add",
         name: "Add",
         mini: "A",
-        component: Buttons
+        component: Dashboard
       },
       {
         path: "/vehicles/view",
         name: "View",
         mini: "V",
-        component: GridSystem
+        component: Dashboard
       },
       // {
       //   path: "/components/panels",
@@ -150,25 +155,25 @@ var dashRoutes = [
         path: "/forms/agreements",
         name: "Agreements",
         mini: "A",
-        component: Wizard
+        component: Agreements
       },
       {
         path: "/reports/claims",
         name: "Claims",
         mini: "C",
-        component: ExtendedForms
+        component: Claims
       },
       {
         path: "/reports/maint",
         name: "Maintenance",
         mini: "M",
-        component: RegularForms
+        component: Maintenance
       },
       {
         path: "/forms/vehiclelist",
         name: "Vehicle List",
         mini: "VL",
-        component: ValidationForms
+        component: VehicleList
       }
     ]
   },
@@ -229,6 +234,5 @@ var dashRoutes = [
   // { path: "/widgets", name: "Widgets", icon: WidgetsIcon, component: Widgets },
   // { path: "/charts", name: "Charts", icon: Timeline, component: Charts },
   // { path: "/calendar", name: "Calendar", icon: DateRange, component: Calendar },
-  { redirect: true, path: "/", pathTo: "/pages/login-page", name: "login-page" }
 ];
 export default dashRoutes;
