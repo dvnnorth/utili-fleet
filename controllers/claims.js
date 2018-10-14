@@ -26,7 +26,7 @@ module.exports = {
     })
       .then(data => {
         res.statusCode = 200;
-        res.send(data);
+        res.json(data);
       })
       .catch(err => sendError(err, res));
   },
@@ -48,16 +48,19 @@ module.exports = {
     db.Claims.create(req.body)
       .then(data => {
         res.statusCode = 200;
-        res.send(data);
+        res.json(data);
       })
       .catch(err => sendError(err, res));
   },
 
   deleteClaim: (req, res) => {
-    db.Claims.destroy({ where: { id: req.params.id } })
-      .then(data => {
+    db.Claims.destroy({ 
+      where: { 
+        id: req.params.id 
+      } 
+    }).then(data => {
         res.statusCode = 200;
-        res.send(data);
+        res.json(data);
       })
       .catch(err => sendError(err, res));
   },

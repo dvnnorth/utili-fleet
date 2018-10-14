@@ -22,6 +22,7 @@ class ReactTables extends Component {
     API.getAllClaims().then(response => {
       const rows = response.data.map(dataValue => {
         let dataRow = [];
+        console.log(JSON.stringify(dataValue))
         for (let key in dataValue) {
           dataRow.push(dataValue[key]);
         } // poner en key el id del claim
