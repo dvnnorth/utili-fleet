@@ -7,8 +7,6 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 
-import Button from "@material-ui/core/Button/Button";
-
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 

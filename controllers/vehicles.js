@@ -32,6 +32,19 @@ module.exports = {
       .catch(err => sendError(err, res));
   },
 
+  getVehicleByUnitNo: (req, res) => {
+    db.Vehicles.findAll({
+      where: {
+        UnitNumber: req.params.UnitNumber
+      }
+    })
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  },
+
   createVehicle: (req, res) => {
     db.Vehicles.create(req.body)
       .then(data => {

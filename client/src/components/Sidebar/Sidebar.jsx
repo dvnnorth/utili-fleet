@@ -16,6 +16,9 @@ import Hidden from "@material-ui/core/Hidden";
 import Collapse from "@material-ui/core/Collapse";
 import Icon from "@material-ui/core/Icon";
 
+// core components
+import HeaderLinks from "components/Header/HeaderLinks.jsx";
+
 import sidebarStyle from "assets/jss/material-dashboard-pro-react/components/sidebarStyle.jsx";
 
 var ps;
@@ -42,7 +45,7 @@ class SidebarWrapper extends React.Component {
     const { className, user, headerLinks, links } = this.props;
     return (
       <div className={className} ref="sidebarWrapper">
-        {user}
+        {/*{user}*/}
         {headerLinks}
         {links}
       </div>
@@ -127,7 +130,93 @@ class Sidebar extends React.Component {
       cx({
         [classes.photoRTL]: rtlActive
       });
-
+    var user = (
+      <div className={userWrapperClass}>
+        <List className={classes.list}>
+          <ListItem className={classes.item + " " + classes.userItem}>
+            <NavLink
+              to={"#"}
+              className={classes.itemLink + " " + classes.userCollapseButton}
+              onClick={() => this.openCollapse("openAvatar")}
+            >
+              <ListItemText
+                primary={rtlActive ? "تانيا أندرو" : "Tania Andrew"}
+                secondary={
+                  <b
+                    className={
+                      caret +
+                      " " +
+                      classes.userCaret +
+                      " " +
+                      (this.state.openAvatar ? classes.caretActive : "")
+                    }
+                  />
+                }
+                disableTypography={true}
+                className={itemText + " " + classes.userItemText}
+              />
+            </NavLink>
+            <Collapse in={this.state.openAvatar} unmountOnExit>
+              <List className={classes.list + " " + classes.collapseList}>
+                <ListItem className={classes.collapseItem}>
+                  <NavLink
+                    to="#"
+                    className={
+                      classes.itemLink + " " + classes.userCollapseLinks
+                    }
+                  >
+                    <span className={collapseItemMini}>
+                      {rtlActive ? "مع" : "MP"}
+                    </span>
+                    <ListItemText
+                      primary={rtlActive ? "ملفي" : "My Profile"}
+                      disableTypography={true}
+                      className={collapseItemText}
+                    />
+                  </NavLink>
+                </ListItem>
+                <ListItem className={classes.collapseItem}>
+                  <NavLink
+                    to="#"
+                    className={
+                      classes.itemLink + " " + classes.userCollapseLinks
+                    }
+                  >
+                    <span className={collapseItemMini}>
+                      {rtlActive ? "هوع" : "EP"}
+                    </span>
+                    <ListItemText
+                      primary={
+                        rtlActive ? "تعديل الملف الشخصي" : "Edit Profile"
+                      }
+                      disableTypography={true}
+                      className={collapseItemText}
+                    />
+                  </NavLink>
+                </ListItem>
+                <ListItem className={classes.collapseItem}>
+                  <NavLink
+                    to="#"
+                    className={
+                      classes.itemLink + " " + classes.userCollapseLinks
+                    }
+                  >
+                    <span className={collapseItemMini}>
+                      {rtlActive ? "و" : "S"}
+                    </span>
+                    <ListItemText
+                      primary={rtlActive ? "إعدادات" : "Settings"}
+                      disableTypography={true}
+                      className={collapseItemText}
+                    />
+                  </NavLink>
+                </ListItem>
+              </List>
+            </Collapse>
+          </ListItem>
+        </List>
+      </div>
+    );
     var links = (
       <List className={classes.list}>
         {routes.map((prop, key) => {
@@ -184,8 +273,8 @@ class Sidebar extends React.Component {
                     {typeof prop.icon === "string" ? (
                       <Icon>{prop.icon}</Icon>
                     ) : (
-                        <prop.icon />
-                      )}
+                      <prop.icon />
+                    )}
                   </ListItemIcon>
                   <ListItemText
                     primary={prop.name}
@@ -269,8 +358,8 @@ class Sidebar extends React.Component {
                   {typeof prop.icon === "string" ? (
                     <Icon>{prop.icon}</Icon>
                   ) : (
-                      <prop.icon />
-                    )}
+                    <prop.icon />
+                  )}
                 </ListItemIcon>
                 <ListItemText
                   primary={prop.name}
@@ -336,11 +425,39 @@ class Sidebar extends React.Component {
       });
     return (
       <div ref="mainPanel">
+        <Hidden mdUp implementation="css">
+          <Drawer
+            variant="temporary"
+            anchor={rtlActive ? "left" : "right"}
+            open={this.props.open}
+            classes={{
+              paper: drawerPaper + " " + classes[bgColor + "Background"]
+            }}
+            onClose={this.props.handleDrawerToggle}
+            ModalProps={{
+              keepMounted: true // Better open performance on mobile.
+            }}
+          >
+            {brand}
+            <SidebarWrapper
+              className={sidebarWrapper}
+              user={user}
+              headerLinks={<HeaderLinks rtlActive={rtlActive} />}
+              links={links}
+            />
+            {image !== undefined ? (
+              <div
+                className={classes.background}
+                style={{ backgroundImage: "url(" + image + ")" }}
+              />
+            ) : null}
+          </Drawer>
+        </Hidden>
         <Hidden smDown implementation="css">
           <Drawer
             onMouseOver={() => this.setState({ miniActive: false })}
             onMouseOut={() => this.setState({ miniActive: true })}
-            anchor={"left"}
+            anchor={rtlActive ? "right" : "left"}
             variant="permanent"
             open
             classes={{
@@ -348,14 +465,17 @@ class Sidebar extends React.Component {
             }}
           >
             {brand}
-            <SidebarWrapper className={sidebarWrapper} links={links} />
+            <SidebarWrapper
+              className={sidebarWrapper}
+              user={user}
+              links={links}
+            />
             {image !== undefined ? (
               <div
                 className={classes.background}
                 style={{ backgroundImage: "url(" + image + ")" }}
               />
             ) : null}
-            <div style={{ height: "20px" }} />
           </Drawer>
         </Hidden>
       </div>

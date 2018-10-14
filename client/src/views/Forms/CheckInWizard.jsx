@@ -18,7 +18,7 @@ class WizardView extends React.Component {
   }
 
   setVehicle = () => {
-
+    
   };
 
   render() {
