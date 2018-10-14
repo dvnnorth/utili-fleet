@@ -22,7 +22,6 @@ export default {
 
   /////////////////////////// Vehicles /////////////////////////
 
-
   getAllVehicles: () => {
     return axios.get("/api/vehicles");
   },
@@ -80,9 +79,95 @@ export default {
   deleteVehicles: (id) => {
     return (axios.delete(`/api/vehicle/${id}`));
 
-  }
+  },
 
   /////////////////////////// Vehicles/////////////////////////
+
+   /////////////////////////// Drivers /////////////////////////
+
+  getAllDrivers: () => {
+    return axios.get("/api/drivers");
+  },
+  getAllDriversByVIN: (VIN) => {
+    return axios.get(`/api/driver/${VIN}`);
+  },
+  postDrivers: (data) => {
+    const driverData = {
+      LastName: data.LastName,
+      FirstName: data.FirstName,
+      Address1: data.Address1,
+      Address2: data.Address2,
+      City: data.City,
+      State: data.State,
+      Zip: data.Zip,
+      Telephone: data.Telephone,
+      DOB: data.DOB,
+      DriversLicence: data.DriversLicence,
+      DriversLicenseExpiration: data.DriversLicenseExpiration,
+      Email: data.Email
+    };
+    return axios.post("/api/drivers", driverData);
+  },
+
+  updateDrivers: (data) => {
+    const driverData = {
+      LastName: data.LastName,
+      FirstName: data.FirstName,
+      Address1: data.Address1,
+      Address2: data.Address2,
+      City: data.City,
+      State: data.State,
+      Zip: data.Zip,
+      Telephone: data.Telephone,
+      DOB: data.DOB,
+      DriversLicence: data.DriversLicence,
+      DriversLicenseExpiration: data.DriversLicenseExpiration,
+      Email: data.Email
+    };
+    return (axios.put(`/api/driver/${data.id}`, driverData));
+  },
+
+  deleteDrivers: (id) => {
+    return (axios.delete(`/api/driver/${id}`));
+
+  },
+
+  /////////////////////////// Drivers/////////////////////////
+
+   /////////////////////////// Employees /////////////////////////
+
+   getAllEmployees: () => {
+    return axios.get("/api/employees");
+  },
+  getAllEmployeesByVIN: (VIN) => {
+    return axios.get(`/api/employee/${VIN}`);
+  },
+  postEmployees: (data) => {
+    const employeeData = {
+      EmployeeNumber: data.EmployeeNumber,
+      JobTitle: data.JobTitle,
+      MVRCheckDate: data.MVRCheckDate,
+      CanDrive: data.CanDrive
+    };
+    return axios.post("/api/employees", employeeData);
+  },
+
+  updateEmployees: (data) => {
+    const employeeData = {
+      EmployeeNumber: data.EmployeeNumber,
+      JobTitle: data.JobTitle,
+      MVRCheckDate: data.MVRCheckDate,
+      CanDrive: data.CanDrive
+    };
+    return (axios.put(`/api/employee/${data.id}`, employeeData));
+  },
+
+  deleteEmployees: (id) => {
+    return (axios.delete(`/api/employee/${id}`));
+
+  }
+
+  ///////////////////////////Employees/////////////////////////
 
 };
 
