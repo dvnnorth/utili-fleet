@@ -16,7 +16,7 @@ import Wizard from "views/Forms/Wizard.jsx";
 // import GoogleMaps from "views/Maps/GoogleMaps.jsx";
 // import FullScreenMap from "views/Maps/FullScreenMap.jsx";
 // import VectorMap from "views/Maps/VectorMap.jsx";
-// import Charts from "views/Charts/Charts.jsx";
+// import Charts from "views/Charts/Charts.jsx"; 
 // import Calendar from "views/Calendar/Calendar.jsx";
 // import Widgets from "views/Widgets/Widgets.jsx";
 //import UserProfile from "views/Pages/UserProfile.jsx";
