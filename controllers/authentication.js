@@ -47,7 +47,12 @@ module.exports = {
 
   logout: (req, res) => {
     req.logout();
-    res.redirect('/');
+    if (process.env.NODE_ENV === 'production') {
+      res.redirect('/');
+    }
+    else {
+      res.redirect('http://localhost:3000');
+    }
   },
 
   user: (req, res) => {
