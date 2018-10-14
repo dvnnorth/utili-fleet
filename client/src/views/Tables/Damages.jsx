@@ -13,13 +13,13 @@ import Button from "components/CustomButtons/Button.jsx";
 import API from "../../utils/API";
 
 // import { dataTable } from "variables/general.jsx";
-class Claims extends Component {
+class Damages extends Component {
   state = {
-    claims: []
+    damages: []
   };
 
   componentDidMount() {
-    API.getAllClaims().then(response => {
+    API.getAllDamages().then(response => {
       let rows = response.data.map(dataValue => {
         let dataRow = [];
         for (let key in dataValue) {
@@ -28,19 +28,14 @@ class Claims extends Component {
         return dataRow;
       });
 
-
       rows = rows.map((prop, key) => {
         return {
           id: key,
           dbID: prop[0],
-          insuranceCompany: prop[1],
-          claimNumber: prop[2],
-          adjusterName: prop[3],
-          adjusterEmail: prop[4],
-          estimate: prop[5],
-          finalCost: prop[6],
-          openClosed: prop[7],
-          status: prop[8],
+          section: prop[1],
+          description: prop[2],
+          claimId: prop[5],
+          vehicleId: prop[6],
           actions: (
             // we've added some custom button actions
             <div className="actions-right">
@@ -50,8 +45,8 @@ class Claims extends Component {
                 round
                 simple
                 onClick={() =>
-                  API.deleteClaim(prop[0]).then(() => {
-                    let data = this.state.claims;
+                  API.deleteDamage(prop[0]).then(() => {
+                    let data = this.state.damages;
                     data.find((o, i) => {
                       if (o.id === key) {
                         // here you should add some custom code so you can delete the data
@@ -61,7 +56,7 @@ class Claims extends Component {
                       }
                       return false;
                     });
-                      this.setState({ claims: data });
+                      this.setState({ damages: data });
                   })
                 }
                 color="danger"
@@ -74,42 +69,30 @@ class Claims extends Component {
         };
       })
 
-      this.setState({ claims: rows });
+      this.setState({ damages: rows });
     });
   }
   render() {
     return (
       <ReactTable
-        data={this.state.claims}
+        data={this.state.damages}
         filterable
         columns={[
           {
-            Header: "Claim No.",
-            accessor: "claimNumber"
+            Header: "Section",
+            accessor: "section"
           },
           {
-            Header: "Ins. Co.",
-            accessor: "insuranceCompany"
+            Header: "Description",
+            accessor: "description"
           },
           {
-            Header: "Adj. Name",
-            accessor: "adjusterName"
+            Header: "Claim Id",
+            accessor: "claimId"
           },
           {
-            Header: "Adj. Email",
-            accessor: "adjusterEmail"
-          },
-          {
-            Header: "Estimate",
-            accessor: "estimate"
-          },
-          {
-            Header: "Final Cost",
-            accessor: "finalCost"
-          },
-          {
-            Header: "Status",
-            accessor: "status"
+            Header: "Vehicle Id",
+            accessor: "vehicleId"
           },
           {
             Header: "Actions",
@@ -127,4 +110,4 @@ class Claims extends Component {
   }
 }
 
-export default Claims;
+export default Damages;

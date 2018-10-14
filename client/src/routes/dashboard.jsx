@@ -16,6 +16,8 @@ import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
 //import ReactTables from "views/Tables/ReactTables.jsx";
 import Agreements from "views/Tables/Agreements.jsx";
 import Claims from "views/Tables/Claims.jsx";
+import Employees from "views/Tables/Employees.jsx";
+import Damages from "views/Tables/Damages.jsx";
 import Maintenance from "views/Tables/Maintenance.jsx";
 import VehicleList from "views/Tables/VehicleList.jsx";
 // import GoogleMaps from "views/Maps/GoogleMaps.jsx";
@@ -162,6 +164,18 @@ var dashRoutes = [
         name: "Claims",
         mini: "C",
         component: Claims
+      },
+      {
+        path: "/reports/damages",
+        name: "Damages",
+        mini: "DA",
+        component: Damages
+      },
+      {
+        path: "/reports/employees",
+        name: "Employees",
+        mini: "E",
+        component: Employees
       },
       {
         path: "/reports/maint",

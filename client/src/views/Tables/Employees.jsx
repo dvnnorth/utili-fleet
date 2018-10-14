@@ -12,14 +12,14 @@ import Button from "components/CustomButtons/Button.jsx";
 
 import API from "../../utils/API";
 
-// import { dataTable } from "variables/general.jsx";
-class Claims extends Component {
+
+class Employees extends Component {
   state = {
-    claims: []
+    employees: []
   };
 
   componentDidMount() {
-    API.getAllClaims().then(response => {
+    API.getAllEmployees().then(response => {
       let rows = response.data.map(dataValue => {
         let dataRow = [];
         for (let key in dataValue) {
@@ -33,14 +33,10 @@ class Claims extends Component {
         return {
           id: key,
           dbID: prop[0],
-          insuranceCompany: prop[1],
-          claimNumber: prop[2],
-          adjusterName: prop[3],
-          adjusterEmail: prop[4],
-          estimate: prop[5],
-          finalCost: prop[6],
-          openClosed: prop[7],
-          status: prop[8],
+          employeeNumber: prop[1],
+          jobTitle: prop[2],
+          mVRCheckDate: prop[3],
+          canDrive: prop[4],
           actions: (
             // we've added some custom button actions
             <div className="actions-right">
@@ -50,8 +46,8 @@ class Claims extends Component {
                 round
                 simple
                 onClick={() =>
-                  API.deleteClaim(prop[0]).then(() => {
-                    let data = this.state.claims;
+                  API.deleteEmployees(prop[0]).then(() => {
+                    let data = this.state.employees;
                     data.find((o, i) => {
                       if (o.id === key) {
                         // here you should add some custom code so you can delete the data
@@ -61,7 +57,7 @@ class Claims extends Component {
                       }
                       return false;
                     });
-                      this.setState({ claims: data });
+                      this.setState({ employees: data });
                   })
                 }
                 color="danger"
@@ -74,42 +70,30 @@ class Claims extends Component {
         };
       })
 
-      this.setState({ claims: rows });
+      this.setState({ employees: rows });
     });
   }
   render() {
     return (
       <ReactTable
-        data={this.state.claims}
+        data={this.state.employees}
         filterable
         columns={[
           {
-            Header: "Claim No.",
-            accessor: "claimNumber"
+            Header: "Employee No.",
+            accessor: "employeeNumber"
           },
           {
-            Header: "Ins. Co.",
-            accessor: "insuranceCompany"
+            Header: "Job Title",
+            accessor: "jobTitle"
           },
           {
-            Header: "Adj. Name",
-            accessor: "adjusterName"
+            Header: "MVR Check Date",
+            accessor: "mVRCheckDate"
           },
           {
-            Header: "Adj. Email",
-            accessor: "adjusterEmail"
-          },
-          {
-            Header: "Estimate",
-            accessor: "estimate"
-          },
-          {
-            Header: "Final Cost",
-            accessor: "finalCost"
-          },
-          {
-            Header: "Status",
-            accessor: "status"
+            Header: "Can Drive",
+            accessor: "canDrive"
           },
           {
             Header: "Actions",
@@ -127,4 +111,4 @@ class Claims extends Component {
   }
 }
 
-export default Claims;
+export default Employees;
