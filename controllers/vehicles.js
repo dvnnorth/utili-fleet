@@ -59,8 +59,10 @@ module.exports = {
         id: req.params.id
       }
     })
-      .then(rowsAffected => {
-        if (rowsAffected === 1) res.sendStatus(200);
+      .then(data => {
+        // if (rowsAffected === 1)
+         res.sendStatus(200);
+         res.json(data)
       })
       .catch(err => sendError(err, res));
   },

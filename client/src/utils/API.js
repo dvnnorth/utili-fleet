@@ -20,69 +20,69 @@ export default {
   },
 */
 
-/////////////////////////// Vehicles /////////////////////////
- 
+  /////////////////////////// Vehicles /////////////////////////
 
-getAllVehicles: () => {
-    return (axios.get("/api/vehicles"));
-  },
-getAllVehiclesByVIN: () => {
-    return (axios.get("/api/vehicle/:VIN"));
-  },
-postVehicles: (data) => {
-  const vehicleData = {
-    UnitNumber: data.UnitNumber,
-    VIN: data.VIN,
-    ModelYear: data.ModelYear,
-    Make: data.Make,
-    Model: data.Model,
-    Series: data.Series,
-    VehicleType: data.VehicleType,
-    BodyClass: data.BodyClass,
-    ExteriorColor: data.ExteriorColor,
-    InteriorColor: data.InteriorColor,
-    LicencePlate: data.LicencePlate,
-    Mileage: data.Mileage,
-    MaxMileage: data.MaxMileage,
-    NetCost: data.NetCost,
-    DepreciationStart: data.DepreciationStart,
-    DepreciationEnd: data.DepreciationEnd,
-    DepreciationRateYearly: DepreciationRateYearly,
-    TollTagSerial: data.TollTagSerial
-  };
-  return (axios.post("/api/vehicles"));
-  },
 
-updateVehicles: () => {
-  const vehicleData = {
-    UnitNumber: data.UnitNumber,
-    VIN: data.VIN,
-    ModelYear: data.ModelYear,
-    Make: data.Make,
-    Model: data.Model,
-    Series: data.Series,
-    VehicleType: data.VehicleType,
-    BodyClass: data.BodyClass,
-    ExteriorColor: data.ExteriorColor,
-    InteriorColor: data.InteriorColor,
-    LicencePlate: data.LicencePlate,
-    Mileage: data.Mileage,
-    MaxMileage: data.MaxMileage,
-    NetCost: data.NetCost,
-    DepreciationStart: data.DepreciationStart,
-    DepreciationEnd: data.DepreciationEnd,
-    DepreciationRateYearly: DepreciationRateYearly,
-    TollTagSerial: data.TollTagSerial
-  };
-    return (axios.put("/api/vehicle/:id"));
+  getAllVehicles: () => {
+    return axios.get("/api/vehicles");
+  },
+  getAllVehiclesByVIN: (VIN) => {
+    return axios.get(`/api/vehicle/${VIN}`);
+  },
+  postVehicles: (data) => {
+    const vehicleData = {
+      UnitNumber: data.UnitNumber,
+      VIN: data.VIN,
+      ModelYear: data.ModelYear,
+      Make: data.Make,
+      Model: data.Model,
+      Series: data.Series,
+      VehicleType: data.VehicleType,
+      BodyClass: data.BodyClass,
+      ExteriorColor: data.ExteriorColor,
+      InteriorColor: data.InteriorColor,
+      LicencePlate: data.LicencePlate,
+      Mileage: data.Mileage,
+      MaxMileage: data.MaxMileage,
+      NetCost: data.NetCost,
+      DepreciationStart: data.DepreciationStart,
+      DepreciationEnd: data.DepreciationEnd,
+      DepreciationRateYearly: data.DepreciationRateYearly,
+      TollTagSerial: data.TollTagSerial
+    };
+    return axios.post("/api/vehicles", vehicleData);
   },
 
-deleteVehicles: () => {
-    return (axios.delete("/api/vehicle/:id"));
-    
+  updateVehicles: (data) => {
+    const vehicleData = {
+      UnitNumber: data.UnitNumber,
+      VIN: data.VIN,
+      ModelYear: data.ModelYear,
+      Make: data.Make,
+      Model: data.Model,
+      Series: data.Series,
+      VehicleType: data.VehicleType,
+      BodyClass: data.BodyClass,
+      ExteriorColor: data.ExteriorColor,
+      InteriorColor: data.InteriorColor,
+      LicencePlate: data.LicencePlate,
+      Mileage: data.Mileage,
+      MaxMileage: data.MaxMileage,
+      NetCost: data.NetCost,
+      DepreciationStart: data.DepreciationStart,
+      DepreciationEnd: data.DepreciationEnd,
+      DepreciationRateYearly: data.DepreciationRateYearly,
+      TollTagSerial: data.TollTagSerial
+    };
+    return (axios.put(`/api/vehicle/${data.id}`, vehicleData));
+  },
+
+  deleteVehicles: (id) => {
+    return (axios.delete(`/api/vehicle/${id}`));
+
   }
 
-/////////////////////////// Vehicles/////////////////////////
-  
+  /////////////////////////// Vehicles/////////////////////////
+
 };
 
