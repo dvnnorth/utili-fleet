@@ -15,6 +15,8 @@ import GridItem from "components/Grid/GridItem.jsx";
 // import PictureUpload from "components/CustomUpload/PictureUpload.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
+import API from "utils/API";
+
 const style = {
   infoText: {
     fontWeight: "300",
@@ -33,9 +35,9 @@ class Step1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      unitNumber: "",
+      UnitNumber: "",
       VIN: "",
-      licensePlate: ""
+      LicensePlate: ""
     };
   }
   sendState() {
@@ -56,26 +58,8 @@ class Step1 extends React.Component {
     }
     return false;
   }
-  change(event, stateName, type, stateNameEqualTo) {
-    switch (type) {
-      case "email":
-        if (this.verifyEmail(event.target.value)) {
-          this.setState({ [stateName + "State"]: "success" });
-        } else {
-          this.setState({ [stateName + "State"]: "error" });
-        }
-        break;
-      case "length":
-        if (this.verifyLength(event.target.value, stateNameEqualTo)) {
-          this.setState({ [stateName + "State"]: "success" });
-        } else {
-          this.setState({ [stateName + "State"]: "error" });
-        }
-        break;
-      default:
-        break;
-    }
-    this.setState({ [stateName]: event.target.value });
+  change(event) {
+    this.setState({ [event.target.getAttribute("id")]: event.target.value });
   }
   isValidated() {
     if (
@@ -108,77 +92,35 @@ class Step1 extends React.Component {
         </GridItem>
         <GridItem xs={10}>
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
-            labelText={
-              <span>
-                Unit Number
-              </span>
-            }
-            id="unitnumber"
+            labelText={<span>Unit Number</span>}
+            id="UnitNumber"
             formControlProps={{
               fullWidth: true
             }}
             inputProps={{
-              onChange: event => this.change(event, "firstname", "length", 3),
-              endAdornment: (
-                <InputAdornment
-                  position="end"
-                  className={classes.inputAdornment}
-                >
-                  <Face className={classes.inputAdornmentIcon} />
-                </InputAdornment>
-              )
+              onChange: event => this.change(event)
             }}
           />
           <CustomInput
-            success={this.state.lastnameState === "success"}
-            error={this.state.lastnameState === "error"}
-            labelText={
-              <span>
-                Last Name <small>(required)</small>
-              </span>
-            }
-            id="lastname"
+            labelText={<span>VIN</span>}
+            id="VIN"
             formControlProps={{
               fullWidth: true
             }}
             inputProps={{
-              onChange: event => this.change(event, "lastname", "length", 3),
-              endAdornment: (
-                <InputAdornment
-                  position="end"
-                  className={classes.inputAdornment}
-                >
-                  <RecordVoiceOver className={classes.inputAdornmentIcon} />
-                </InputAdornment>
-              )
+              onChange: event => this.change(event)
             }}
           />
         </GridItem>
         <GridItem xs={12} sm={12} md={12} lg={10}>
           <CustomInput
-            success={this.state.emailState === "success"}
-            error={this.state.emailState === "error"}
-            labelText={
-              <span>
-                Email <small>(required)</small>
-              </span>
-            }
-            id="email"
+            labelText={<span>License Plate</span>}
+            id="LicensePlate"
             formControlProps={{
               fullWidth: true
             }}
             inputProps={{
-              onChange: event => this.change(event, "email", "email"),
-              endAdornment: (
-                <InputAdornment
-                  position="end"
-                  className={classes.inputAdornment}
-                >
-                  <Email className={classes.inputAdornmentIcon} />
-                </InputAdornment>
-              )
+              onChange: event => this.change(event)
             }}
           />
         </GridItem>

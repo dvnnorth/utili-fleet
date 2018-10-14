@@ -76,6 +76,8 @@ module.exports = app => {
   // Get all vehicles from the database
   app.get('/api/vehicles', authenticationMiddleware(), controller.vehicles.getAllVehicles);
 
+  app.post('/api/vehicle', authenticationMiddleware(), controller.vehicles.getVehicleSearch);
+
   app.get('/api/vehicle/:VIN', authenticationMiddleware(), controller.vehicles.getVehicleByVIN);
 
   // Post a vehicle into the database

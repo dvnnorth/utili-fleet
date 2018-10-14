@@ -36,7 +36,7 @@ module.exports = {
       db.Users.findOne({ where: { username: req.body.username } })
         .then(data => {
           res.statusCode = 200;
-          res.send(data.dataValues);
+          res.send(data.dataValues.username);
         })
         .catch(err => sendError(err, res));
     }

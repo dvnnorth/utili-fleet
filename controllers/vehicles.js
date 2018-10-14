@@ -32,15 +32,17 @@ module.exports = {
       .catch(err => sendError(err, res));
   },
 
-  getVehicleByUnitNo: (req, res) => {
+  getVehicleSearch: (req, res) => {
+    let constraints = {};
+    for (let key in req.body) {
+      constraints[key] = req.body[key]
+    }
     db.Vehicles.findAll({
-      where: {
-        UnitNumber: req.params.UnitNumber
-      }
+      where: constraints
     })
-      .then(data => {
+      .then(response => {
         res.statusCode = 200;
-        res.send(data);
+        res.send(response);
       })
       .catch(err => sendError(err, res));
   },

@@ -9,11 +9,13 @@ import Step1 from "./CheckInSteps/Step1.jsx";
 import Step2 from "./CheckInSteps/Step2.jsx";
 import Step3 from "./CheckInSteps/Step3.jsx";
 
-class WizardView extends React.Component {
+class CheckInWizard extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-      vehicle: {}
+      vehicle: {
+        VIN: "12345"
+      }
     };
   }
 
@@ -41,4 +43,4 @@ class WizardView extends React.Component {
   }
 }
 
-export default WizardView;
+export default CheckInWizard;
