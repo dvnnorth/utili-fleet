@@ -76,7 +76,10 @@ class ReactTables extends Component {
                   justIcon
                   round
                   simple
-                  onClick={() => API.deleteVehicles(key)}
+                  onClick={() => {
+                    console.log(key);
+                    API.deleteVehicles(key)
+                  }}
                   color="danger"
                   customClass="remove">
                   <Close />
