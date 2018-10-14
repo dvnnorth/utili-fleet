@@ -78,9 +78,8 @@ class ReactTables extends Component {
                   round
                   simple
                   onClick={() => {
-                    console.log('key'+key);
-                    console.log('id'+prop[0])
-                    API.deleteVehicles(prop[0])
+                    console.log(key);
+                    API.deleteVehicles(key)
                   }}
                   color="danger"
                   customClass="remove">

@@ -67,6 +67,21 @@ module.exports = {
       .catch(err => sendError(err, res));
   },
 
+  getVehiclesByDriver: (req, res) => {
+    db.Vehicles.findAll({
+      where: {
+        driverId: req.params.driverId
+          { exclude: ['null'] }
+      }
+    })
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  },
+
+
   getFromVehicleDatabase: (req, res) => {
     const nhtsaEndpoint = new URL('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/' +
       req.params.VIN);

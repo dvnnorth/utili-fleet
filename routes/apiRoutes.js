@@ -76,6 +76,8 @@ module.exports = app => {
 
   app.get('/api/vehicle/:VIN', /*authenticationMiddleware(),*/ controller.vehicles.getVehicleByVIN);
 
+  app.get('/api/vehicles/drivers', /*authenticationMiddleware(),*/ controller.vehicles.getVehicleByDriver);
+
   // Post a vehicle into the database
   app.post('/api/vehicles', /*authenticationMiddleware(),*/ controller.vehicles.createVehicle);
 
@@ -143,4 +145,6 @@ module.exports = app => {
 
   app.delete('/api/employee/:id', /*authenticationMiddleware(),*/ controller.employees.deleteEmployee);
   ///////////////////// End Emplpoyees //////////////////////////////
+
+
 };

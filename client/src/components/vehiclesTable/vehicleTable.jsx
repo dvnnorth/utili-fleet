@@ -1,3 +1,5 @@
+//May need to delete this whole folder and file.
+
 import React, {Component} from 'react';
 import {
   Table,

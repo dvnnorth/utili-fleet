@@ -92,9 +92,9 @@ class Dashboard extends React.Component {
                 <CardIcon color="warning">
                   <Icon>content_copy</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Used Space</p>
+                <p className={classes.cardCategory}>Vehicle Utilization</p>
                 <h3 className={classes.cardTitle}>
-                  49/50 <small>GB</small>
+                  49/1000 
                 </h3>
               </CardHeader>
               <CardFooter stats>

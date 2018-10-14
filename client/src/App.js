@@ -4,7 +4,7 @@ import axios from 'axios';
 import API from './utils/API';
 
 //import ScannerDiv from "./components/Scanner";
-import ValidationForms from "./views/Forms/ValidationForms";
+import Dashboard from "views/Dashboard/Dashboard.jsx";
 
 
 class App extends Component {
@@ -33,7 +33,7 @@ class App extends Component {
   };
 
   render() {
-    return <ValidationForms />;
+    return <Dashboard />;
   }
 }
 
