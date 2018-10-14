@@ -67,6 +67,7 @@ module.exports = app => {
 
   app.post('/api/register', controller.authentication.register);
 
+<<<<<<< HEAD
   app.post('/api/login/', passport.authenticate('local', {
     successRedirect: '/dashboard', // Application route
     failureRedirect: '/'
@@ -80,6 +81,9 @@ module.exports = app => {
       });
   });
   //app.get('/dashboard', controller.authentication.success ); 
+=======
+  app.post('/api/login', passport.authenticate('local'), controller.authentication.login);
+>>>>>>> eddcf2aef641bd2bf7069e39e9938c5a7dd8e8d6
 
   app.get('/api/logout', controller.authentication.logout);
   ////////////////////////// End Auth ///////////////////////////////////////

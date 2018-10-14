@@ -40,6 +40,21 @@ module.exports = {
   },
   
 
+  login: (req, res) => {
+    console.log(req.body);
+    if (req.isAuthenticated) {
+      db.Users.findOne({ where: { username: req.body.username } })
+        .then(data => {
+          res.statusCode = 200;
+          res.send(data.dataValues);
+        })
+        .catch(err => sendError(err, res));
+    }
+    else {
+      res.sendStatus(401);
+    }
+  },
+
   logout: (req, res) => {
     req.logout();
     res.redirect('/');
