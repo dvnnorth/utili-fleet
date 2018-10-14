@@ -10,7 +10,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Icon from "@material-ui/core/Icon";
 
 // @material-ui/icons
-import Face from "@material-ui/icons/Face";
+// import Face from "@material-ui/icons/Face";
 import Email from "@material-ui/icons/Email";
 // import LockOutline from "@material-ui/icons/LockOutline";
 
@@ -21,10 +21,13 @@ import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
+// import CardHeader from "components/Card/CardHeader.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
 import loginPageStyle from "assets/jss/material-dashboard-pro-react/views/loginPageStyle.jsx";
+
+import loginLogo from "assets/img/logoWithText.svg";
+// import CardIcon from "../../components/Card/CardIcon";
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -55,27 +58,29 @@ class LoginPage extends React.Component {
     const { name, value } = event.target;
     this.setState({ [name]: value });
   };
+
   submitHandler = () => {
     //console.log(this.state);
     axios
-      .post(`/api/login/`, {
+      .post(`/api/login`, {
         username: this.state.username,
         password: this.state.password
       })
       .then(response => {
         console.log(response.data);
         console.log(response.data.id);
-        this.setState({toDashboard: true});
+        if(response.data.id){
+          this.setState({ toDashboard: true });
+        };
         console.log(this.state);
         //console.log(response.config.data);
         //console.log(response.config.data.username);
-
       });
   };
 
   render() {
     if (this.state.toDashboard === true) {
-      <Redirect to="/dashboard" />;
+      return <Redirect to="/dashboard" />;
     }
     const { classes } = this.props;
     return (
@@ -84,7 +89,7 @@ class LoginPage extends React.Component {
           <GridItem xs={12} sm={6} md={4}>
             <form>
               <Card login className={classes[this.state.cardAnimaton]}>
-                <CardHeader
+                {/* <CardHeader
                   className={`${classes.cardHeader} ${classes.textCenter}`}
                   color="rose"
                 >
@@ -108,9 +113,20 @@ class LoginPage extends React.Component {
                       );
                     })}
                   </div>
-                </CardHeader>
-                <CardBody>
-                  <CustomInput
+                </CardHeader> */}
+                <CardBody className={classes.cardBodyImg}>
+                  <img
+                    src={loginLogo}
+                    alt="UtiliFleet Logo"
+                    width="80%"
+                    style={{
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      marginTop: "1rem",
+                      display: "block"
+                    }}
+                  />
+                  {/* <CustomInput
                     labelText="First Name.."
                     id="firstname"
                     formControlProps={{
@@ -123,7 +139,7 @@ class LoginPage extends React.Component {
                         </InputAdornment>
                       )
                     }}
-                  />
+                  /> */}
                   <CustomInput
                     labelText="Email..."
                     name="username"
@@ -161,13 +177,16 @@ class LoginPage extends React.Component {
                 </CardBody>
                 <CardFooter className={classes.justifyContentCenter}>
                   <Button
-                    color="rose"
+                    color="gray"
                     simple
                     size="lg"
                     block
                     onClick={this.submitHandler}
+                    style={{
+                      textTransform: "uppercase"
+                    }}
                   >
-                    Let's Go
+                    Login
                   </Button>
                 </CardFooter>
               </Card>
