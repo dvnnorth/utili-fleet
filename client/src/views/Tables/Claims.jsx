@@ -28,7 +28,6 @@ class Claims extends Component {
         return dataRow;
       });
 
-
       rows = rows.map((prop, key) => {
         return {
           id: key,
@@ -72,7 +71,7 @@ class Claims extends Component {
                       }
                       return false;
                     });
-                      this.setState({ claims: data });
+                    this.setState({ claims: data });
                   })
                 }
                 color="danger"
@@ -83,7 +82,7 @@ class Claims extends Component {
             </div>
           )
         };
-      })
+      });
 
       this.setState({ claims: rows });
     });
