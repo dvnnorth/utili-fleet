@@ -48,6 +48,17 @@ module.exports = {
   logout: (req, res) => {
     req.logout();
     res.redirect('/');
+  },
+
+  user: (req, res) => {
+    if (req.user) {
+      res.statusCode = 200;
+      res.send(req.user.username);
+    }
+    else {
+      res.statusCode = 401;
+      res.send();
+    }
   }
-  /////////////// End Auth ///////////////////////
+   /////////////// End Auth ///////////////////////
 };

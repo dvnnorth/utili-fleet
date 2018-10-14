@@ -14,5 +14,8 @@ export default {
   },
   getAllVehicles: function () {
     return axios.get("/api/vehicles");
+  },
+  getUser: () => {
+    return axios.get("/api/user");
   }
 };

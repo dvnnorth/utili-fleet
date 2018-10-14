@@ -78,13 +78,13 @@ var dashRoutes = [
     path: "/checkin",
     name: "Check-in",
     icon: ArrowDownward,
-    component: Dashboard
+    component: CheckInWizard
   },
   {
     path: "/checkout",
     name: "Check-out",
     icon: ArrowUpward,
-    component: Dashboard
+    component: CheckOutWizard
   },
   // {
   //   collapse: true,

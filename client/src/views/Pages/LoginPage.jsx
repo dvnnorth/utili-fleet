@@ -61,8 +61,7 @@ class LoginPage extends React.Component {
       password: this.state.password
     })
       .then(res => {
-        console.log(res);
-        this.props.setAuth();
+        this.props.setAuth(res.data.username);
       })
       .catch(err => this.setState({ errorMessage: "Login Failed" + err.toString()}));
   };
