@@ -1,19 +1,23 @@
 import Dashboard from "views/Dashboard/Dashboard.jsx";
-import Buttons from "views/Components/Buttons.jsx";
-import GridSystem from "views/Components/GridSystem.jsx";
+//import Buttons from "views/Components/Buttons.jsx";
+//import GridSystem from "views/Components/GridSystem.jsx";
 //import Panels from "views/Components/Panels.jsx";
 //import SweetAlert from "views/Components/SweetAlert.jsx";
 //import Notifications from "views/Components/Notifications.jsx";
 //import Icons from "views/Components/Icons.jsx";
 //import Typography from "views/Components/Typography.jsx";
 // import RegularForms from "views/Forms/RegularForms.jsx";
-// import ExtendedForms from "views/Forms/ExtendedForms.jsx";
+//import ExtendedForms from "views/Forms/ExtendedForms.jsx";
 // import ValidationForms from "views/Forms/ValidationForms.jsx";
 import CheckInWizard from "views/Forms/CheckInWizard.jsx";
 import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
-// import ExtendedTables from "views/Tables/ExtendedTables.jsx";
-import ReactTables from "views/Tables/ReactTables.jsx";
+//import ExtendedTables from "views/Tables/ExtendedTables.jsx";
+//import ReactTables from "views/Tables/ReactTables.jsx";
+import Agreements from "views/Tables/Agreements.jsx";
+import Claims from "views/Tables/Claims.jsx";
+import Maintenance from "views/Tables/Maintenance.jsx";
+import VehicleList from "views/Tables/VehicleList.jsx";
 // import GoogleMaps from "views/Maps/GoogleMaps.jsx";
 // import FullScreenMap from "views/Maps/FullScreenMap.jsx";
 // import VectorMap from "views/Maps/VectorMap.jsx";
@@ -82,13 +86,13 @@ var dashRoutes = [
     path: "/checkin",
     name: "Check-in",
     icon: ArrowDownward,
-    component: Dashboard
+    component: CheckInWizard
   },
   {
     path: "/checkout",
     name: "Check-out",
     icon: ArrowUpward,
-    component: Dashboard
+    component: CheckOutWizard
   },
   // {
   //   collapse: true,
@@ -155,25 +159,25 @@ var dashRoutes = [
         path: "/forms/agreements",
         name: "Agreements",
         mini: "A",
-        component: ReactTables
+        component: Agreements
       },
       {
         path: "/reports/claims",
         name: "Claims",
         mini: "C",
-        component: ReactTables
+        component: Claims
       },
       {
         path: "/reports/maint",
         name: "Maintenance",
         mini: "M",
-        component: ReactTables
+        component: Maintenance
       },
       {
         path: "/forms/vehiclelist",
         name: "Vehicle List",
         mini: "VL",
-        component: ReactTables
+        component: VehicleList
       }
     ]
   },
