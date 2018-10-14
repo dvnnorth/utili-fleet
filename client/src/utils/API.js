@@ -14,5 +14,9 @@ export default {
   },
   getAllVehicles: function () {
     return axios.get("/api/vehicles");
+  },
+  addVehicle: function (data) {
+    console.log(data);
+    return axios.post("/api/vehicles", data);
   }
 };

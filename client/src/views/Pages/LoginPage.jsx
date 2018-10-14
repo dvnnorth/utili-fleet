@@ -1,9 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
-=======
->>>>>>> eddcf2aef641bd2bf7069e39e9938c5a7dd8e8d6
 
 // Import API
 import API from "utils/API";
@@ -18,6 +13,8 @@ import Typography from "@material-ui/core/Typography";
 // import Face from "@material-ui/icons/Face";
 import PermIdentity from "@material-ui/icons/PermIdentity";
 // import LockOutline from "@material-ui/icons/LockOutline";
+
+import { Redirect } from "react-router-dom";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -43,11 +40,7 @@ class LoginPage extends React.Component {
       cardAnimaton: "cardHidden",
       username: "",
       password: "",
-<<<<<<< HEAD
-      toDashboard: false
-=======
       errorMessage: ""
->>>>>>> eddcf2aef641bd2bf7069e39e9938c5a7dd8e8d6
     };
   }
   componentDidMount() {
@@ -63,31 +56,6 @@ class LoginPage extends React.Component {
     clearTimeout(this.timeOutFunction);
     this.timeOutFunction = null;
   }
-<<<<<<< HEAD
-
-  loginHandler = event => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-  };
-
-  submitHandler = () => {
-    //console.log(this.state);
-    axios
-      .post(`/api/login`, {
-        username: this.state.username,
-        password: this.state.password
-      })
-      .then(response => {
-        console.log(response.data);
-        console.log(response.data.id);
-        if(response.data.id){
-          this.setState({ toDashboard: true });
-        };
-        console.log(this.state);
-        //console.log(response.config.data);
-        //console.log(response.config.data.username);
-      });
-=======
   logIn = event => {
     event.preventDefault();
     API.login({
@@ -102,7 +70,6 @@ class LoginPage extends React.Component {
   };
   handleChange = event => {
     this.setState({ [event.target.getAttribute("id")]: event.target.value });
->>>>>>> eddcf2aef641bd2bf7069e39e9938c5a7dd8e8d6
   };
   render() {
     if (this.state.toDashboard === true) {

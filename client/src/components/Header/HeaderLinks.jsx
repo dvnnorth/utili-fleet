@@ -45,7 +45,7 @@ class HeaderLinks extends React.Component {
     axios.get(`/api/logout`).then(response => {
       console.log(response);
         this.setState({ toDashboard: false });
-        console.log(this.state)
+        console.log(this.state);
     });
   };
   render() {

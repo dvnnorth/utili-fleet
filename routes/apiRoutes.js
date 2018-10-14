@@ -67,35 +67,19 @@ module.exports = app => {
 
   app.post('/api/register', controller.authentication.register);
 
-<<<<<<< HEAD
-  app.post('/api/login/', passport.authenticate('local', {
-    successRedirect: '/dashboard', // Application route
-    failureRedirect: '/'
-  }));
-  
-  app.get('/dashboard', (req, res) => {
-    db.Users.findOne({ where: { username: usernamed} })
-      .then(response => {
-        res.statusCode = 200;
-        res.send(response);
-      });
-  });
-  //app.get('/dashboard', controller.authentication.success ); 
-=======
   app.post('/api/login', passport.authenticate('local'), controller.authentication.login);
->>>>>>> eddcf2aef641bd2bf7069e39e9938c5a7dd8e8d6
 
   app.get('/api/logout', controller.authentication.logout);
   ////////////////////////// End Auth ///////////////////////////////////////
 
   //////////////////////// Vehicles /////////////////////////////////////////////
   // Get all vehicles from the database
-  app.get('/api/vehicles', authenticationMiddleware(), controller.vehicles.getAllVehicles);
+  app.get('/api/vehicles', /*authenticationMiddleware(),*/ controller.vehicles.getAllVehicles);
 
   app.get('/api/vehicle/:VIN', authenticationMiddleware(), controller.vehicles.getVehicleByVIN);
 
   // Post a vehicle into the database
-  app.post('/api/vehicles', authenticationMiddleware(), controller.vehicles.createVehicle);
+  app.post('/api/vehicles', /*authenticationMiddleware(),*/ controller.vehicles.createVehicle);
 
   // Update a vehicle into the database
   app.put('/api/vehicle/:id', authenticationMiddleware(), controller.vehicles.updateVehicle);

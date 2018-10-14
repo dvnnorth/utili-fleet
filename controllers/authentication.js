@@ -43,8 +43,10 @@ module.exports = {
   login: (req, res) => {
     console.log(req.body);
     if (req.isAuthenticated) {
+      console.log(req.body.username);
       db.Users.findOne({ where: { username: req.body.username } })
         .then(data => {
+          //console.log(req.body.username);
           res.statusCode = 200;
           res.send(data.dataValues);
         })
