@@ -113,15 +113,15 @@ module.exports = app => {
   ///////////////////////// End Driver Routes ///////////////////////////////////
 
   //////////////////////// Claims ///////////////////////////////////
-  app.get('/api/claims', /*authenticationMiddleware(),*/controller.claims.getAllClaims);
+  app.get('/api/claims', authenticationMiddleware(),controller.claims.getAllClaims);
 
-  app.get('/api/claim/:id', /*authenticationMiddleware(),*/ controller.claims.getClaimById);
+  app.get('/api/claim/:id', authenticationMiddleware(), controller.claims.getClaimById);
 
   app.put('/api/claim/:id', authenticationMiddleware(), controller.claims.updateClaim);
 
   app.post('/api/claims', authenticationMiddleware(), controller.claims.createClaim);
 
-  app.delete('/api/claim/:id', /*authenticationMiddleware(),*/ controller.claims.deleteClaim);
+  app.delete('/api/claim/:id', authenticationMiddleware(), controller.claims.deleteClaim);
   ///////////////////// End Claims //////////////////////////////
 
   //////////////////////// Damages ///////////////////////////////////
@@ -147,4 +147,6 @@ module.exports = app => {
 
   app.delete('/api/employee/:id', authenticationMiddleware(), controller.employees.deleteEmployee);
   ///////////////////// End Emplpoyees //////////////////////////////
+
+
 };

@@ -1,5 +1,8 @@
+const Sequelize = require('sequelize');
 const db = require('../models/index');
 const request = require('request-promise');
+
+const Op = Sequelize.Op;
 
 const sendError = (err, res) => {
   if (err) {
@@ -74,11 +77,27 @@ module.exports = {
         id: req.params.id
       }
     })
-      .then(rowsAffected => {
-        if (rowsAffected === 1) res.sendStatus(200);
+      .then(data => {
+        // if (rowsAffected === 1)
+         res.sendStatus(200);
+         res.json(data)
       })
       .catch(err => sendError(err, res));
   },
+
+  getVehiclesByDriver: (req, res) => {
+    db.Vehicles.findAll({
+      where: {
+        DriverId: {[Op.ne]: null} 
+      }
+    })
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  },
+
 
   getFromVehicleDatabase: (req, res) => {
     const nhtsaEndpoint = new URL('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/' +

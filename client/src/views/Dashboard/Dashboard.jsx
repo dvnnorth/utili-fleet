@@ -40,6 +40,8 @@ import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
+// import API from "../";
+
 import {
   dailySalesChart,
   emailsSubscriptionChart,
@@ -52,8 +54,24 @@ import imagePlaceHolder from "assets/img/image_placeholder.jpg";
 
 class Dashboard extends React.Component {
   state = {
-    value: 0
+    value: 0,
+    carsWithDrivers: 0
   };
+
+  // componentDidMount() {
+  //   API.getVehiclesByDriver().then(response => {
+  //     console.log(response.data);
+      // const cars = response.data.map(dataValue => {
+      //   let dataRow = [];
+      //   for (let key in dataValue) {
+      //     dataRow.push(dataValue[key]);
+      //   }
+      //   return dataRow;
+      // });
+      // this.setState({ vehicles: rows });
+  //   });
+  // }
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -71,9 +89,9 @@ class Dashboard extends React.Component {
                 <CardIcon color="warning">
                   <Icon>content_copy</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Used Space</p>
+                <p className={classes.cardCategory}>Vehicle Utilization</p>
                 <h3 className={classes.cardTitle}>
-                  49/50 <small>GB</small>
+                  6/1000 
                 </h3>
               </CardHeader>
               <CardFooter stats>
