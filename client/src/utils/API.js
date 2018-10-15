@@ -12,18 +12,18 @@ export default {
   logout: function() {
     return axios.get("/logout");
   },
-  getAllVehicles: function() {
-    return axios.get("/api/vehicles");
-  },
-  addVehicle: function (data) {
-    console.log(data);
-    return axios.post("/api/vehicles", data);
 
   /////////////////////////// START Vehicles /////////////////////////
 
+  addVehicle: function (data) {
+    console.log(data);
+    return axios.post("/api/vehicles", data);
+  },
+  
   getAllVehicles: () => {
     return axios.get("/api/vehicles");
   },
+
   getAllVehiclesByVIN: VIN => {
     return axios.get(`/api/vehicle/${VIN}`);
   },
