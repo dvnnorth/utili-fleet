@@ -36,12 +36,21 @@ class Step1 extends React.Component {
     super(props);
     this.state = {
       UnitNumber: "",
+      UnitNumberGood: false,
       VIN: "",
-      LicensePlate: ""
+      VINGood: false,
+      LicensePlate: "",
+      LicensePlateGood: false
     };
   }
   sendState() {
-    return this.state;
+    let filledState = {};
+    for (let key in this.state) {
+      if (this.state[key] !== "" && !key.includes("Good")) {
+        filledState[key] = this.state[key];
+      }
+    }
+    return filledState;
   }
   // function that returns true if value is email, false otherwise
   verifyEmail(value) {
@@ -63,8 +72,8 @@ class Step1 extends React.Component {
   }
   isValidated() {
     if (
-      this.state.firstnameState === "success" &&
-      this.state.lastnameState === "success" &&
+      this.state.UnitNumberGood === true &&
+      this.state.VINGood === "" || this.state.VINGood === "success"
       this.state.emailState === "success"
     ) {
       return true;
