@@ -200,6 +200,39 @@ export default {
 
   deleteClaim: id => {
     return axios.delete(`/api/claim/${id}`);
-  }
+  },
   ////////////////////////  END Claims  //////////////////////
+
+    ////////////////////////  START Damages  //////////////////////
+  
+    getAllDamages: () => {
+      return axios.get("/api/damages");
+    },
+    getDamagesById: id => {
+      return axios.get(`/api/damage/${id}`);
+    },
+    postDamage: data => {
+      const DamageData = {
+        Section: data.Section,
+        Description: data.Description,
+        ClaimId: data.ClaimId,
+        VehicleId: data.VehicleId
+      };
+      return axios.post("/api/damages", DamageData);
+    },
+  
+    updateDamage: data => {
+        const DamageData = {
+          Section: data.Section,
+          Description: data.Description,
+          ClaimId: data.ClaimId,
+          VehicleId: data.VehicleId
+      };
+      return axios.post(`/api/damage/${data.id}`, DamageData);
+    },
+  
+    deleteDamage: id => {
+      return axios.delete(`/api/damage/${id}`);
+    },
+    ////////////////////////  END Damages  //////////////////////
 };
