@@ -61,14 +61,14 @@ class Dashboard extends React.Component {
   // componentDidMount() {
   //   API.getVehiclesByDriver().then(response => {
   //     console.log(response.data);
-      // const cars = response.data.map(dataValue => {
-      //   let dataRow = [];
-      //   for (let key in dataValue) {
-      //     dataRow.push(dataValue[key]);
-      //   }
-      //   return dataRow;
-      // });
-      // this.setState({ vehicles: rows });
+  // const cars = response.data.map(dataValue => {
+  //   let dataRow = [];
+  //   for (let key in dataValue) {
+  //     dataRow.push(dataValue[key]);
+  //   }
+  //   return dataRow;
+  // });
+  // this.setState({ vehicles: rows });
   //   });
   // }
 
@@ -90,20 +90,9 @@ class Dashboard extends React.Component {
                   <Icon>content_copy</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Vehicle Utilization</p>
-                <h3 className={classes.cardTitle}>
-                  6/1000 
-                </h3>
+                <h3 className={classes.cardTitle}>6/1000</h3>
               </CardHeader>
-              <CardFooter stats>
-                <div className={classes.stats}>
-                  <Danger>
-                    <Warning />
-                  </Danger>
-                  <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Get more space
-                  </a>
-                </div>
-              </CardFooter>
+              <CardFooter stats />
             </Card>
           </GridItem>
           <GridItem xs={12} sm={6} md={6} lg={3}>

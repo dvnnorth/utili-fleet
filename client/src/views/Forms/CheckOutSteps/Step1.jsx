@@ -12,7 +12,6 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import PictureUpload from "components/CustomUpload/PictureUpload.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 
 const style = {
@@ -110,7 +109,6 @@ class Step1 extends React.Component {
           </h4>
         </GridItem>
         <GridItem xs={12} sm={4}>
-          <PictureUpload />
         </GridItem>
         <GridItem xs={12} sm={6}>
           <CustomInput
