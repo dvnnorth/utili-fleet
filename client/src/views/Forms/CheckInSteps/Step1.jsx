@@ -1,5 +1,7 @@
 import React from "react";
 
+import vinValidator from "vin-validator";
+
 // @material-ui/icons
 import Face from "@material-ui/icons/Face";
 import RecordVoiceOver from "@material-ui/icons/RecordVoiceOver";
@@ -68,25 +70,36 @@ class Step1 extends React.Component {
     return false;
   }
   change(event) {
-    this.setState({ [event.target.getAttribute("id")]: event.target.value });
+    let makeGood = id => this.setState({ [id + "Good"]: true });
+    let value = event.target.value;
+    let id = event.target.getAttribute("id");
+    this.setState({ [id]: value });
+    switch (id) {
+      case "UnitNumber":
+        let numeric = /^[0-9]+$/;
+        if (numeric.test(value) && value.length > 0) {
+          makeGood();
+        }
+        break;
+      case "VIN":
+        if (vinValidator.validate(value)) {
+          makeGood();
+        }
+        break;
+      case "LicensePlate":
+        
+        break;
+      default:
+        break;
+    }
   }
   isValidated() {
     if (
-      this.state.UnitNumberGood === true &&
-      this.state.VINGood === "" || this.state.VINGood === "success"
-      this.state.emailState === "success"
+      (this.state.UnitNumberGood === true || this.state.UnitNumber === "") &&
+      (this.state.VINGood === true || this.state.VIN === "") &&
+      (this.state.LicensePlateGood === true || this.state.LicensePlate === "")
     ) {
       return true;
-    } else {
-      if (this.state.firstnameState !== "success") {
-        this.setState({ firstnameState: "error" });
-      }
-      if (this.state.lastnameState !== "success") {
-        this.setState({ lastnameState: "error" });
-      }
-      if (this.state.emailState !== "success") {
-        this.setState({ emailState: "error" });
-      }
     }
     return false;
   }
@@ -111,6 +124,8 @@ class Step1 extends React.Component {
             }}
           />
           <CustomInput
+            success={this.state.VINGood || this.state.VIN === ""}
+            error={!this.state.VINGood ||}
             labelText={<span>VIN</span>}
             id="VIN"
             formControlProps={{
