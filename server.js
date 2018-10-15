@@ -35,8 +35,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
 // Call routes
 routes(app);
 
@@ -48,6 +46,9 @@ if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
+}
+else {
+  app.get('/', (req, res) => res.redirect('http://localhost:3000'));
 }
 
 // Setup app listener and database connection

@@ -17,7 +17,7 @@ import PermIdentity from "@material-ui/icons/PermIdentity";
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
+import CustomInputLogin from "components/CustomInput/CustomInputLogin.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Card from "components/Card/Card.jsx";
 import CardBody from "components/Card/CardBody.jsx";
@@ -61,8 +61,7 @@ class LoginPage extends React.Component {
       password: this.state.password
     })
       .then(res => {
-        console.log(res);
-        this.props.setAuth();
+        this.props.setAuth(res.data.username);
       })
       .catch(err => this.setState({ errorMessage: "Login Failed" + err.toString()}));
   };
@@ -134,7 +133,7 @@ class LoginPage extends React.Component {
                       )
                     }}
                   /> */}
-                  <CustomInput
+                  <CustomInputLogin
                     labelText="Username..."
                     name="username"
                     id="username"
@@ -153,7 +152,7 @@ class LoginPage extends React.Component {
                       onChange: this.handleChange
                     }}
                   />
-                  <CustomInput
+                  <CustomInputLogin
                     labelText="Password"
                     name="password"
                     id="password"
@@ -182,7 +181,7 @@ class LoginPage extends React.Component {
                   )}
                   <Button
                     onClick={event => this.logIn(event)}
-                    color="rose"
+                    color="info"
                     simple
                     size="lg"
                     block

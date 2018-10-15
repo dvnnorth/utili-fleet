@@ -9,8 +9,8 @@ import Dashboard from "views/Dashboard/Dashboard.jsx";
 // import RegularForms from "views/Forms/RegularForms.jsx";
 //import ExtendedForms from "views/Forms/ExtendedForms.jsx";
 // import ValidationForms from "views/Forms/ValidationForms.jsx";
-import CheckInWizard from "views/Forms/CheckInWizard.jsx";
-import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
+import CheckInWizardContainer from "views/Forms/CheckInWizardContainer.jsx";
+import CheckOutWizardContainer from "views/Forms/CheckOutWizardContainer.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 //import ExtendedTables from "views/Tables/ExtendedTables.jsx";
 //import ReactTables from "views/Tables/ReactTables.jsx";
@@ -84,13 +84,13 @@ var dashRoutes = [
     path: "/checkin",
     name: "Check-in",
     icon: ArrowDownward,
-    component: CheckInWizard
+    component: CheckInWizardContainer
   },
   {
     path: "/checkout",
     name: "Check-out",
     icon: ArrowUpward,
-    component: CheckOutWizard
+    component: CheckOutWizardContainer
   },
   // {
   //   collapse: true,
@@ -117,7 +117,7 @@ var dashRoutes = [
         path: "/vehicles/view",
         name: "View",
         mini: "V",
-        component: Dashboard
+        component: Vehicles
       },
       // {
       //   path: "/components/panels",
@@ -184,7 +184,7 @@ var dashRoutes = [
         component: Maintenance
       },
       {
-        path: "/forms/vehicles",
+        path: "/reports/vehicles",
         name: "Vehicles",
         mini: "VL",
         component: Vehicles

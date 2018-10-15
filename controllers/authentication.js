@@ -36,7 +36,7 @@ module.exports = {
       db.Users.findOne({ where: { username: req.body.username } })
         .then(data => {
           res.statusCode = 200;
-          res.send(data.dataValues);
+          res.send(data.dataValues.username);
         })
         .catch(err => sendError(err, res));
     }
@@ -47,7 +47,23 @@ module.exports = {
 
   logout: (req, res) => {
     req.logout();
-    res.redirect('/');
+    if (process.env.NODE_ENV === 'production') {
+      res.redirect('/');
+    }
+    else {
+      res.redirect('http://localhost:3000');
+    }
+  },
+
+  user: (req, res) => {
+    if (req.user) {
+      res.statusCode = 200;
+      res.send(req.user.username);
+    }
+    else {
+      res.statusCode = 401;
+      res.send();
+    }
   }
-  /////////////// End Auth ///////////////////////
+   /////////////// End Auth ///////////////////////
 };

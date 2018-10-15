@@ -68,11 +68,15 @@ module.exports = app => {
   app.post('/api/login', passport.authenticate('local'), controller.authentication.login);
 
   app.get('/api/logout', controller.authentication.logout);
+
+  app.get('/api/user', controller.authentication.user);
   ////////////////////////// End Auth ///////////////////////////////////////
 
   //////////////////////// Vehicles /////////////////////////////////////////////
   // Get all vehicles from the database
   app.get('/api/vehicles', authenticationMiddleware(), controller.vehicles.getAllVehicles);
+
+  app.post('/api/vehicle', authenticationMiddleware(), controller.vehicles.getVehicleSearch);
 
   app.get('/api/vehicle/:VIN', authenticationMiddleware(), controller.vehicles.getVehicleByVIN);
 

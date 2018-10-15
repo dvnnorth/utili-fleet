@@ -9,13 +9,10 @@ export default {
   login: data => {
     return axios.post("/api/login", data);
   },
-  logout: function() {
-    return axios.get("/logout");
+  logout: () => {
+    return axios.get("/api/logout");
   },
-  getAllVehicles: function() {
-    return axios.get("/api/vehicles");
-  },
-
+  
   /////////////////////////// START Vehicles /////////////////////////
 
   getAllVehicles: () => {
@@ -235,4 +232,10 @@ export default {
       return axios.delete(`/api/damage/${id}`);
     },
     ////////////////////////  END Damages  //////////////////////
+  getVehicle: data => {
+    return axios.post("/api/vehicle", data);
+  },
+  getUser: () => {
+    return axios.get("/api/user");
+  }
 };

@@ -63,8 +63,6 @@ class HeaderLinks extends React.Component {
     // });
     return (
       <div className={wrapper}>
-        Logged in as {this.props.username}
-        &nbsp;&nbsp;
         <Button
           color="transparent"
           aria-label="Log Off"

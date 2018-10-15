@@ -2,6 +2,7 @@ import React from "react";
 import cx from "classnames";
 import PropTypes from "prop-types";
 import { Switch, Route, Redirect } from "react-router-dom";
+
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -20,6 +21,8 @@ import appStyle from "assets/jss/material-dashboard-pro-react/layouts/dashboardS
 
 import image from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/logo-white.svg";
+
+import API from "utils/API.js";
 
 const switchRoutes = (
   <Switch>
@@ -44,11 +47,13 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       mobileOpen: false,
-      miniActive: false
+      miniActive: false,
+      username: ""
     };
     this.resizeFunction = this.resizeFunction.bind(this);
   }
   componentDidMount() {
+    API.getUser().then(response => this.setState({ username: response.data }));
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(this.refs.mainPanel, {
         suppressScrollX: true,
@@ -86,6 +91,7 @@ class Dashboard extends React.Component {
       this.setState({ mobileOpen: false });
     }
   }
+
   render() {
     const { classes, ...rest } = this.props;
     const mainPanel =
@@ -116,6 +122,7 @@ class Dashboard extends React.Component {
             miniActive={this.state.miniActive}
             routes={dashboardRoutes}
             handleDrawerToggle={this.handleDrawerToggle}
+            username={this.state.username}
             {...rest}
           />
           {/* On the /maps/full-screen-maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
@@ -124,8 +131,8 @@ class Dashboard extends React.Component {
               <div className={classes.container}>{switchRoutes}</div>
             </div>
           ) : (
-            <div className={classes.map}>{switchRoutes}</div>
-          )}
+              <div className={classes.map}>{switchRoutes}</div>
+            )}
           {this.getRoute() ? <Footer fluid /> : null}
         </div>
       </div>
