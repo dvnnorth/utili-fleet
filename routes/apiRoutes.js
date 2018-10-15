@@ -70,11 +70,15 @@ module.exports = app => {
   app.post('/api/login', passport.authenticate('local'), controller.authentication.login);
 
   app.get('/api/logout', controller.authentication.logout);
+
+  app.get('/api/user', controller.authentication.user);
   ////////////////////////// End Auth ///////////////////////////////////////
 
   //////////////////////// Vehicles /////////////////////////////////////////////
   // Get all vehicles from the database
   app.get('/api/vehicles', /*authenticationMiddleware(),*/ controller.vehicles.getAllVehicles);
+
+  app.post('/api/vehicle', authenticationMiddleware(), controller.vehicles.getVehicleSearch);
 
   app.get('/api/vehicle/:VIN', authenticationMiddleware(), controller.vehicles.getVehicleByVIN);
 
@@ -111,15 +115,15 @@ module.exports = app => {
   ///////////////////////// End Driver Routes ///////////////////////////////////
 
   //////////////////////// Claims ///////////////////////////////////
-  app.get('/api/claims', authenticationMiddleware(), controller.claims.getAllClaims);
+  app.get('/api/claims', /*authenticationMiddleware(),*/controller.claims.getAllClaims);
 
-  app.get('/api/claim/:id', authenticationMiddleware(), controller.claims.getClaimById);
+  app.get('/api/claim/:id', /*authenticationMiddleware(),*/ controller.claims.getClaimById);
 
   app.put('/api/claim/:id', authenticationMiddleware(), controller.claims.updateClaim);
 
   app.post('/api/claims', authenticationMiddleware(), controller.claims.createClaim);
 
-  app.delete('/api/claim/:id', authenticationMiddleware(), controller.claims.deleteClaim);
+  app.delete('/api/claim/:id', /*authenticationMiddleware(),*/ controller.claims.deleteClaim);
   ///////////////////// End Claims //////////////////////////////
 
   //////////////////////// Damages ///////////////////////////////////

@@ -9,10 +9,14 @@ export default {
   login: data => {
     return axios.post("/api/login", data);
   },
-  logout: function() {
-    return axios.get("/logout");
+  logout: () => {
+    return axios.get("/api/logout");
   },
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 59c4d4e792b5ea69218aaa6532c3fd7de6fb0bc2
   /////////////////////////// START Vehicles /////////////////////////
 
   addVehicle: function (data) {
@@ -203,6 +207,45 @@ export default {
 
   deleteClaim: id => {
     return axios.delete(`/api/claim/${id}`);
-  }
+  },
   ////////////////////////  END Claims  //////////////////////
+
+    ////////////////////////  START Damages  //////////////////////
+  
+    getAllDamages: () => {
+      return axios.get("/api/damages");
+    },
+    getDamagesById: id => {
+      return axios.get(`/api/damage/${id}`);
+    },
+    postDamage: data => {
+      const DamageData = {
+        Section: data.Section,
+        Description: data.Description,
+        ClaimId: data.ClaimId,
+        VehicleId: data.VehicleId
+      };
+      return axios.post("/api/damages", DamageData);
+    },
+  
+    updateDamage: data => {
+        const DamageData = {
+          Section: data.Section,
+          Description: data.Description,
+          ClaimId: data.ClaimId,
+          VehicleId: data.VehicleId
+      };
+      return axios.post(`/api/damage/${data.id}`, DamageData);
+    },
+  
+    deleteDamage: id => {
+      return axios.delete(`/api/damage/${id}`);
+    },
+    ////////////////////////  END Damages  //////////////////////
+  getVehicle: data => {
+    return axios.post("/api/vehicle", data);
+  },
+  getUser: () => {
+    return axios.get("/api/user");
+  }
 };

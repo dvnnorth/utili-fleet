@@ -32,6 +32,21 @@ module.exports = {
       .catch(err => sendError(err, res));
   },
 
+  getVehicleSearch: (req, res) => {
+    let constraints = {};
+    for (let key in req.body) {
+      constraints[key] = req.body[key]
+    }
+    db.Vehicles.findAll({
+      where: constraints
+    })
+      .then(response => {
+        res.statusCode = 200;
+        res.send(response);
+      })
+      .catch(err => sendError(err, res));
+  },
+
   createVehicle: (req, res) => {
     db.Vehicles.create(req.body)
       .then(data => {

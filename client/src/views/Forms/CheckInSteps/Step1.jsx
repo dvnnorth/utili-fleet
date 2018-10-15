@@ -1,5 +1,7 @@
 import React from "react";
 
+import vinValidator from "vin-validator";
+
 // @material-ui/icons
 import Face from "@material-ui/icons/Face";
 import RecordVoiceOver from "@material-ui/icons/RecordVoiceOver";
@@ -14,6 +16,8 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 // import PictureUpload from "components/CustomUpload/PictureUpload.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
+
+import API from "utils/API";
 
 const style = {
   infoText: {
@@ -33,13 +37,22 @@ class Step1 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      unitNumber: "",
+      UnitNumber: "",
+      UnitNumberGood: false,
       VIN: "",
-      licensePlate: ""
+      VINGood: false,
+      LicensePlate: "",
+      LicensePlateGood: false
     };
   }
   sendState() {
-    return this.state;
+    let filledState = {};
+    for (let key in this.state) {
+      if (this.state[key] !== "" && !key.includes("Good")) {
+        filledState[key] = this.state[key];
+      }
+    }
+    return filledState;
   }
   // function that returns true if value is email, false otherwise
   verifyEmail(value) {
@@ -56,44 +69,37 @@ class Step1 extends React.Component {
     }
     return false;
   }
-  change(event, stateName, type, stateNameEqualTo) {
-    switch (type) {
-      case "email":
-        if (this.verifyEmail(event.target.value)) {
-          this.setState({ [stateName + "State"]: "success" });
-        } else {
-          this.setState({ [stateName + "State"]: "error" });
+  change(event) {
+    let makeGood = id => this.setState({ [id + "Good"]: true });
+    let value = event.target.value;
+    let id = event.target.getAttribute("id");
+    this.setState({ [id]: value });
+    switch (id) {
+      case "UnitNumber":
+        let numeric = /^[0-9]+$/;
+        if (numeric.test(value) && value.length > 0) {
+          makeGood();
         }
         break;
-      case "length":
-        if (this.verifyLength(event.target.value, stateNameEqualTo)) {
-          this.setState({ [stateName + "State"]: "success" });
-        } else {
-          this.setState({ [stateName + "State"]: "error" });
+      case "VIN":
+        if (vinValidator.validate(value)) {
+          makeGood();
         }
+        break;
+      case "LicensePlate":
+        
         break;
       default:
         break;
     }
-    this.setState({ [stateName]: event.target.value });
   }
   isValidated() {
     if (
-      this.state.firstnameState === "success" &&
-      this.state.lastnameState === "success" &&
-      this.state.emailState === "success"
+      (this.state.UnitNumberGood === true || this.state.UnitNumber === "") &&
+      (this.state.VINGood === true || this.state.VIN === "") &&
+      (this.state.LicensePlateGood === true || this.state.LicensePlate === "")
     ) {
       return true;
-    } else {
-      if (this.state.firstnameState !== "success") {
-        this.setState({ firstnameState: "error" });
-      }
-      if (this.state.lastnameState !== "success") {
-        this.setState({ lastnameState: "error" });
-      }
-      if (this.state.emailState !== "success") {
-        this.setState({ emailState: "error" });
-      }
     }
     return false;
   }
@@ -108,77 +114,37 @@ class Step1 extends React.Component {
         </GridItem>
         <GridItem xs={10}>
           <CustomInput
-            success={this.state.firstnameState === "success"}
-            error={this.state.firstnameState === "error"}
-            labelText={
-              <span>
-                Unit Number
-              </span>
-            }
-            id="unitnumber"
+            labelText={<span>Unit Number</span>}
+            id="UnitNumber"
             formControlProps={{
               fullWidth: true
             }}
             inputProps={{
-              onChange: event => this.change(event, "firstname", "length", 3),
-              endAdornment: (
-                <InputAdornment
-                  position="end"
-                  className={classes.inputAdornment}
-                >
-                  <Face className={classes.inputAdornmentIcon} />
-                </InputAdornment>
-              )
+              onChange: event => this.change(event)
             }}
           />
           <CustomInput
-            success={this.state.lastnameState === "success"}
-            error={this.state.lastnameState === "error"}
-            labelText={
-              <span>
-                Last Name <small>(required)</small>
-              </span>
-            }
-            id="lastname"
+            success={this.state.VINGood || this.state.VIN === ""}
+            error={!this.state.VINGood && this.state.VIN !== ""}
+            labelText={<span>VIN</span>}
+            id="VIN"
             formControlProps={{
               fullWidth: true
             }}
             inputProps={{
-              onChange: event => this.change(event, "lastname", "length", 3),
-              endAdornment: (
-                <InputAdornment
-                  position="end"
-                  className={classes.inputAdornment}
-                >
-                  <RecordVoiceOver className={classes.inputAdornmentIcon} />
-                </InputAdornment>
-              )
+              onChange: event => this.change(event)
             }}
           />
         </GridItem>
         <GridItem xs={12} sm={12} md={12} lg={10}>
           <CustomInput
-            success={this.state.emailState === "success"}
-            error={this.state.emailState === "error"}
-            labelText={
-              <span>
-                Email <small>(required)</small>
-              </span>
-            }
-            id="email"
+            labelText={<span>License Plate</span>}
+            id="LicensePlate"
             formControlProps={{
               fullWidth: true
             }}
             inputProps={{
-              onChange: event => this.change(event, "email", "email"),
-              endAdornment: (
-                <InputAdornment
-                  position="end"
-                  className={classes.inputAdornment}
-                >
-                  <Email className={classes.inputAdornmentIcon} />
-                </InputAdornment>
-              )
+              onChange: event => this.change(event)
             }}
           />
         </GridItem>

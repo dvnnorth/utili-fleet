@@ -9,19 +9,21 @@ import Dashboard from "views/Dashboard/Dashboard.jsx";
 // import RegularForms from "views/Forms/RegularForms.jsx";
 //import ExtendedForms from "views/Forms/ExtendedForms.jsx";
 // import ValidationForms from "views/Forms/ValidationForms.jsx";
-import CheckInWizard from "views/Forms/CheckInWizard.jsx";
-import CheckOutWizard from "views/Forms/CheckOutWizard.jsx";
+import CheckInWizardContainer from "views/Forms/CheckInWizardContainer.jsx";
+import CheckOutWizardContainer from "views/Forms/CheckOutWizardContainer.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 //import ExtendedTables from "views/Tables/ExtendedTables.jsx";
 //import ReactTables from "views/Tables/ReactTables.jsx";
 import Agreements from "views/Tables/Agreements.jsx";
 import Claims from "views/Tables/Claims.jsx";
+import Employees from "views/Tables/Employees.jsx";
+import Damages from "views/Tables/Damages.jsx";
 import Maintenance from "views/Tables/Maintenance.jsx";
-import VehicleList from "views/Tables/VehicleList.jsx";
+import Vehicles from "views/Tables/Vehicles.jsx";
 // import GoogleMaps from "views/Maps/GoogleMaps.jsx";
 // import FullScreenMap from "views/Maps/FullScreenMap.jsx";
 // import VectorMap from "views/Maps/VectorMap.jsx";
-// import Charts from "views/Charts/Charts.jsx";
+// import Charts from "views/Charts/Charts.jsx"; 
 // import Calendar from "views/Calendar/Calendar.jsx";
 // import Widgets from "views/Widgets/Widgets.jsx";
 //import UserProfile from "views/Pages/UserProfile.jsx";
@@ -86,13 +88,13 @@ var dashRoutes = [
     path: "/checkin",
     name: "Check-in",
     icon: ArrowDownward,
-    component: CheckInWizard
+    component: CheckInWizardContainer
   },
   {
     path: "/checkout",
     name: "Check-out",
     icon: ArrowUpward,
-    component: CheckOutWizard
+    component: CheckOutWizardContainer
   },
   // {
   //   collapse: true,
@@ -119,7 +121,7 @@ var dashRoutes = [
         path: "/vehicles/view",
         name: "View",
         mini: "V",
-        component: Dashboard
+        component: Vehicles
       },
       // {
       //   path: "/components/panels",
@@ -168,16 +170,28 @@ var dashRoutes = [
         component: Claims
       },
       {
+        path: "/reports/damages",
+        name: "Damages",
+        mini: "DA",
+        component: Damages
+      },
+      {
+        path: "/reports/employees",
+        name: "Employees",
+        mini: "E",
+        component: Employees
+      },
+      {
         path: "/reports/maint",
         name: "Maintenance",
         mini: "M",
         component: Maintenance
       },
       {
-        path: "/forms/vehiclelist",
-        name: "Vehicle List",
+        path: "/reports/vehicles",
+        name: "Vehicles",
         mini: "VL",
-        component: VehicleList
+        component: Vehicles
       }
     ]
   },
