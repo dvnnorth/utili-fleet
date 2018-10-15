@@ -9,6 +9,7 @@ import GridSystem from "views/Components/GridSystem.jsx";
 import RegularForms from "views/Forms/RegularForms.jsx";
 import ExtendedForms from "views/Forms/ExtendedForms.jsx";
 import ValidationForms from "views/Forms/ValidationForms.jsx";
+import Drivers from "views/Tables/drivers.jsx";
 // import Driver from "views/Tables/drivers.jsx";
 import Wizard from "views/Forms/Wizard.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
@@ -176,6 +177,12 @@ var dashRoutes = [
         name: "Vehicle List",
         mini: "VL",
         component: ValidationForms
+      },
+      {
+        path: "/Tables/Drivers",
+        name: "Drivers",
+        mini: "DV",
+        component: Drivers
       }
     ]
   },

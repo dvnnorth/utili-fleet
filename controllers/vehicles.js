@@ -1,5 +1,9 @@
+const Sequelize = require("Sequelize")
+
 const db = require('../models/index');
 const request = require('request-promise');
+
+const Op = Sequelize.Op;
 
 const sendError = (err, res) => {
   if (err) {
@@ -70,8 +74,7 @@ module.exports = {
   getVehiclesByDriver: (req, res) => {
     db.Vehicles.findAll({
       where: {
-        driverId: req.params.driverId
-          { exclude: ['null'] }
+        DriverId: {[Op.ne]: null} 
       }
     })
       .then(data => {

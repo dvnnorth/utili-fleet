@@ -12,7 +12,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import API from "../../utils/API";
 
 // import { dataTable } from "variables/general.jsx";
-class ReactTables extends Component {
+class Drivers extends Component {
   state = {
     drivers: []
   };
@@ -144,4 +144,4 @@ class ReactTables extends Component {
     );
   }
 }
-export default ReactTables;
+export default Drivers;
