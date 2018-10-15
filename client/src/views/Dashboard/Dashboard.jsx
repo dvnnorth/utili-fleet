@@ -195,7 +195,7 @@ class Dashboard extends React.Component {
                   <Language />
                 </CardIcon>
                 <h4 className={classes.cardIconTitle}>
-                  Global Sales by Top Locations
+                  Sales by Top Locations in the US
                 </h4>
               </CardHeader>
               <CardBody>
@@ -204,38 +204,38 @@ class Dashboard extends React.Component {
                     <Table
                       tableData={[
                         [
-                          <img src={us_flag} alt="us_flag" />,
-                          "USA",
+                          // <img src={us_flag} alt="us_flag" />,
+                          "Houston",
                           "2.920",
                           "53.23%"
                         ],
                         [
-                          <img src={de_flag} alt="us_flag" />,
-                          "Germany",
+                          // <img src={de_flag} alt="us_flag" />,
+                          "Katy",
                           "1.300",
                           "20.43%"
                         ],
                         [
-                          <img src={au_flag} alt="us_flag" />,
-                          "Australia",
+                          // <img src={au_flag} alt="us_flag" />,
+                          "Dallas",
                           "760",
                           "10.35%"
                         ],
                         [
-                          <img src={gb_flag} alt="us_flag" />,
-                          "United Kingdom",
+                          // <img src={gb_flag} alt="us_flag" />,
+                          "San Antonio",
                           "690",
                           "7.87%"
                         ],
                         [
-                          <img src={ro_flag} alt="us_flag" />,
-                          "Romania",
+                          // <img src={ro_flag} alt="us_flag" />,
+                          "Fort Worth",
                           "600",
                           "5.94%"
                         ],
                         [
-                          <img src={br_flag} alt="us_flag" />,
-                          "Brasil",
+                          // <img src={br_flag} alt="us_flag" />,
+                          "Austin",
                           "550",
                           "4.34%"
                         ]
