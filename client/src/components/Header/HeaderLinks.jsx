@@ -51,9 +51,6 @@ class HeaderLinks extends React.Component {
     });
   };
   render() {
-    if (this.state.toDashboard === false) {
-      return <Redirect to="/" />;
-    }
     const { classes, rtlActive } = this.props;
     // const { open } = this.state;
     // const searchButton =
@@ -87,9 +84,6 @@ class HeaderLinks extends React.Component {
           muiClasses={{
             label: rtlActive ? classes.labelRTL : ""
           }}
-<<<<<<< HEAD
-          onClick={this.logOff}
-=======
           onClick={() =>
             API.logout().then(response => {
               let url =
@@ -100,7 +94,6 @@ class HeaderLinks extends React.Component {
               window.location = url;
             })
           }
->>>>>>> 59c4d4e792b5ea69218aaa6532c3fd7de6fb0bc2
         >
           <LogOff
             className={

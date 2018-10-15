@@ -30,8 +30,12 @@ class CheckInWizardContainer extends React.Component {
           <CheckInOutWizard
             steps={[
               { stepName: "Vehicle", stepComponent: Step1, stepId: "vehicle" },
-              { stepName: "Information", stepComponent: Step2, stepId: "information" },
-              { stepName: "Damages", stepComponent: Step3, stepId: "damages" },
+              {
+                stepName: "Information",
+                stepComponent: Step2,
+                stepId: "information"
+              },
+              { stepName: "Damages", stepComponent: Step3, stepId: "damages" }
             ]}
             title="Vehicle Check-In"
             subtitle="Complete the process to check a vehicle back in."

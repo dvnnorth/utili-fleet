@@ -12,11 +12,6 @@ export default {
   logout: () => {
     return axios.get("/api/logout");
   },
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 59c4d4e792b5ea69218aaa6532c3fd7de6fb0bc2
   /////////////////////////// START Vehicles /////////////////////////
 
   addVehicle: function (data) {

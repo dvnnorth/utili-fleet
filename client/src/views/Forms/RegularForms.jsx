@@ -120,8 +120,8 @@ class RegularForms extends React.Component {
     })
       .then(res => {
         console.log(res.data.id);
-        if(res.data.id) {
-          this.setState({redirect: true});
+        if (res.data.id) {
+          this.setState({ redirect: true });
         }
       })
       .catch(err =>
@@ -134,8 +134,8 @@ class RegularForms extends React.Component {
       return <Redirect to="/dashboard" />;
     }
     return (
-      <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={8}>
           <Card>
             <CardHeader color="rose" icon>
               <CardIcon color="rose">
@@ -324,7 +324,7 @@ class RegularForms extends React.Component {
                     placeholder: "mm/dd/yyyy"
                   }}
                 />
-                  <CustomInput
+                <CustomInput
                   labelText="Depreciation End"
                   name="depreciationEnd"
                   id="depreciationEnd"
@@ -360,7 +360,12 @@ class RegularForms extends React.Component {
                     type: "email"
                   }}
                 />
-                <Button color="rose" onClick={(event) => {this.sumbitHandler(event)}}>
+                <Button
+                  color="rose"
+                  onClick={event => {
+                    this.sumbitHandler(event);
+                  }}
+                >
                   Submit
                 </Button>
               </form>
