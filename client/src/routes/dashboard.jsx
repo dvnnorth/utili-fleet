@@ -49,7 +49,7 @@ import DirectionsCar from "@material-ui/icons/DirectionsCar";
 
 //import form
 
-import RegularForms from "../views/Forms/RegularForms";
+import RegularForms from "../views/Forms/VehicleForm";
 
 // var pages = [
 //   {

@@ -26,6 +26,9 @@ export default {
   getAllVehiclesByVIN: VIN => {
     return axios.get(`/api/vehicle/${VIN}`);
   },
+  getAllVehiclesByDriver: () => {
+    return axios.get(`/api/vehicle/drivers`);
+  },
   postVehicles: data => {
     const vehicleData = {
       UnitNumber: data.UnitNumber,
@@ -76,6 +79,10 @@ export default {
 
   deleteVehicles: id => {
     return axios.delete(`/api/vehicle/${id}`);
+  },
+
+  searchVIN: VIN => {
+    return axios.get(`/api/vinCheck/${VIN}`);
   },
 
   /////////////////////////// END Vehicles/////////////////////////

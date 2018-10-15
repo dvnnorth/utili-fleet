@@ -5,8 +5,8 @@ import CheckInOutWizard from "components/Wizard/CheckInOutWizard.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 
-import Step1 from "./CheckOutSteps/Step1.jsx";
-import Step2 from "./CheckOutSteps/Step2.jsx";
+import Step1 from "./CheckOutSteps/Step1";
+import Step2 from "./DriverForm.jsx";
 import Step3 from "./CheckOutSteps/Step3.jsx";
 
 class CheckOutWizardContainer extends React.Component {
@@ -29,16 +29,16 @@ class CheckOutWizardContainer extends React.Component {
         <GridItem xs={12} sm={8}>
           <CheckInOutWizard
             steps={[
-              { stepName: "Vehicle", stepComponent: Step1, stepId: "vehicle" },
+              { stepName: "Client / Employee", stepComponent: Step1, stepId: "driverOrEmployee" },
               {
-                stepName: "Information",
+                stepName: "Find / Add Driver",
                 stepComponent: Step2,
-                stepId: "information"
+                stepId: "driverInformation"
               },
-              { stepName: "Damages", stepComponent: Step3, stepId: "damages" }
+              { stepName: "Notate Damages", stepComponent: Step3, stepId: "damages" }
             ]}
-            title="Vehicle Check-In"
-            subtitle="Complete the process to check a vehicle back in."
+            title="Vehicle Check-Out"
+            subtitle="Complete the process to check out a vehicle."
             captureState={this.captureState}
             submitData={this.submitData}
           />

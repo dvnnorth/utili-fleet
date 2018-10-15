@@ -16,7 +16,6 @@ const authenticationMiddleware = () => {
 };
 
 module.exports = app => {
-  let usernamed;
 
   ////////////////////////// Auth ///////////////////////////////////////
   //local strategy used for signing in users
@@ -41,7 +40,6 @@ module.exports = app => {
             if (err) return done(err);
             if (res) {
               //console.log(user);
-              usernamed = user.username;
               return done(null, user);
             }
             else {

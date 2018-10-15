@@ -8,6 +8,7 @@ import Email from "@material-ui/icons/Email";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
+import Button from "components/CustomButtons/Button.jsx";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -37,7 +38,8 @@ class Step1 extends React.Component {
       lastname: "",
       lastnameState: "",
       email: "",
-      emailState: ""
+      emailState: "",
+      driver: ""
     };
   }
   sendState() {
@@ -103,15 +105,19 @@ class Step1 extends React.Component {
     const { classes } = this.props;
     return (
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12}>
+        <GridItem xs={12}>
           <h4 className={classes.infoText}>
-            Let's start with the basic information (with validation)
+            Is the person internal or external?
           </h4>
         </GridItem>
-        <GridItem xs={12} sm={4}>
+        <GridItem xs={2} />
+        <GridItem xs={3}>
+          <Button>Internal</Button>
         </GridItem>
-        <GridItem xs={12} sm={6}>
-          <CustomInput
+        <GridItem xs={2} />
+        <GridItem xs={3}>
+          <Button>External</Button>
+          {/* <CustomInput
             success={this.state.firstnameState === "success"}
             error={this.state.firstnameState === "error"}
             labelText={
@@ -158,10 +164,11 @@ class Step1 extends React.Component {
                 </InputAdornment>
               )
             }}
-          />
+          /> */}
         </GridItem>
+        <GridItem xs={2} />
         <GridItem xs={12} sm={12} md={12} lg={10}>
-          <CustomInput
+          {/* <CustomInput
             success={this.state.emailState === "success"}
             error={this.state.emailState === "error"}
             labelText={
@@ -184,7 +191,7 @@ class Step1 extends React.Component {
                 </InputAdornment>
               )
             }}
-          />
+          /> */}
         </GridItem>
       </GridContainer>
     );
