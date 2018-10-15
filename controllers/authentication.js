@@ -29,12 +29,24 @@ module.exports = {
       })
       .catch(err => sendError(err, res));
   },
+  
+  success: (req, res) => {
+    db.Users.findOne({ where: { username: req.params.username} })
+      .then(response => {
+        res.statusCode = 200;
+        res.send(response);
+      })
+      .catch(err => sendError(err, res));
+  },
+  
 
   login: (req, res) => {
     console.log(req.body);
     if (req.isAuthenticated) {
+      console.log(req.body.username);
       db.Users.findOne({ where: { username: req.body.username } })
         .then(data => {
+          //console.log(req.body.username);
           res.statusCode = 200;
           res.send(data.dataValues.username);
         })

@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
         isAlphanumeric: true,
         len: [17, 17],
-        notContains: ['I', 'i', 'O', 'o', 'Q', 'q'],
+        notContains: ['I', 'i', 'o', 'Q', 'q'],
         isVIN(value) {
           // Make sure value is uppercase string
           value = value.toString().toUpperCase();

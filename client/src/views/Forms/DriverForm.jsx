@@ -38,23 +38,17 @@ class RegularForms extends React.Component {
     super(props);
     this.state = {
       redirect: false,
-      unitNumber: "",
-      VIN: "",
-      modelYear: "",
-      make: "",
-      model: "",
-      series: "",
-      vehicleType: "",
-      bodyClass: "",
-      exteriorColor: "",
-      interiorColor: "",
-      licensePlate: "",
-      mileage: "",
-      maxMileage: "",
-      netCost: "",
-      depreciationStart: "",
-      depreciationRateYearly: "",
-      tollTageSerial: ""
+      FirstName: "",
+      Address1: "",
+      Address2: "",
+      City: "",
+      State: "",
+      Zip: "",
+      Telephone: "",
+      DOB: "",
+      DriversLicense: "",
+      DriversLicenseExpiration: "",
+      Email: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnabled = this.handleChangeEnabled.bind(this);
@@ -65,58 +59,22 @@ class RegularForms extends React.Component {
   handleChangeEnabled(event) {
     this.setState({ selectedEnabled: event.target.value });
   }
-  handleToggle(value) {
-    const { checked } = this.state;
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
-
-    this.setState({
-      unitNumber: "",
-      VIN: "",
-      modelYear: "",
-      make: "",
-      model: "",
-      series: "",
-      vehicleType: "",
-      bodyClass: "",
-      exteriorColor: "",
-      interiorColor: "",
-      licensePlate: "",
-      mileage: "",
-      maxMileage: "",
-      netCost: "",
-      depreciationStart: "",
-      DepreciationEnd: "",
-      depreciationRateYearly: "",
-      tollTageSerial: ""
-    });
-  }
   sumbitHandler = event => {
     event.preventDefault();
     API.addVehicle({
-      UnitNumber: this.state.unitNumber,
-      VIN: this.state.VIN,
-      ModelYear: this.state.modelYear,
-      Make: this.state.make,
-      Model: this.state.model,
-      Series: this.state.series,
-      VehicleType: this.state.vehicleType,
-      BodyClass: this.state.bodyClass,
-      ExteriorColor: this.state.exteriorColor,
-      InteriorColor: this.state.interiorColor,
-      LicensePlate: this.state.licensePlate,
-      Mileage: this.state.mileage,
-      MaxMileage: this.state.maxMileage,
-      NetCost: this.state.netCost,
-      DepreciationStart: this.state.depreciationStart,
-      DepreciationEnd: this.state.depreciationRateYearly,
-      TollTagSerial: this.state.tollTageSerial
+      LastName: this.state.LastName,
+      FirstName: this.state.FirstName,
+      Address1: this.state.Address1,
+      Address2: this.state.Address2,
+      City: this.state.City,
+      State: this.state.State,
+      Zip: this.state.Zip,
+      Telephone: this.state.Telephone,
+      DOB: this.state.DOB,
+      DriversLicense: this.state.DriversLicense,
+      DriversLicenseExpiration: this.state.DriversLicenseExpiration,
+      Email: this.state.Email
     })
       .then(res => {
         console.log(res.data.id);
@@ -141,14 +99,14 @@ class RegularForms extends React.Component {
               <CardIcon color="rose">
                 <VehicleEntry />
               </CardIcon>
-              <h4 className={classes.cardIconTitle}>Add a vehicle</h4>
+              <h4 className={classes.cardIconTitle}>Add a new Driver</h4>
             </CardHeader>
             <CardBody>
               <form>
                 <CustomInput
-                  labelText="Unit Number"
-                  name="unitNumber"
-                  id="unitNumber"
+                  labelText="First Name"
+                  name="FirstName"
+                  id="FirstName"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -158,9 +116,9 @@ class RegularForms extends React.Component {
                   }}
                 />
                 <CustomInput
-                  labelText="VIN"
-                  name="VIN"
-                  id="VIN"
+                  labelText="Last Name"
+                  name="LastName"
+                  id="LastName"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -170,21 +128,9 @@ class RegularForms extends React.Component {
                   }}
                 />
                 <CustomInput
-                  labelText="Model Year"
-                  name="modelYear"
-                  id="modelYear"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  onChange={this.handleChange}
-                  inputProps={{
-                    placeholder: "mm/dd/yyyy"
-                  }}
-                />
-                <CustomInput
-                  labelText="Make"
-                  name="make"
-                  id="make"
+                  labelText="Address 1"
+                  name="Address1"
+                  id="Address1"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -194,9 +140,9 @@ class RegularForms extends React.Component {
                   }}
                 />
                 <CustomInput
-                  labelText="Model"
-                  name="model"
-                  id="model"
+                  labelText="Address 2"
+                  name="Address2"
+                  id="Address2"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -206,21 +152,9 @@ class RegularForms extends React.Component {
                   }}
                 />
                 <CustomInput
-                  labelText="Series"
-                  name="series"
-                  id="series"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  onChange={this.handleChange}
-                  inputProps={{
-                    placeholder: "Series"
-                  }}
-                />
-                <CustomInput
-                  labelText="Vehicle Type"
-                  name="vehicleType"
-                  id="vehicleType"
+                  labelText="City"
+                  name="City"
+                  id="City"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -230,21 +164,45 @@ class RegularForms extends React.Component {
                   }}
                 />
                 <CustomInput
-                  labelText="Body Class"
-                  name="bodyClass"
-                  id="bodyClass"
+                  labelText="State"
+                  name="State"
+                  id="State"
                   formControlProps={{
                     fullWidth: true
                   }}
                   onChange={this.handleChange}
                   inputProps={{
-                    placeholder: "Body Class"
+                    placeholder: "Required"
                   }}
                 />
                 <CustomInput
-                  labelText="Exterior Color"
-                  name="exteriorColor"
-                  id="exteriorColor"
+                  labelText="Zip"
+                  name="Zip"
+                  id="Zip"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  onChange={this.handleChange}
+                  inputProps={{
+                    placeholder: "required"
+                  }}
+                />
+                <CustomInput
+                  labelText="Telephone"
+                  name="Telephone"
+                  id="Telephone"
+                  formControlProps={{
+                    fullWidth: true
+                  }}
+                  onChange={this.handleChange}
+                  inputProps={{
+                    placeholder: "Required"
+                  }}
+                />
+                <CustomInput
+                  labelText="Date of Birth"
+                  name="DOB"
+                  id="DOB"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -253,9 +211,9 @@ class RegularForms extends React.Component {
                   }}
                 />
                 <CustomInput
-                  labelText="Interior Color"
-                  name="interiorColor"
-                  id="interiorColor"
+                  labelText="Drivers License"
+                  name="DriversLicense"
+                  id="DriversLicense"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -265,9 +223,9 @@ class RegularForms extends React.Component {
                   }}
                 />
                 <CustomInput
-                  labelText="License Plate"
-                  name="licensePlate"
-                  id="licensePlate"
+                  labelText="Drivers License Expiration"
+                  name="DriversLicenseExpiration"
+                  id="DriversLicenseExpiration"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -289,75 +247,15 @@ class RegularForms extends React.Component {
                   }}
                 />
                 <CustomInput
-                  labelText="Max Mileage"
-                  name="maxMileage"
-                  id="maxMileage"
+                  labelText="Email"
+                  name="Email"
+                  id="Email"
                   formControlProps={{
                     fullWidth: true
                   }}
                   onChange={this.handleChange}
                   inputProps={{
-                    placeholder: "Max Mileage"
-                  }}
-                />
-                <CustomInput
-                  labelText="Net Cost"
-                  name="netCost"
-                  id="netCost"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  onChange={this.handleChange}
-                  inputProps={{
-                    placeholder: "Decimal"
-                  }}
-                />
-                <CustomInput
-                  labelText="Depreciation Start"
-                  name="depreciationStart"
-                  id="depreciationStart"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  onChange={this.handleChange}
-                  inputProps={{
-                    placeholder: "mm/dd/yyyy"
-                  }}
-                />
-                  <CustomInput
-                  labelText="Depreciation End"
-                  name="depreciationEnd"
-                  id="depreciationEnd"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  onChange={this.handleChange}
-                  inputProps={{
-                    placeholder: "mm/dd/yyyy"
-                  }}
-                />
-                <CustomInput
-                  labelText="Depreciation Rate Yearly"
-                  name="depreciationRateYearly"
-                  id="depreciationRateYearly"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  onChange={this.handleChange}
-                  inputProps={{
-                    placeholder: "Decimal"
-                  }}
-                />
-                <CustomInput
-                  labelText="Toll Tag Serial"
-                  name="tollTageSerial"
-                  id="tollTageSerial"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  onChange={this.handleChange}
-                  inputProps={{
-                    type: "email"
+                    placeholder: "Required"
                   }}
                 />
                 <Button color="rose" onClick={(event) => {this.sumbitHandler(event)}}>

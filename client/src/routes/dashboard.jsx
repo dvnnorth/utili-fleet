@@ -47,6 +47,10 @@ import DirectionsCar from "@material-ui/icons/DirectionsCar";
 // import Timeline from "@material-ui/icons/Timeline";
 // import DateRange from "@material-ui/icons/DateRange";
 
+//import form
+
+import RegularForms from "../views/Forms/RegularForms";
+
 // var pages = [
 //   {
 //     path: "/timeline-page",
@@ -112,7 +116,7 @@ var dashRoutes = [
         path: "/vehicles/add",
         name: "Add",
         mini: "A",
-        component: Dashboard
+        component: RegularForms
       },
       {
         path: "/vehicles/view",

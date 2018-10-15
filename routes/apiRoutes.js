@@ -16,6 +16,7 @@ const authenticationMiddleware = () => {
 };
 
 module.exports = app => {
+  let usernamed;
 
   ////////////////////////// Auth ///////////////////////////////////////
   //local strategy used for signing in users
@@ -40,6 +41,7 @@ module.exports = app => {
             if (err) return done(err);
             if (res) {
               //console.log(user);
+              usernamed = user.username;
               return done(null, user);
             }
             else {
@@ -74,14 +76,14 @@ module.exports = app => {
 
   //////////////////////// Vehicles /////////////////////////////////////////////
   // Get all vehicles from the database
-  app.get('/api/vehicles', authenticationMiddleware(), controller.vehicles.getAllVehicles);
+  app.get('/api/vehicles', /*authenticationMiddleware(),*/ controller.vehicles.getAllVehicles);
 
   app.post('/api/vehicle', authenticationMiddleware(), controller.vehicles.getVehicleSearch);
 
   app.get('/api/vehicle/:VIN', authenticationMiddleware(), controller.vehicles.getVehicleByVIN);
 
   // Post a vehicle into the database
-  app.post('/api/vehicles', authenticationMiddleware(), controller.vehicles.createVehicle);
+  app.post('/api/vehicles', /*authenticationMiddleware(),*/ controller.vehicles.createVehicle);
 
   // Update a vehicle into the database
   app.put('/api/vehicle/:id', authenticationMiddleware(), controller.vehicles.updateVehicle);

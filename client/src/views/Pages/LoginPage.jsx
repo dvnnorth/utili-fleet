@@ -14,6 +14,8 @@ import Typography from "@material-ui/core/Typography";
 import PermIdentity from "@material-ui/icons/PermIdentity";
 // import LockOutline from "@material-ui/icons/LockOutline";
 
+import { Redirect } from "react-router-dom";
+
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
@@ -69,6 +71,9 @@ class LoginPage extends React.Component {
     this.setState({ [event.target.getAttribute("id")]: event.target.value });
   };
   render() {
+    if (this.state.toDashboard === true) {
+      return <Redirect to="/dashboard" />;
+    }
     const { classes } = this.props;
     return (
       <div className={classes.container}>

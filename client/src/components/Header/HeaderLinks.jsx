@@ -1,7 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 // import { Manager, Target, Popper } from "react-popper";
+
+import axios from "axios";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -31,7 +34,8 @@ import headerLinksStyle from "assets/jss/material-dashboard-pro-react/components
 
 class HeaderLinks extends React.Component {
   state = {
-    open: false
+    open: false,
+    toDashboard: true
   };
   handleClick = () => {
     this.setState({ open: !this.state.open });
@@ -39,7 +43,17 @@ class HeaderLinks extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+  logOff = () => {
+    axios.get(`/api/logout`).then(response => {
+      console.log(response);
+        this.setState({ toDashboard: false });
+        console.log(this.state);
+    });
+  };
   render() {
+    if (this.state.toDashboard === false) {
+      return <Redirect to="/" />;
+    }
     const { classes, rtlActive } = this.props;
     // const { open } = this.state;
     // const searchButton =
@@ -73,6 +87,9 @@ class HeaderLinks extends React.Component {
           muiClasses={{
             label: rtlActive ? classes.labelRTL : ""
           }}
+<<<<<<< HEAD
+          onClick={this.logOff}
+=======
           onClick={() =>
             API.logout().then(response => {
               let url =
@@ -83,6 +100,7 @@ class HeaderLinks extends React.Component {
               window.location = url;
             })
           }
+>>>>>>> 59c4d4e792b5ea69218aaa6532c3fd7de6fb0bc2
         >
           <LogOff
             className={
@@ -91,7 +109,7 @@ class HeaderLinks extends React.Component {
               (rtlActive
                 ? classes.links + " " + classes.linksRTL
                 : classes.links)
-            }
+            }          
           />
           <Hidden mdUp implementation="css">
             <span className={classes.linkText}>
