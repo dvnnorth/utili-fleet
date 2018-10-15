@@ -158,7 +158,8 @@ const cardStyle = {
   },
   cardLogin: {
     transform: "translate3d(0, 0, 0)",
-    transition: "all 300ms linear"
+    transition: "all 300ms linear",
+    background: "rgba(0, 0, 0, 0.65)"
   }
 };
 

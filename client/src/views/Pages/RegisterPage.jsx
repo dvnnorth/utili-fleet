@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import axios from "axios";
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputAdornment from "@material-ui/core/InputAdornment";
@@ -48,9 +50,25 @@ class RegisterPage extends React.Component {
     }
 
     this.setState({
-      checked: newChecked
+      checked: newChecked,
+      username: "",
+      password: ""
     });
   }
+  handleInputChange = (event) => {
+    const {name, value} = event.target;
+    this.setState({ [name] : value}); 
+  };
+  submitHandler = (event) => {
+    console.log(this.state);
+    axios.post('/api/register', {
+      username: this.state.username,
+      password: this.state.password
+    }).then(
+      response => {
+        console.log(response);
+      });
+  };
   render() {
     const { classes } = this.props;
     return (
@@ -103,6 +121,7 @@ class RegisterPage extends React.Component {
                           fullWidth: true,
                           className: classes.customFormControlClasses
                         }}
+                        onChange={this.handleInputChange}
                         inputProps={{
                           startAdornment: (
                             <InputAdornment
@@ -120,6 +139,8 @@ class RegisterPage extends React.Component {
                           fullWidth: true,
                           className: classes.customFormControlClasses
                         }}
+                        name="username"
+                        onChange={this.handleInputChange}
                         inputProps={{
                           startAdornment: (
                             <InputAdornment
@@ -137,6 +158,8 @@ class RegisterPage extends React.Component {
                           fullWidth: true,
                           className: classes.customFormControlClasses
                         }}
+                        name="password"
+                        onChange={this.handleInputChange}
                         inputProps={{
                           startAdornment: (
                             <InputAdornment
@@ -178,7 +201,7 @@ class RegisterPage extends React.Component {
                         }
                       />
                       <div className={classes.center}>
-                        <Button round color="primary">
+                        <Button round color="primary" onClick={this.submitHandler}>
                           Get started
                         </Button>
                       </div>

@@ -1,39 +1,96 @@
-import React, { Component } from 'react';
-//import SignUp from './components/SignUp';
-import axios from 'axios';
-import API from './utils/API';
+import React, { Component } from "react";
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch } from "react-router-dom";
 
-//import ScannerDiv from "./components/Scanner";
-import Dashboard from "views/Dashboard/Dashboard.jsx";
+import dashboardRoutes from "routes/dashboard.jsx";
 
+import Pages from "layouts/Pages.jsx";
+import Dashboard from "layouts/Dashboard.jsx";
+
+import "assets/scss/material-dashboard-pro-react.css?v=1.4.0";
+
+const hist = createBrowserHistory();
 
 class App extends Component {
-  state = { 
-    isAuthenticated: false,
-    username:'' ,
-    email: '',
-    password: '',
-    user_id: ''
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAuthenticated: false
+    };
   }
-
-  login = () => {
-    API.login (this.state.username, this.state.password);
-  }
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
-
+  setAuth = () => {
+    this.setState({ isAuthenticated: true });
   };
-
-  formPost = event => {
-    event.preventDefault();
-
-    console.log('STATE AT AXIOS POST: ', this.state);
-    axios.post('/register', this.state);
-  };
-
   render() {
-    return <Dashboard />;
+    return (
+      <Router history={hist}>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            component={() => (
+              <Pages
+                setAuth={this.setAuth}
+                isAuth={this.state.isAuthenticated}
+              />
+            )}
+          />
+          <Route
+            path="/dashboard"
+            component={
+              this.state.isAuthenticated
+                ? Dashboard
+                : () => (
+                    <Pages
+                      setAuth={this.setAuth}
+                      isAuth={this.state.isAuthenticated}
+                    />
+                  )
+            }
+          />
+          {dashboardRoutes.map((prop, key) => {
+            if (prop.views) {
+              return prop.views.map((prop, key) => {
+                return (
+                  <Route
+                    exact
+                    path={prop.path}
+                    component={
+                      this.state.isAuthenticated
+                        ? Dashboard
+                        : () => (
+                            <Pages
+                              setAuth={this.setAuth}
+                              isAuth={this.state.isAuthenticated}
+                            />
+                          )
+                    }
+                    key={key}
+                  />
+                );
+              });
+            }
+            return (
+              <Route
+                exact
+                path={prop.path}
+                component={
+                  this.state.isAuthenticated
+                    ? Dashboard
+                    : () => (
+                        <Pages
+                          setAuth={this.setAuth}
+                          isAuth={this.state.isAuthenticated}
+                        />
+                      )
+                }
+                key={key}
+              />
+            );
+          })}
+        </Switch>
+      </Router>
+    );
   }
 }
 

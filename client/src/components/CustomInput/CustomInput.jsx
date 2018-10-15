@@ -76,6 +76,8 @@ function CustomInput({ ...props }) {
           underline: underlineClasses
         }}
         id={id}
+        onChange={props.onChange}
+        name={props.name}
         {...inputProps}
       />
       {helpText !== undefined ? (
