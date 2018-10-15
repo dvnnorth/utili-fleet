@@ -38,7 +38,7 @@ import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
-// import API from "../";
+import API from "../../utils/API";
 
 import {
   dailySalesChart,
@@ -73,25 +73,33 @@ var mapData = {
   US: 2920
 };
 
+
+// function countCarDriver () {
+// API.getVehiclesByDriver().then(response => {
+//   console.log(response.data);
+//   const count = response.data.length;
+//   console.log(response.data.length);
+//   return count;
+//   });
+// };
+
 class Dashboard extends React.Component {
   state = {
     value: 0,
     carsWithDrivers: 0
   };
+  
 
-  // componentDidMount() {
-  //   API.getVehiclesByDriver().then(response => {
-  //     console.log(response.data);
-      // const cars = response.data.map(dataValue => {
-      //   let dataRow = [];
-      //   for (let key in dataValue) {
-      //     dataRow.push(dataValue[key]);
-      //   }
-      //   return dataRow;
-      // });
-      // this.setState({ vehicles: rows });
-  //   });
-  // }
+  componentDidMount() {
+    // const carsWithDrivers = countCarDriver();
+  
+    // API.getVehiclesByDriver().then(response => {
+    //   console.log(response.data);
+    //   const count = response.data.length;
+    //   console.log(response.data.length);
+    //   return count;
+    //   });
+  };
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -112,16 +120,16 @@ class Dashboard extends React.Component {
                 </CardIcon>
                 <p className={classes.cardCategory}>Vehicle Utilization</p>
                 <h3 className={classes.cardTitle}>
-                  6/1000 
+                  5/1000 
                 </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <Danger>
+                  {/* <Danger>
                     <Warning />
-                  </Danger>
+                  </Danger> */}
                   <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Get more space
+                    View Vehicles
                   </a>
                 </div>
               </CardFooter>
@@ -133,8 +141,8 @@ class Dashboard extends React.Component {
                 <CardIcon color="success">
                   <Store />
                 </CardIcon>
-                <p className={classes.cardCategory}>Revenue</p>
-                <h3 className={classes.cardTitle}>$34,245</h3>
+                <p className={classes.cardCategory}>Total Assets</p>
+                <h3 className={classes.cardTitle}>$21,245,099</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -150,13 +158,13 @@ class Dashboard extends React.Component {
                 <CardIcon color="danger">
                   <Icon>info_outline</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Fixed Issues</p>
-                <h3 className={classes.cardTitle}>75</h3>
+                <p className={classes.cardCategory}>Vehicles in Service</p>
+                <h3 className={classes.cardTitle}>9</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
                   <LocalOffer />
-                  Tracked from Github
+                  View Vehicle Inventory
                 </div>
               </CardFooter>
             </Card>
@@ -164,11 +172,11 @@ class Dashboard extends React.Component {
           <GridItem xs={12} sm={6} md={6} lg={3}>
             <Card>
               <CardHeader color="info" stats icon>
-                <CardIcon color="info">
-                  <i className="fab fa-twitter" />
+                <CardIcon color="warning">
+                  <Icon>content_copy</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Followers</p>
-                <h3 className={classes.cardTitle}>+245</h3>
+                <p className={classes.cardCategory}>Purchases</p>
+                <h3 className={classes.cardTitle}>+25</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -458,21 +466,19 @@ class Dashboard extends React.Component {
                 </div>
                 <h4 className={classes.cardProductTitle}>
                   <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Cozy 5 Stars Apartment
+                    Toyota Corolla
                   </a>
                 </h4>
                 <p className={classes.cardProductDesciprion}>
-                  The place is close to Barceloneta Beach and bus stop just 2
-                  min by walk and near to "Naviglio" where you can enjoy the
-                  main night life in Barcelona.
+                 Best Selling Vehicle
                 </p>
               </CardBody>
               <CardFooter product>
                 <div className={classes.price}>
-                  <h4>$899/night</h4>
+                  <h4>$39/Day</h4>
                 </div>
                 <div className={`${classes.stats} ${classes.productStats}`}>
-                  <Place /> Barcelona, Spain
+                  <Place /> Houston, TX
                 </div>
               </CardFooter>
             </Card>
@@ -519,21 +525,19 @@ class Dashboard extends React.Component {
                 </div>
                 <h4 className={classes.cardProductTitle}>
                   <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Office Studio
+                    Honda Civic
                   </a>
                 </h4>
                 <p className={classes.cardProductDesciprion}>
-                  The place is close to Metro Station and bus stop just 2 min by
-                  walk and near to "Naviglio" where you can enjoy the night life
-                  in London, UK.
+                  Most Reliable Vehicle
                 </p>
               </CardBody>
               <CardFooter product>
                 <div className={classes.price}>
-                  <h4>$1.119/night</h4>
+                  <h4>$39/Day</h4>
                 </div>
                 <div className={`${classes.stats} ${classes.productStats}`}>
-                  <Place /> London, UK
+                  <Place /> Houston, TX
                 </div>
               </CardFooter>
             </Card>
@@ -580,21 +584,19 @@ class Dashboard extends React.Component {
                 </div>
                 <h4 className={classes.cardProductTitle}>
                   <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Beautiful Castle
+                    Ford F150
                   </a>
                 </h4>
                 <p className={classes.cardProductDesciprion}>
-                  The place is close to Metro Station and bus stop just 2 min by
-                  walk and near to "Naviglio" where you can enjoy the main night
-                  life in Milan.
+                  Best Selling Pick-Up
                 </p>
               </CardBody>
               <CardFooter product>
                 <div className={classes.price}>
-                  <h4>$459/night</h4>
+                  <h4>$69/Day</h4>
                 </div>
                 <div className={`${classes.stats} ${classes.productStats}`}>
-                  <Place /> Milan, Italy
+                  <Place /> Houston, TX
                 </div>
               </CardFooter>
             </Card>

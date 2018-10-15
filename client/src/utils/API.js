@@ -24,6 +24,9 @@ export default {
   getAllVehiclesByVIN: VIN => {
     return axios.get(`/api/vehicle/${VIN}`);
   },
+  getAllVehiclesByDriver: () => {
+    return axios.get(`/api/vehicle/drivers`);
+  },
   postVehicles: data => {
     const vehicleData = {
       UnitNumber: data.UnitNumber,
