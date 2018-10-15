@@ -34,9 +34,10 @@ export default class Scanner extends Component {
         },
         numOfWorkers: 8,
         decoder: {
-          readers:
-            // "code_39_vin_reader",
+          readers: [
+            "code_39_vin_reader",
             "upc_reader",
+          ],
           debug: {
             drawBoundingBox: false,
             showFrequency: false,
@@ -47,7 +48,7 @@ export default class Scanner extends Component {
         },
         locate: true
       },
-      function(err) {
+      function (err) {
         if (err) {
           return console.log(err);
         }
@@ -57,7 +58,7 @@ export default class Scanner extends Component {
 
     Quagga.onDetected(this._onDetected);
 
-    Quagga.onProcessed(function(result) {
+    Quagga.onProcessed(function (result) {
       var drawingCtx = Quagga.canvas.ctx.overlay,
         drawingCanvas = Quagga.canvas.dom.overlay;
 
@@ -70,10 +71,10 @@ export default class Scanner extends Component {
             parseInt(drawingCanvas.getAttribute("height"))
           );
           result.boxes
-            .filter(function(box) {
+            .filter(function (box) {
               return box !== result.box;
             })
-            .forEach(function(box) {
+            .forEach(function (box) {
               Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
                 color: "green",
                 lineWidth: 2
