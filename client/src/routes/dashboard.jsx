@@ -19,7 +19,7 @@ import Claims from "views/Tables/Claims.jsx";
 import Employees from "views/Tables/Employees.jsx";
 import Damages from "views/Tables/Damages.jsx";
 import Maintenance from "views/Tables/Maintenance.jsx";
-import VehicleList from "views/Tables/VehicleList.jsx";
+import Vehicles from "views/Tables/Vehicles.jsx";
 // import GoogleMaps from "views/Maps/GoogleMaps.jsx";
 // import FullScreenMap from "views/Maps/FullScreenMap.jsx";
 // import VectorMap from "views/Maps/VectorMap.jsx";
@@ -184,10 +184,10 @@ var dashRoutes = [
         component: Maintenance
       },
       {
-        path: "/forms/vehiclelist",
-        name: "Vehicle List",
+        path: "/forms/vehicles",
+        name: "Vehicles",
         mini: "VL",
-        component: VehicleList
+        component: Vehicles
       }
     ]
   },
