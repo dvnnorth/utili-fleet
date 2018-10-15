@@ -211,7 +211,7 @@ class Dashboard extends React.Component {
                         ],
                         [
                           // <img src={de_flag} alt="us_flag" />,
-                          "Katy",
+                          "Austin",
                           "1.300",
                           "20.43%"
                         ],
@@ -235,7 +235,7 @@ class Dashboard extends React.Component {
                         ],
                         [
                           // <img src={br_flag} alt="us_flag" />,
-                          "Austin",
+                          "Galveston",
                           "550",
                           "4.34%"
                         ]
