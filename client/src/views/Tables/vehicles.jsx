@@ -44,20 +44,20 @@ class ReactTables extends Component {
             modelYear: prop[3],
             make: prop[4],
             model: prop[5],
-            // series: prop[6],
+            series: prop[6],
             vehicleType: prop[7],
             bodyClass: prop[8],
             exteriorColor: prop[9],
-            // interiorColor: prop[10],
+            interiorColor: prop[10],
             licencePlate: prop[11],
             mileage: prop[12],
-            // maxMileage: prop[9],
-            // MaxMileage: prop[10],
-            // NetCost: prop[13],
-            // DepretiationStart: prop[14],
-            // DepretiationEnd: prop[15],
-            // DepretiationRateYearly: prop[16],
-            // TollTagSerial: prop[17],
+            maxMileage: prop[9],
+            MaxMileage: prop[10],
+            NetCost: prop[13],
+            DepretiationStart: prop[14],
+            DepretiationEnd: prop[15],
+            DepretiationRateYearly: prop[16],
+            TollTagSerial: prop[17],
             actions: (
               // we've added some custom button actions
               <div className="actions-right">
@@ -113,10 +113,10 @@ class ReactTables extends Component {
             Header: "Model",
             accessor: "model",
           },
-          // {
-          //   Header: "Series",
-          //   accessor: "series"
-          // },
+          {
+            Header: "Series",
+            accessor: "series"
+          },
           {
             Header: "VehicleType",
             accessor: "vehicleType"
@@ -129,10 +129,10 @@ class ReactTables extends Component {
             Header: "ExtColor",
             accessor: "exteriorColor"
           },
-          // {
-          //   Header: "IntColor",
-          //   accessor: "interiorColor"
-          // },
+          {
+            Header: "IntColor",
+            accessor: "interiorColor"
+          },
           {
             Header: "LicencePlate",
             accessor: "licencePlate"
@@ -141,34 +141,34 @@ class ReactTables extends Component {
             Header: "Mileage",
             accessor: "mileage"
           },
-          // {
-          //   Header: "MaxMileage",
-          //   accessor: "MaxMileage"
-          // },
-          // {
-          //   Header: "VehicleType",
-          //   accessor: "VehicleType"
-          // },
-          // {
-          //   Header: "NetCost",
-          //   accessor: "NetCost"
-          // },
-          // {
-          //   Header: "DepretiationStart",
-          //   accessor: "DepretiationStart"
-          // },
-          // {
-          //   Header: "DepretiationEnd",
-          //   accessor: "DepretiationEnd"
-          // },
-          // {
-          //   Header: "DepretiationRateYearly",
-          //   accessor: "DepretiationRateYearly"
-          // },
-          // {
-          //   Header: "TollTagSerial",
-          //   accessor: "TollTagSerial"
-          // },
+          {
+            Header: "MaxMileage",
+            accessor: "MaxMileage"
+          },
+          {
+            Header: "VehicleType",
+            accessor: "VehicleType"
+          },
+          {
+            Header: "NetCost",
+            accessor: "NetCost"
+          },
+          {
+            Header: "DepretiationStart",
+            accessor: "DepretiationStart"
+          },
+          {
+            Header: "DepretiationEnd",
+            accessor: "DepretiationEnd"
+          },
+          {
+            Header: "DepretiationRateYearly",
+            accessor: "DepretiationRateYearly"
+          },
+          {
+            Header: "TollTagSerial",
+            accessor: "TollTagSerial"
+          },
           {
             Header: "Actions",
             accessor: "actions",

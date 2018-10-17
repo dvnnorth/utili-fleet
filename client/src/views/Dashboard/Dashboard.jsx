@@ -99,11 +99,11 @@ class Dashboard extends React.Component {
         const count = response.data.length;
         return this.setState({ carsWithDrivers: count })
       });
-        API.getAllVehicles()
-          .then(response => {
-            const count1 = response.data.length;
-            return this.setState({ totalcars: count1 })
-          })
+    API.getAllVehicles()
+      .then(response => {
+        const count1 = response.data.length;
+        return this.setState({ totalcars: count1 })
+      })
   };
 
   handleChange = (event, value) => {
