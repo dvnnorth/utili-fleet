@@ -86,19 +86,24 @@ var mapData = {
 class Dashboard extends React.Component {
   state = {
     value: 0,
-    carsWithDrivers: 0
+    carsWithDrivers: 0,
+    totalcars: 0
   };
-  
 
-  componentDidMount() {
+
+  componentWillMount() {
     // const carsWithDrivers = countCarDriver();
-  
-    // API.getVehiclesByDriver().then(response => {
-    //   console.log(response.data);
-    //   const count = response.data.length;
-    //   console.log(response.data.length);
-    //   return count;
-    //   });
+
+    API.getAllVehiclesByDriver()
+      .then(response => {
+        const count = response.data.length;
+        return this.setState({ carsWithDrivers: count })
+      });
+        API.getAllVehicles()
+          .then(response => {
+            const count1 = response.data.length;
+            return this.setState({ totalcars: count1 })
+          })
   };
 
   handleChange = (event, value) => {
@@ -120,7 +125,7 @@ class Dashboard extends React.Component {
                 </CardIcon>
                 <p className={classes.cardCategory}>Vehicle Utilization</p>
                 <h3 className={classes.cardTitle}>
-                  5/1000 
+                  {this.state.carsWithDrivers}/{this.state.totalcars}
                 </h3>
               </CardHeader>
               <CardFooter stats>
@@ -470,7 +475,7 @@ class Dashboard extends React.Component {
                   </a>
                 </h4>
                 <p className={classes.cardProductDesciprion}>
-                 Best Selling Vehicle
+                  Best Selling Vehicle
                 </p>
               </CardBody>
               <CardFooter product>

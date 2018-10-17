@@ -76,7 +76,7 @@ module.exports = app => {
 
   app.get('/api/vehicle/:VIN', /*authenticationMiddleware(),*/ controller.vehicles.getVehicleByVIN);
 
-  app.get('/api/vehicles/drivers', /*authenticationMiddleware(),*/ controller.vehicles.getVehiclesByDriver);
+  app.get('/api/vehicles/driverss', /*authenticationMiddleware(),*/ controller.vehicles.getVehiclesByDriver);
 
   // Post a vehicle into the database
   app.post('/api/vehicles', /*authenticationMiddleware(),*/ controller.vehicles.createVehicle);
