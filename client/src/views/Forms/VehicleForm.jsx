@@ -26,6 +26,8 @@ import CardHeader from "components/Card/CardHeader.jsx";
 import CardText from "components/Card/CardText.jsx";
 import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import Scanner from "components/Scanner/Scanner.js";
+import ScannerDiv from "components/Scanner/ScannerDiv.js";
 
 // Import API
 import API from "utils/API";
@@ -128,13 +130,39 @@ class RegularForms extends React.Component {
         this.setState({ errorMessage: "Login Failed" + err.toString() })
       );
   };
+  searchAndFill = (event) => {
+    event.preventDefault();
+    let VIN = this.state.VIN;
+    console.log('execute search and fill');
+    console.log(VIN);
+    API.searchVIN(VIN)
+      .then(results => {
+        let carInfo = results.data.Results[0]
+        this.setState({
+          modelYear: carInfo.ModelYear,
+          make: carInfo.Make,
+          model: carInfo.Model,
+          series: carInfo.Series,
+          vehicleType: carInfo.VehicleType,
+          bodyClass: carInfo.BodyClass
+        });
+      })
+      .catch(err => console.error(err));
+  };
+
   render() {
     const { classes } = this.props;
     if (this.state.redirect) {
       return <Redirect to="/dashboard" />;
     }
     return (
+
       <GridContainer justify="center">
+        <GridItem xs={12} sm={8}>
+          <ScannerDiv>
+            <Scanner />
+          </ScannerDiv>
+        </GridItem>
         <GridItem xs={12} sm={8}>
           <Card>
             <CardHeader color="rose" icon>
@@ -146,9 +174,9 @@ class RegularForms extends React.Component {
             <CardBody>
               <form>
                 <CustomInput
-                  labelText="Unit Number"
-                  name="unitNumber"
-                  id="unitNumber"
+                  labelText="VIN"
+                  name="VIN"
+                  id="VIN"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -157,10 +185,11 @@ class RegularForms extends React.Component {
                     placeholder: "required"
                   }}
                 />
+                <Button color="rose" onClick={this.searchAndFill}>Search VIN...</Button>
                 <CustomInput
-                  labelText="VIN"
-                  name="VIN"
-                  id="VIN"
+                  labelText="Unit Number"
+                  name="unitNumber"
+                  id="unitNumber"
                   formControlProps={{
                     fullWidth: true
                   }}
@@ -180,6 +209,7 @@ class RegularForms extends React.Component {
                   inputProps={{
                     placeholder: "mm/dd/yyyy"
                   }}
+                  value={this.state.modelYear}
                 />
                 <CustomInput
                   labelText="Make"
@@ -192,6 +222,7 @@ class RegularForms extends React.Component {
                   inputProps={{
                     placeholder: "required"
                   }}
+                  value={this.state.make}
                 />
                 <CustomInput
                   labelText="Model"
@@ -204,6 +235,7 @@ class RegularForms extends React.Component {
                   inputProps={{
                     placeholder: "required"
                   }}
+                  value={this.state.model}
                 />
                 <CustomInput
                   labelText="Series"
@@ -216,6 +248,7 @@ class RegularForms extends React.Component {
                   inputProps={{
                     placeholder: "Series"
                   }}
+                  value={this.state.series}
                 />
                 <CustomInput
                   labelText="Vehicle Type"
@@ -228,6 +261,7 @@ class RegularForms extends React.Component {
                   inputProps={{
                     placeholder: "required"
                   }}
+                  value={this.state.vehicleType}
                 />
                 <CustomInput
                   labelText="Body Class"
@@ -240,6 +274,7 @@ class RegularForms extends React.Component {
                   inputProps={{
                     placeholder: "Body Class"
                   }}
+                  value={this.state.bodyClass}
                 />
                 <CustomInput
                   labelText="Exterior Color"

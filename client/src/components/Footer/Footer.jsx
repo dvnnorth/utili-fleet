@@ -47,7 +47,8 @@ function Footer({ ...props }) {
               </a>
             </ListItem> */}
             <ListItem className={classes.inlineBlock}>
-              <Link to="/admin" className={block}>
+              {/* the admin link to should change to /admin when admin page is made */}
+              <Link to="/dashboard" className={block}>
                 Admin
               </Link>
             </ListItem>
