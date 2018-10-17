@@ -16,6 +16,7 @@ import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 // import PictureUpload from "components/CustomUpload/PictureUpload.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
+import Button from "components/CustomButtons/Button.jsx";
 
 import API from "utils/API";
 
@@ -87,7 +88,7 @@ class Step1 extends React.Component {
         }
         break;
       case "LicensePlate":
-        
+
         break;
       default:
         break;
@@ -148,6 +149,8 @@ class Step1 extends React.Component {
             }}
           />
         </GridItem>
+
+        <Button>Search for Vehicle</Button>
       </GridContainer>
     );
   }

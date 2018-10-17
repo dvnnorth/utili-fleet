@@ -40,6 +40,9 @@ import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
+import API from "../../utils/API";
+import { Redirect } from "react-router-dom";
+
 import {
   dailySalesChart,
   emailsSubscriptionChart,
@@ -50,17 +53,86 @@ import dashboardStyle from "assets/jss/material-dashboard-pro-react/views/dashbo
 
 import imagePlaceHolder from "assets/img/image_placeholder.jpg";
 
+var mapData = {
+  AU: 760,
+  BR: 550,
+  CA: 120,
+  DE: 1300,
+  FR: 540,
+  GB: 690,
+  GE: 200,
+  IN: 200,
+  RO: 600,
+  RU: 300,
+  US: 2920
+};
+
+// function countCarDriver () {
+// API.getVehiclesByDriver().then(response => {
+//   console.log(response.data);
+//   const count = response.data.length;
+//   console.log(response.data.length);
+//   return count;
+//   });
+// };
+
 class Dashboard extends React.Component {
   state = {
-    value: 0
+    value: 0,
+    carsWithDrivers: 0,
+    inService: "",
+    claims: "",
+    goToClaims: false,
+    goToDamages: false,
+    goToVehicles: false,
+
   };
+  
+
+  componentDidMount() {
+    // const carsWithDrivers = countCarDriver();
+  
+    // API.getVehiclesByDriver().then(response => {
+    //   console.log(response.data);
+    //   const count = response.data.length;
+    //   console.log(response.data.length);
+    //   return count;
+    //   });
+    API.getDamages().then( response => {
+      console.log(response.data);
+      this.setState({inService: response.data.length});
+    });
+    API.getClaims().then(response => {
+      console.log(response.data);
+      this.setState({claims: response.data.length});
+    });
+  };
+
   handleChange = (event, value) => {
     this.setState({ value });
   };
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+  handleClaims = () => {
+    this.setState({goToClaims: true});
+  };
+  handleDamages = () => {
+    this.setState({goToDamages: true});
+  };
+  handleVehicles = () => {
+    this.setState({goToVehicles: true});
+  };
   render() {
+    if(this.state.goToClaims){
+      return <Redirect to='/reports/claims' />
+    }
+    if(this.state.goToDamages){
+      return <Redirect to='/reports/damages' />
+    }
+    if(this.state.goToVehicles){
+      return <Redirect to='/reports/vehicles' />
+    }
     const { classes } = this.props;
     return (
       <div>
@@ -71,18 +143,18 @@ class Dashboard extends React.Component {
                 <CardIcon color="warning">
                   <Icon>content_copy</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Used Space</p>
+                <p className={classes.cardCategory}>Vehicle Utilization</p>
                 <h3 className={classes.cardTitle}>
-                  49/50 <small>GB</small>
+                  5/1000 
                 </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <Danger>
+                  {/* <Danger>
                     <Warning />
-                  </Danger>
-                  <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Get more space
+                  </Danger> */}
+                  <a href="#" onClick={(event) => {this.handleDamages(event)}}>
+                    View Vehicles
                   </a>
                 </div>
               </CardFooter>
@@ -94,8 +166,8 @@ class Dashboard extends React.Component {
                 <CardIcon color="success">
                   <Store />
                 </CardIcon>
-                <p className={classes.cardCategory}>Revenue</p>
-                <h3 className={classes.cardTitle}>$34,245</h3>
+                <p className={classes.cardCategory}>Total Assets</p>
+                <h3 className={classes.cardTitle}>$21,245,099</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -108,16 +180,16 @@ class Dashboard extends React.Component {
           <GridItem xs={12} sm={6} md={6} lg={3}>
             <Card>
               <CardHeader color="danger" stats icon>
-                <CardIcon color="danger">
+                <CardIcon color="danger" onClick={(event) => {this.handleDamages(event)}}>
                   <Icon>info_outline</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Fixed Issues</p>
-                <h3 className={classes.cardTitle}>75</h3>
+                <p className={classes.cardCategory}>Vehicles in Service</p>
+                <h3 className={classes.cardTitle}>{this.state.inService}/1000</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
                   <LocalOffer />
-                  Tracked from Github
+                  View Vehicle Inventory
                 </div>
               </CardFooter>
             </Card>
@@ -125,11 +197,11 @@ class Dashboard extends React.Component {
           <GridItem xs={12} sm={6} md={6} lg={3}>
             <Card>
               <CardHeader color="info" stats icon>
-                <CardIcon color="info">
-                  <i className="fab fa-twitter" />
+                <CardIcon color="warning" onClick={(event) => {this.handleClaims(event)}}>
+                  <Icon>content_copy</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Followers</p>
-                <h3 className={classes.cardTitle}>+245</h3>
+                <p className={classes.cardCategory}>Open Claims</p>
+                <h3 className={classes.cardTitle}>{this.state.claims}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -137,6 +209,96 @@ class Dashboard extends React.Component {
                   Just Updated
                 </div>
               </CardFooter>
+            </Card>
+          </GridItem>
+        </GridContainer>
+        <GridContainer>
+          <GridItem xs={12}>
+            <Card>
+              <CardHeader color="success" icon>
+                <CardIcon color="success">
+                  <Language />
+                </CardIcon>
+                <h4 className={classes.cardIconTitle}>
+                  Sales by Top Locations in the US
+                </h4>
+              </CardHeader>
+              <CardBody>
+                <GridContainer justify="space-between">
+                  <GridItem xs={12} sm={12} md={5}>
+                    <Table
+                      tableData={[
+                        [
+                          // <img src={us_flag} alt="us_flag" />,
+                          "Houston",
+                          "2.920",
+                          "53.23%"
+                        ],
+                        [
+                          // <img src={de_flag} alt="us_flag" />,
+                          "Austin",
+                          "1.300",
+                          "20.43%"
+                        ],
+                        [
+                          // <img src={au_flag} alt="us_flag" />,
+                          "Dallas",
+                          "760",
+                          "10.35%"
+                        ],
+                        [
+                          // <img src={gb_flag} alt="us_flag" />,
+                          "San Antonio",
+                          "690",
+                          "7.87%"
+                        ],
+                        [
+                          // <img src={ro_flag} alt="us_flag" />,
+                          "Fort Worth",
+                          "600",
+                          "5.94%"
+                        ],
+                        [
+                          // <img src={br_flag} alt="us_flag" />,
+                          "Galveston",
+                          "550",
+                          "4.34%"
+                        ]
+                      ]}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={6}>
+                    <VectorMap
+                      map={"world_mill"}
+                      backgroundColor="transparent"
+                      zoomOnScroll={false}
+                      containerStyle={{
+                        width: "100%",
+                        height: "280px"
+                      }}
+                      containerClassName="map"
+                      regionStyle={{
+                        initial: {
+                          fill: "#e4e4e4",
+                          "fill-opacity": 0.9,
+                          stroke: "none",
+                          "stroke-width": 0,
+                          "stroke-opacity": 0
+                        }
+                      }}
+                      series={{
+                        regions: [
+                          {
+                            values: mapData,
+                            scale: ["#AAAAAA", "#444444"],
+                            normalizeFunction: "polynomial"
+                          }
+                        ]
+                      }}
+                    />
+                  </GridItem>
+                </GridContainer>
+              </CardBody>
             </Card>
           </GridItem>
         </GridContainer>
@@ -329,21 +491,19 @@ class Dashboard extends React.Component {
                 </div>
                 <h4 className={classes.cardProductTitle}>
                   <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Cozy 5 Stars Apartment
+                    Toyota Corolla
                   </a>
                 </h4>
                 <p className={classes.cardProductDesciprion}>
-                  The place is close to Barceloneta Beach and bus stop just 2
-                  min by walk and near to "Naviglio" where you can enjoy the
-                  main night life in Barcelona.
+                 Best Selling Vehicle
                 </p>
               </CardBody>
               <CardFooter product>
                 <div className={classes.price}>
-                  <h4>$899/night</h4>
+                  <h4>$39/Day</h4>
                 </div>
                 <div className={`${classes.stats} ${classes.productStats}`}>
-                  <Place /> Barcelona, Spain
+                  <Place /> Houston, TX
                 </div>
               </CardFooter>
             </Card>
@@ -390,21 +550,19 @@ class Dashboard extends React.Component {
                 </div>
                 <h4 className={classes.cardProductTitle}>
                   <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Office Studio
+                    Honda Civic
                   </a>
                 </h4>
                 <p className={classes.cardProductDesciprion}>
-                  The place is close to Metro Station and bus stop just 2 min by
-                  walk and near to "Naviglio" where you can enjoy the night life
-                  in London, UK.
+                  Most Reliable Vehicle
                 </p>
               </CardBody>
               <CardFooter product>
                 <div className={classes.price}>
-                  <h4>$1.119/night</h4>
+                  <h4>$39/Day</h4>
                 </div>
                 <div className={`${classes.stats} ${classes.productStats}`}>
-                  <Place /> London, UK
+                  <Place /> Houston, TX
                 </div>
               </CardFooter>
             </Card>
@@ -451,21 +609,19 @@ class Dashboard extends React.Component {
                 </div>
                 <h4 className={classes.cardProductTitle}>
                   <a href="#pablo" onClick={e => e.preventDefault()}>
-                    Beautiful Castle
+                    Ford F150
                   </a>
                 </h4>
                 <p className={classes.cardProductDesciprion}>
-                  The place is close to Metro Station and bus stop just 2 min by
-                  walk and near to "Naviglio" where you can enjoy the main night
-                  life in Milan.
+                  Best Selling Pick-Up
                 </p>
               </CardBody>
               <CardFooter product>
                 <div className={classes.price}>
-                  <h4>$459/night</h4>
+                  <h4>$69/Day</h4>
                 </div>
                 <div className={`${classes.stats} ${classes.productStats}`}>
-                  <Place /> Milan, Italy
+                  <Place /> Houston, TX
                 </div>
               </CardFooter>
             </Card>

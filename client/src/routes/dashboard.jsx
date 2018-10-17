@@ -20,6 +20,7 @@ import Employees from "views/Tables/Employees.jsx";
 import Damages from "views/Tables/Damages.jsx";
 import Maintenance from "views/Tables/Maintenance.jsx";
 import Vehicles from "views/Tables/Vehicles.jsx";
+import Drivers from "views/Tables/Drivers.jsx";
 // import GoogleMaps from "views/Maps/GoogleMaps.jsx";
 // import FullScreenMap from "views/Maps/FullScreenMap.jsx";
 // import VectorMap from "views/Maps/VectorMap.jsx";
@@ -48,7 +49,7 @@ import DirectionsCar from "@material-ui/icons/DirectionsCar";
 
 //import form
 
-import RegularForms from "../views/Forms/RegularForms";
+import RegularForms from "../views/Forms/VehicleForm";
 
 // var pages = [
 //   {
@@ -169,6 +170,12 @@ var dashRoutes = [
         mini: "C",
         component: Claims
       },
+      // {
+      //   path: "/reports/drivers",
+      //   name: "Drivers",
+      //   mini: "D",
+      //   component: drivers
+      // },
       {
         path: "/reports/damages",
         name: "Damages",
@@ -192,6 +199,12 @@ var dashRoutes = [
         name: "Vehicles",
         mini: "VL",
         component: Vehicles
+      },
+      {
+        path: "/reports/drivers",
+        name: "Drivers",
+        mini: "DV",
+        component: Drivers
       }
     ]
   },

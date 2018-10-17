@@ -93,7 +93,7 @@ class RegularForms extends React.Component {
     }
     return (
       <GridContainer>
-        <GridItem xs={12} sm={12} md={8}>
+        <GridItem xs={12} sm={12}>
           <Card>
             <CardHeader color="rose" icon>
               <CardIcon color="rose">

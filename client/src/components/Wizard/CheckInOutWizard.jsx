@@ -116,21 +116,21 @@ class CheckInOutWizard extends React.Component {
     //   ) {
 
 
-        console.log("This is happening");
-        this.props.captureState({
-          [this.props.steps[this.state.currentStep].stepId]: this[
-            this.props.steps[this.state.currentStep].stepId
-          ].sendState()
-        });
-      //}
-      var key = this.state.currentStep + 1;
-      this.setState({
-        currentStep: key,
-        nextButton: this.props.steps.length > key + 1 ? true : false,
-        previousButton: key > 0 ? true : false,
-        finishButton: this.props.steps.length === key + 1 ? true : false
-      });
-      this.refreshAnimation(key);
+    console.log("This is happening");
+    this.props.captureState({
+      [this.props.steps[this.state.currentStep].stepId]: this[
+        this.props.steps[this.state.currentStep].stepId
+      ].sendState()
+    });
+    //}
+    var key = this.state.currentStep + 1;
+    this.setState({
+      currentStep: key,
+      nextButton: this.props.steps.length > key + 1 ? true : false,
+      previousButton: key > 0 ? true : false,
+      finishButton: this.props.steps.length === key + 1 ? true : false
+    });
+    this.refreshAnimation(key);
     //}
   }
   previousButtonClick() {
@@ -292,7 +292,6 @@ class CheckInOutWizard extends React.Component {
             <div className={classes.clearfix} />
           </div>
         </Card>
-        <Button>Search for Vehicle</Button>
       </div>
     );
   }

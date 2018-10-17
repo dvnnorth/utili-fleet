@@ -51,9 +51,6 @@ class HeaderLinks extends React.Component {
     });
   };
   render() {
-    if (this.state.toDashboard === false) {
-      return <Redirect to="/" />;
-    }
     const { classes, rtlActive } = this.props;
     // const { open } = this.state;
     // const searchButton =
