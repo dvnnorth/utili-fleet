@@ -111,6 +111,9 @@ export default {
   getAllVehicles: () => {
     return axios.get("/api/vehicles");
   },
+  getAllVehiclesByDriver: () => {
+    return axios.get(`/api/vehicle/drivers`);
+  },
   getAllVehiclesByVIN: (VIN) => {
     return axios.get(`/api/vehicle/${VIN}`);
   },

@@ -40,7 +40,6 @@ import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
-// import API from "../";
 
 import {
   dailySalesChart,
@@ -58,19 +57,6 @@ class Dashboard extends React.Component {
     carsWithDrivers: 0
   };
 
-  // componentDidMount() {
-  //   API.getVehiclesByDriver().then(response => {
-  //     console.log(response.data);
-      // const cars = response.data.map(dataValue => {
-      //   let dataRow = [];
-      //   for (let key in dataValue) {
-      //     dataRow.push(dataValue[key]);
-      //   }
-      //   return dataRow;
-      // });
-      // this.setState({ vehicles: rows });
-  //   });
-  // }
 
   handleChange = (event, value) => {
     this.setState({ value });

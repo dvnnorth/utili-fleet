@@ -21,6 +21,19 @@ module.exports = {
       })
       .catch(err => sendError(err, res));
   },
+  
+  getVehiclesByDriver: (req, res) => {
+    db.Vehicles.findAll({
+      where: {
+        DriverId: {[Op.ne]: null} 
+      }
+    })
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));
+  },
 
   getVehicleByVIN: (req, res) => {
     db.Vehicles.findAll({

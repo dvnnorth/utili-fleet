@@ -50,6 +50,7 @@ import DirectionsCar from "@material-ui/icons/DirectionsCar";
 //import form
 
 import RegularForms from "../views/Forms/RegularForms";
+// import ClaimForm from "../views/Forms/ClaimForm";
 
 // var pages = [
 //   {

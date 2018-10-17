@@ -91,6 +91,8 @@ module.exports = app => {
   // Delete a vehicle into the database
   app.delete('/api/vehicle/:id', authenticationMiddleware(), controller.vehicles.deleteVehicle);
 
+  app.get('/api/vehicles/drivers', /*authenticationMiddleware(),*/ controller.vehicles.getVehiclesByDriver);
+
   // Get the record from the NHTSA API for a particular VIN
   app.get('/api/vinCheck/:VIN', authenticationMiddleware(), controller.vehicles.getFromVehicleDatabase);
   //////////////////////// End Vehicles /////////////////////////////
