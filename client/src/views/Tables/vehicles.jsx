@@ -12,7 +12,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import API from "../../utils/API";
 
 // import { dataTable } from "variables/general.jsx";
-class ReactTables extends Component {
+class Vehicles extends Component {
   state = {
     vehicles: []
   };
@@ -78,9 +78,8 @@ class ReactTables extends Component {
                   round
                   simple
                   onClick={() => {
-                    console.log('key'+key);
-                    console.log('id'+prop[0])
-                    API.deleteVehicles(prop[0])
+                    console.log(key);
+                    API.deleteVehicles(key)
                   }}
                   color="danger"
                   customClass="remove">
@@ -184,4 +183,4 @@ class ReactTables extends Component {
     );
   }
 }
-export default ReactTables;
+export default Vehicles;
