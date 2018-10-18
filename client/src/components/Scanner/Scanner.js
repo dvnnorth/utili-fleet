@@ -16,8 +16,8 @@ export default class Scanner extends Component {
           name: "Live",
           type: "LiveStream",
           constraints: {
-            width: 640,
-            height: 480,
+            width: 1920,
+            height: 1080,
             facingMode: "environment" // or user
           }
         },
@@ -34,14 +34,15 @@ export default class Scanner extends Component {
         },
         numOfWorkers: 8,
         decoder: {
-          readers:
-            // "code_39_vin_reader",
-            "upc_reader",
+          readers:[
+              "code_39_vin_reader"
+          ],
+
           debug: {
-            drawBoundingBox: false,
+            drawBoundingBox: true,
             showFrequency: false,
-            drawScanline: false,
-            showPattern: false
+            drawScanline: true,
+            showPattern: true
           },
           multiple: false
         },

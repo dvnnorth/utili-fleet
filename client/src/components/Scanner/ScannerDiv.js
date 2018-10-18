@@ -17,10 +17,10 @@ export default class App extends Component {
     this._onProcessed = this._onProcessed.bind(this);
   }
 
-  validateVin = (vin) => {
-    var isValidVin = vinValidator.validate(vin);
-    return isValidVin;
-  }
+  // validateVin = (vin) => {
+  //   var isValidVin = vinValidator.validate(vin);
+  //   return isValidVin;
+  // }
 
 
   // more_frec = (array) => {
@@ -54,10 +54,12 @@ export default class App extends Component {
     //     console.log(eltipo[0]);
     //     return;
     // }
-    // this.setState({ results: this.state.results.concat([result]), orderedResult: result.codeResult.code });   
+    // this.setState({ results: this.state.results.concat([result]), orderedResult: result.codeResult.code });  
+    result = result.codeResult.code;
     console.log(result);
-    const vin = this.validateVin(result) // chequeo que sea un vin valido
+    const vin = vinValidator.validate(result) // chequeo que sea un vin valido
     console.log("resultado de la llamada a la funcion para verificar el vin :" + vin)
+    this.props.getVIN(result);
     // while (vin) {    //mientras no sea un vin valido seguir escaneando
     //     // this._scan();
     // }
@@ -107,7 +109,7 @@ export default class App extends Component {
                 </ul> */}
 
         {/* hasta aqui */}
-        {this.state.scanning ? <Scanner onDetected={this._onDetected('result')} /> : null}
+        {this.state.scanning ? <Scanner onDetected={(result) => this._onDetected(result)} /> : null}
       </div>
     );
   }
