@@ -89,11 +89,10 @@ class Dashboard extends React.Component {
       const count1 = response.data.length;
       return this.setState({ totalcars: count1 });
     });
-   /* API.getAllVehiclesCost().then(response => {
+    API.getAllVehiclesCost().then(response => {
       const cost = response.data[0].cost;
       return this.setState({ vehiclesCost: cost });
-    }); */
-
+    });
     // API.getVehiclesByDriver().then(response => {
     //   console.log(response.data);
     //   const count = response.data.length;

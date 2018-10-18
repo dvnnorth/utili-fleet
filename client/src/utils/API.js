@@ -40,6 +40,9 @@ export default {
   getAllVehiclesByDriver: () => {
     return axios.get(`/api/vehicle/drivers`);
   },
+  getAllVehiclesCost: () => {
+    return axios.get("/api/vehicles/cost");
+  },
   postVehicles: data => {
     const vehicleData = {
       UnitNumber: data.UnitNumber,
@@ -316,7 +319,6 @@ export default {
   },
   ////////////////////////  END Claims  //////////////////////
 
-<<<<<<< HEAD
   ////////////////////////  START Damages  //////////////////////
 
   getAllDamages: () => {
@@ -343,40 +345,6 @@ export default {
     return axios.delete(`/api/damage/${id}`);
   },
   ////////////////////////  END Damages  //////////////////////
-=======
-    ////////////////////////  START Damages  //////////////////////
-  
-    getAllDamages: () => {
-      return axios.get("/api/damages");
-    },
-    getDamagesById: id => {
-      return axios.get(`/api/damage/${id}`);
-    },
-    postDamage: data => {
-      const DamageData = {
-        Section: data.Section,
-        Description: data.Description,
-        ClaimId: data.ClaimId,
-        VehicleId: data.VehicleId
-      };
-      return axios.post("/api/damages", DamageData);
-    },
-  
-    updateDamage: data => {
-        const DamageData = {
-          Section: data.Section,
-          Description: data.Description,
-          ClaimId: data.ClaimId,
-          VehicleId: data.VehicleId
-      };
-      return axios.post(`/api/damage/${data.id}`, DamageData);
-    },
-  
-    deleteDamage: id => {
-      return axios.delete(`/api/damage/${id}`);
-    },
-    ////////////////////////  END Damages  //////////////////////
->>>>>>> e813681fe2a9c7aeee6e11cdb6b2ee973e206e5d
   getVehicle: data => {
     return axios.post("/api/vehicle", data);
   },
@@ -393,4 +361,3 @@ export default {
     return axios.post("/api/claims");
   }
 };
-
