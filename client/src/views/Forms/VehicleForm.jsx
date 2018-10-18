@@ -150,6 +150,10 @@ class RegularForms extends React.Component {
       .catch(err => console.error(err));
   };
 
+  getVINFromScanner = (VIN) => {
+    this.setState({VIN});
+  };
+
   render() {
     const { classes } = this.props;
     if (this.state.redirect) {
@@ -159,9 +163,7 @@ class RegularForms extends React.Component {
 
       <GridContainer justify="center">
         <GridItem xs={12} sm={8}>
-          <ScannerDiv>
-            <Scanner />
-          </ScannerDiv>
+          <ScannerDiv getVIN={this.getVINFromScanner} />
         </GridItem>
         <GridItem xs={12} sm={8}>
           <Card>
@@ -184,6 +186,7 @@ class RegularForms extends React.Component {
                   inputProps={{
                     placeholder: "required"
                   }}
+                  value={this.state.VIN}
                 />
                 <Button color="rose" onClick={this.searchAndFill}>Search VIN...</Button>
                 <CustomInput

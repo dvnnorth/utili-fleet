@@ -7,7 +7,6 @@ module.exports = {
     'database': 'utilifleetDB_dev',
     'host': '127.0.0.1',
     'dialect': 'mysql'
-
   },
   'test': {
     'username': process.env.DB_USERNAME_DEV,
