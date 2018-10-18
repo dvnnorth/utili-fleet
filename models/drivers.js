@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {
-          args: 3,
+          args: 2,
           msg: 'Last-name must be at least 3 characters in length'
         }
       }
@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         len: {
-          args: 3,
+          args: 2,
           msg: 'Name must be at least 3 characters in length'
         }
       }
@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     Address2: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     }, 
     City: {
       type: DataTypes.STRING,

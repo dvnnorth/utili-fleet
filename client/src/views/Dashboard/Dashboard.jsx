@@ -125,6 +125,16 @@ class Dashboard extends React.Component {
   handleVehicles = () => {
     this.setState({ goToVehicles: true });
   };
+  commafy = num => {
+    var str = num.toString().split(".");
+    if (str[0].length >= 5) {
+      str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, "$1,");
+    }
+    if (str[1] && str[1].length >= 5) {
+      str[1] = str[1].replace(/(\d{3})/g, "$1 ");
+    }
+    return str.join(".");
+  };
   render() {
     if (this.state.goToClaims) {
       return <Redirect to="/reports/claims" />;
@@ -168,7 +178,7 @@ class Dashboard extends React.Component {
                 </CardIcon>
                 <p className={classes.cardCategory}>Total Assets</p>
                 <h3 className={classes.cardTitle}>
-                  ${() => this.state.vehiclesCost.toLocaleString("en")}
+                  ${this.commafy(this.state.vehiclesCost)}
                 </h3>
               </CardHeader>
               <CardFooter stats>
@@ -260,12 +270,12 @@ class Dashboard extends React.Component {
                     </Button>
                   </Tooltip>
                 </div>
-                <h4 className={classes.cardTitle}>Daily Sales</h4>
+                <h4 className={classes.cardTitle}>Daily Utilization</h4>
                 <p className={classes.cardCategory}>
                   <span className={classes.successText}>
-                    <ArrowUpward className={classes.upArrowCardCategory} /> 55%
+                    <ArrowUpward className={classes.upArrowCardCategory} /> 10%
                   </span>{" "}
-                  increase in today sales.
+                  increase in availability.
                 </p>
               </CardBody>
               <CardFooter chart>
@@ -310,14 +320,12 @@ class Dashboard extends React.Component {
                     </Button>
                   </Tooltip>
                 </div>
-                <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-                <p className={classes.cardCategory}>
-                  Last Campaign Performance
-                </p>
+                <h4 className={classes.cardTitle}>Assest Cost</h4>
+                <p className={classes.cardCategory}>&nbsp;</p>
               </CardBody>
               <CardFooter chart>
                 <div className={classes.stats}>
-                  <AccessTime /> campaign sent 2 days ago
+                  <AccessTime /> updated 10 minutes ago
                 </div>
               </CardFooter>
             </Card>
@@ -356,14 +364,12 @@ class Dashboard extends React.Component {
                     </Button>
                   </Tooltip>
                 </div>
-                <h4 className={classes.cardTitle}>Completed Tasks</h4>
-                <p className={classes.cardCategory}>
-                  Last Campaign Performance
-                </p>
+                <h4 className={classes.cardTitle}>Open Claims</h4>
+                <p className={classes.cardCategory}>&nbsp;</p>
               </CardBody>
               <CardFooter chart>
                 <div className={classes.stats}>
-                  <AccessTime /> campaign sent 2 days ago
+                  <AccessTime /> last update 10 minutes ago
                 </div>
               </CardFooter>
             </Card>

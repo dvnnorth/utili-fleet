@@ -9,6 +9,7 @@ import Close from "@material-ui/icons/Close";
 
 // core components
 import Button from "components/CustomButtons/Button.jsx";
+
 import API from "../../utils/API";
 
 // import { dataTable } from "variables/general.jsx";
@@ -29,19 +30,19 @@ class Vehicles extends Component {
 
       rows = rows.map((prop, key) => {
         return {
-          id1: key,
-          id: prop[0],
+          id: key,
+          dbID: prop[0],
           unitNumber: prop[1],
           VIN: prop[2],
           modelYear: prop[3],
           make: prop[4],
           model: prop[5],
           // series: prop[6],
-          vehicleType: prop[7],
+          //vehicleType: prop[7],
           bodyClass: prop[8],
           exteriorColor: prop[9],
           // interiorColor: prop[10],
-          LicensePlate: prop[11],
+          licensePlate: prop[11],
           mileage: prop[12],
           // maxMileage: prop[9],
           // MaxMileage: prop[10],
@@ -53,27 +54,41 @@ class Vehicles extends Component {
           actions: (
             // we've added some custom button actions
             <div className="actions-right">
-              { /* use this button to add a like kind of action */}
-              { /* use this button to add a edit kind of action */}
-              <Button
+              {/* use this button to add a like kind of action */}
+              {/* use this button to add a edit kind of action */}
+              {/* <Button
                 justIcon
                 round
                 simple
-                onClick={() => alert("You've pressed the edit button on colmun id: " + key)}
+                onClick={() =>
+                  alert("You've pressed the edit button on column id: " + key)
+                }
                 color="warning"
-                customClass="edit">
+              >
                 <Dvr />
-              </Button>{" "}
-              { /* use this button to remove the data row */}
+              </Button>{" "} */}
+              {/* use this button to remove the data row */}
               <Button
                 justIcon
                 round
                 simple
                 onClick={() => {
-                  API.deleteVehicles(prop[0])
+                  API.deleteVehicles(prop[0]).then(() => {
+                    let data = this.state.vehicles;
+                    data.find((o, i) => {
+                      if (o.id === key) {
+                        // here you should add some custom code so you can delete the data
+                        // from this component and from your server as well
+                        data.splice(i, 1);
+                        return true;
+                      }
+                      return false;
+                    });
+                    this.setState({ vehicles: data });
+                  });
                 }}
                 color="danger"
-                customClass="remove">
+              >
                 <Close />
               </Button>{" "}
             </div>
@@ -93,7 +108,7 @@ class Vehicles extends Component {
         columns={[
           {
             Header: "Unit #",
-            accessor: "unitNumber",
+            accessor: "unitNumber"
           },
           {
             Header: "VIN",
@@ -105,20 +120,16 @@ class Vehicles extends Component {
           },
           {
             Header: "Make",
-            accessor: "make",
+            accessor: "make"
           },
           {
             Header: "Model",
-            accessor: "model",
+            accessor: "model"
           },
-          {
-            Header: "Series",
-            accessor: "series"
-          },
-          {
-            Header: "VehicleType",
-            accessor: "vehicleType"
-          },
+          // {
+          //   Header: "VehicleType",
+          //   accessor: "vehicleType"
+          // },
           {
             Header: "BodyClass",
             accessor: "bodyClass"
@@ -126,10 +137,6 @@ class Vehicles extends Component {
           {
             Header: "ExtColor",
             accessor: "exteriorColor"
-          },
-          {
-            Header: "IntColor",
-            accessor: "interiorColor"
           },
           {
             Header: "LicensePlate",
@@ -140,34 +147,10 @@ class Vehicles extends Component {
             accessor: "mileage"
           },
           {
-            Header: "MaxMileage",
-            accessor: "maxMileage"
-          },
-          {
-            Header: "NetCost",
-            accessor: "netCost"
-          },
-          {
-            Header: "DepretiationStart",
-            accessor: "depretiationStart"
-          },
-          {
-            Header: "DepretiationEnd",
-            accessor: "depretiationEnd"
-          },
-          {
-            Header: "DepretiationRateYearly",
-            accessor: "depretiationRateYearly"
-          },
-          {
-            Header: "TollTagSerial",
-            accessor: "tollTagSerial"
-          },
-          {
             Header: "Actions",
             accessor: "actions",
             sortable: false,
-            filterable: false,
+            filterable: false
           }
         ]}
         defaultPageSize={10}

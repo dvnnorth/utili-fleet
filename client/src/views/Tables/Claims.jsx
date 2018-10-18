@@ -64,7 +64,6 @@ class Claims extends Component {
                   })
                 }
                 color="danger"
-                customclass="remove"
               >
                 <Close />
               </Button>{" "}

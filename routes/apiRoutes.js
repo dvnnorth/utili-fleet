@@ -78,9 +78,9 @@ module.exports = app => {
 
   app.post('/api/vehicle', authenticationMiddleware(), controller.vehicles.getVehicleSearch);
 
-  app.get('/api/vehicles/driverss', /*authenticationMiddleware(),*/ controller.vehicles.getVehiclesByDriver);
+  app.get('/api/vehicles/drivers', authenticationMiddleware(), controller.vehicles.getVehiclesByDriver);
 
-  app.get('/api/vehicles/cost', /*authenticationMiddleware(),*/ controller.vehicles.getVehiclesCost);
+  app.get('/api/vehicles/cost', authenticationMiddleware(), controller.vehicles.getVehiclesCost);
   
   app.get('/api/vehicle/:VIN', authenticationMiddleware(), controller.vehicles.getVehicleByVIN);
 
@@ -93,7 +93,7 @@ module.exports = app => {
   // Delete a vehicle into the database
   app.delete('/api/vehicle/:id', authenticationMiddleware(), controller.vehicles.deleteVehicle);
 
-  app.get('/api/vehicles/drivers', /*authenticationMiddleware(),*/ controller.vehicles.getVehiclesByDriver);
+  app.get('/api/vehicles/drivers', authenticationMiddleware(), controller.vehicles.getVehiclesByDriver);
 
   // Get the record from the NHTSA API for a particular VIN
   app.get('/api/vinCheck/:VIN', authenticationMiddleware(), controller.vehicles.getFromVehicleDatabase);

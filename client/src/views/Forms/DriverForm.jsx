@@ -1,6 +1,5 @@
 import React from "react";
 
-
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -8,6 +7,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import Radio from "@material-ui/core/Radio";
 import Checkbox from "@material-ui/core/Checkbox";
+import { Typography } from "@material-ui/core";
 
 // @material-ui/icons
 import MailOutline from "@material-ui/icons/MailOutline";
@@ -49,7 +49,8 @@ class RegularForms extends React.Component {
       DOB: "",
       DriversLicense: "",
       DriversLicenseExpiration: "",
-      Email: ""
+      Email: "",
+      errorMessage: ""
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnabled = this.handleChangeEnabled.bind(this);
@@ -63,7 +64,7 @@ class RegularForms extends React.Component {
 
   sumbitHandler = event => {
     event.preventDefault();
-    API.addDriver({
+    API.postDrivers({
       LastName: this.state.LastName,
       FirstName: this.state.FirstName,
       Address1: this.state.Address1,
@@ -79,13 +80,11 @@ class RegularForms extends React.Component {
     })
       .then(res => {
         console.log(res.data.id);
-        if(res.data.id) {
-          this.setState({redirect: true});
+        if (res.data.id) {
+          this.setState({ redirect: true });
         }
       })
-      .catch(err =>
-        this.setState({ errorMessage: "Login Failed" + err.toString() })
-      );
+      .catch(err => this.setState({ errorMessage: "Error" }));
   };
   render() {
     const { classes } = this.props;
@@ -113,7 +112,7 @@ class RegularForms extends React.Component {
                   }}
                   onChange={this.handleChange}
                   inputProps={{
-                    placeholder: "required"
+                    placeholder: "Required"
                   }}
                 />
                 <CustomInput
@@ -125,7 +124,7 @@ class RegularForms extends React.Component {
                   }}
                   onChange={this.handleChange}
                   inputProps={{
-                    placeholder: "required"
+                    placeholder: "Required"
                   }}
                 />
                 <CustomInput
@@ -137,7 +136,7 @@ class RegularForms extends React.Component {
                   }}
                   onChange={this.handleChange}
                   inputProps={{
-                    placeholder: "required"
+                    placeholder: "Required"
                   }}
                 />
                 <CustomInput
@@ -148,9 +147,6 @@ class RegularForms extends React.Component {
                     fullWidth: true
                   }}
                   onChange={this.handleChange}
-                  inputProps={{
-                    placeholder: "required"
-                  }}
                 />
                 <CustomInput
                   labelText="City"
@@ -161,7 +157,7 @@ class RegularForms extends React.Component {
                   }}
                   onChange={this.handleChange}
                   inputProps={{
-                    placeholder: "required"
+                    placeholder: "Required"
                   }}
                 />
                 <CustomInput
@@ -185,7 +181,7 @@ class RegularForms extends React.Component {
                   }}
                   onChange={this.handleChange}
                   inputProps={{
-                    placeholder: "required"
+                    placeholder: "Required"
                   }}
                 />
                 <CustomInput
@@ -207,8 +203,9 @@ class RegularForms extends React.Component {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  onChange={this.handleChange}
                   inputProps={{
-                    placeholder: "required"
+                    placeholder: "Required"
                   }}
                 />
                 <CustomInput
@@ -220,7 +217,7 @@ class RegularForms extends React.Component {
                   }}
                   onChange={this.handleChange}
                   inputProps={{
-                    placeholder: "Interior Color"
+                    placeholder: "Required"
                   }}
                 />
                 <CustomInput
@@ -232,19 +229,7 @@ class RegularForms extends React.Component {
                   }}
                   onChange={this.handleChange}
                   inputProps={{
-                    type: "email"
-                  }}
-                />
-                <CustomInput
-                  labelText="Mileage"
-                  id="mileage"
-                  name="mileage"
-                  formControlProps={{
-                    fullWidth: true
-                  }}
-                  onChange={this.handleChange}
-                  inputProps={{
-                    placeholder: "required"
+                    placeholder: "Required"
                   }}
                 />
                 <CustomInput
@@ -259,7 +244,15 @@ class RegularForms extends React.Component {
                     placeholder: "Required"
                   }}
                 />
-                <Button color="rose" onClick={(event) => {this.sumbitHandler(event)}}>
+                <Typography color="error">
+                  {this.state.errorMessage === "" ? null : "Invalid input"}
+                </Typography>
+                <Button
+                  color="rose"
+                  onClick={event => {
+                    this.sumbitHandler(event);
+                  }}
+                >
                   Submit
                 </Button>
               </form>

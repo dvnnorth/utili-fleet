@@ -92,32 +92,6 @@ export default {
   },
   /////////////////////////// END Vehicles/////////////////////////
 
-  /////////////////////////// START Drivers /////////////////////////
-
-  getAllDrivers: () => {
-    return axios.get("/api/drivers");
-  },
-  getAllDriversByVIN: VIN => {
-    return axios.get(`/api/driver/${VIN}`);
-  },
-  postDrivers: data => {
-    const driverData = {
-      LastName: data.LastName,
-      FirstName: data.FirstName,
-      Address1: data.Address1,
-      Address2: data.Address2,
-      City: data.City,
-      State: data.State,
-      Zip: data.Zip,
-      Telephone: data.Telephone,
-      DOB: data.DOB,
-      DriversLicence: data.DriversLicence,
-      DriversLicenseExpiration: data.DriversLicenseExpiration,
-      Email: data.Email
-    };
-    return axios.post("/api/drivers", driverData);
-  },
-
   /////////////////////////// Drivers /////////////////////////
 
   getAllDrivers: () => {
@@ -127,21 +101,7 @@ export default {
     return axios.get(`/api/driver/${VIN}`);
   },
   postDrivers: data => {
-    const driverData = {
-      LastName: data.LastName,
-      FirstName: data.FirstName,
-      Address1: data.Address1,
-      Address2: data.Address2,
-      City: data.City,
-      State: data.State,
-      Zip: data.Zip,
-      Telephone: data.Telephone,
-      DOB: data.DOB,
-      DriversLicence: data.DriversLicence,
-      DriversLicenseExpiration: data.DriversLicenseExpiration,
-      Email: data.Email
-    };
-    return axios.post("/api/drivers", driverData);
+    return axios.post("/api/drivers", data);
   },
 
   updateDrivers: data => {

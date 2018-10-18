@@ -1,6 +1,7 @@
 import React from "react";
 
 // @material-ui/core components
+import { Typography } from "@material-ui/core";
 import withStyles from "@material-ui/core/styles/withStyles";
 import FormLabel from "@material-ui/core/FormLabel";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -56,7 +57,9 @@ class RegularForms extends React.Component {
       netCost: "",
       depreciationStart: "",
       depreciationRateYearly: "",
-      tollTageSerial: ""
+      tollTageSerial: "",
+      errorMessage: false,
+      VINError: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeEnabled = this.handleChangeEnabled.bind(this);
@@ -126,32 +129,29 @@ class RegularForms extends React.Component {
           this.setState({ redirect: true });
         }
       })
-      .catch(err =>
-        this.setState({ errorMessage: "Login Failed" + err.toString() })
-      );
+      .catch(err => this.setState({ errorMessage: true }));
   };
-  searchAndFill = (event) => {
+  searchAndFill = event => {
     event.preventDefault();
     let VIN = this.state.VIN;
-    console.log('execute search and fill');
-    console.log(VIN);
     API.searchVIN(VIN)
       .then(results => {
-        let carInfo = results.data.Results[0]
+        let carInfo = results.data.Results[0];
         this.setState({
           modelYear: carInfo.ModelYear,
           make: carInfo.Make,
           model: carInfo.Model,
           series: carInfo.Series,
           vehicleType: carInfo.VehicleType,
-          bodyClass: carInfo.BodyClass
+          bodyClass: carInfo.BodyClass,
+          VINError: false
         });
       })
-      .catch(err => console.error(err));
+      .catch(err => this.setState({ VINError: true }));
   };
 
-  getVINFromScanner = (VIN) => {
-    this.setState({VIN});
+  getVINFromScanner = VIN => {
+    this.setState({ VIN });
   };
 
   render() {
@@ -160,7 +160,6 @@ class RegularForms extends React.Component {
       return <Redirect to="/dashboard" />;
     }
     return (
-
       <GridContainer justify="center">
         <GridItem xs={12} sm={8}>
           <ScannerDiv getVIN={this.getVINFromScanner} />
@@ -182,13 +181,18 @@ class RegularForms extends React.Component {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={this.state.VIN}
                   onChange={this.handleChange}
                   inputProps={{
                     placeholder: "required"
                   }}
-                  value={this.state.VIN}
                 />
-                <Button color="rose" onClick={this.searchAndFill}>Search VIN...</Button>
+                <Button color="rose" onClick={this.searchAndFill}>
+                  Search VIN...
+                </Button>
+                {this.state.VINError ? (
+                  <Typography color="error">VIN Not Found...</Typography>
+                ) : null}
                 <CustomInput
                   labelText="Unit Number"
                   name="unitNumber"
@@ -208,11 +212,11 @@ class RegularForms extends React.Component {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={this.state.modelYear}
                   onChange={this.handleChange}
                   inputProps={{
                     placeholder: "mm/dd/yyyy"
                   }}
-                  value={this.state.modelYear}
                 />
                 <CustomInput
                   labelText="Make"
@@ -221,11 +225,11 @@ class RegularForms extends React.Component {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={this.state.make}
                   onChange={this.handleChange}
                   inputProps={{
                     placeholder: "required"
                   }}
-                  value={this.state.make}
                 />
                 <CustomInput
                   labelText="Model"
@@ -234,11 +238,11 @@ class RegularForms extends React.Component {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={this.state.model}
                   onChange={this.handleChange}
                   inputProps={{
                     placeholder: "required"
                   }}
-                  value={this.state.model}
                 />
                 <CustomInput
                   labelText="Series"
@@ -247,11 +251,11 @@ class RegularForms extends React.Component {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={this.state.series}
                   onChange={this.handleChange}
                   inputProps={{
                     placeholder: "Series"
                   }}
-                  value={this.state.series}
                 />
                 <CustomInput
                   labelText="Vehicle Type"
@@ -260,11 +264,11 @@ class RegularForms extends React.Component {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={this.state.vehicleType}
                   onChange={this.handleChange}
                   inputProps={{
                     placeholder: "required"
                   }}
-                  value={this.state.vehicleType}
                 />
                 <CustomInput
                   labelText="Body Class"
@@ -273,11 +277,11 @@ class RegularForms extends React.Component {
                   formControlProps={{
                     fullWidth: true
                   }}
+                  value={this.state.bodyClass}
                   onChange={this.handleChange}
                   inputProps={{
                     placeholder: "Body Class"
                   }}
-                  value={this.state.bodyClass}
                 />
                 <CustomInput
                   labelText="Exterior Color"
@@ -398,6 +402,9 @@ class RegularForms extends React.Component {
                     type: "email"
                   }}
                 />
+                {this.state.errorMessage ? (
+                  <Typography color="error">Invalid Input</Typography>
+                ) : null}
                 <Button
                   color="rose"
                   onClick={event => {
