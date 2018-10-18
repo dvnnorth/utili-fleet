@@ -376,5 +376,11 @@ export default {
   },
   getUser: () => {
     return axios.get("/api/user");
+  },
+  getDamages: () => {
+    return axios.get("/api/damages");
+  },
+  getClaims: () => {
+    return axios.get("/api/claims");
   }
 };

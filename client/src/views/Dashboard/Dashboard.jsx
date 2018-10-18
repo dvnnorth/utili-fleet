@@ -41,6 +41,7 @@ import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
 import API from "../../utils/API";
+import { Redirect } from "react-router-dom";
 
 import {
   dailySalesChart,
@@ -78,7 +79,13 @@ var mapData = {
 class Dashboard extends React.Component {
   state = {
     value: 0,
-    carsWithDrivers: 0
+    carsWithDrivers: 0,
+    inService: "",
+    claims: "",
+    goToClaims: false,
+    goToDamages: false,
+    goToVehicles: false,
+
   };
   
 
@@ -91,6 +98,14 @@ class Dashboard extends React.Component {
     //   console.log(response.data.length);
     //   return count;
     //   });
+    API.getDamages().then( response => {
+      console.log(response.data);
+      this.setState({inService: response.data.length});
+    });
+    API.getClaims().then(response => {
+      console.log(response.data);
+      this.setState({claims: response.data.length});
+    });
   };
 
   handleChange = (event, value) => {
@@ -99,7 +114,25 @@ class Dashboard extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+  handleClaims = () => {
+    this.setState({goToClaims: true});
+  };
+  handleDamages = () => {
+    this.setState({goToDamages: true});
+  };
+  handleVehicles = () => {
+    this.setState({goToVehicles: true});
+  };
   render() {
+    if(this.state.goToClaims){
+      return <Redirect to='/reports/claims' />
+    }
+    if(this.state.goToDamages){
+      return <Redirect to='/reports/damages' />
+    }
+    if(this.state.goToVehicles){
+      return <Redirect to='/reports/vehicles' />
+    }
     const { classes } = this.props;
     return (
       <div>
@@ -120,7 +153,7 @@ class Dashboard extends React.Component {
                   {/* <Danger>
                     <Warning />
                   </Danger> */}
-                  <a href="#pablo" onClick={e => e.preventDefault()}>
+                  <a href="#" onClick={(event) => {this.handleDamages(event)}}>
                     View Vehicles
                   </a>
                 </div>
@@ -147,11 +180,11 @@ class Dashboard extends React.Component {
           <GridItem xs={12} sm={6} md={6} lg={3}>
             <Card>
               <CardHeader color="danger" stats icon>
-                <CardIcon color="danger">
+                <CardIcon color="danger" onClick={(event) => {this.handleDamages(event)}}>
                   <Icon>info_outline</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Vehicles in Service</p>
-                <h3 className={classes.cardTitle}>9</h3>
+                <h3 className={classes.cardTitle}>{this.state.inService}/1000</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -164,11 +197,11 @@ class Dashboard extends React.Component {
           <GridItem xs={12} sm={6} md={6} lg={3}>
             <Card>
               <CardHeader color="info" stats icon>
-                <CardIcon color="warning">
+                <CardIcon color="warning" onClick={(event) => {this.handleClaims(event)}}>
                   <Icon>content_copy</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Purchases</p>
-                <h3 className={classes.cardTitle}>+25</h3>
+                <p className={classes.cardCategory}>Open Claims</p>
+                <h3 className={classes.cardTitle}>{this.state.claims}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
