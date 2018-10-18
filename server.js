@@ -51,7 +51,11 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 else {
+  app.use(express.static(path.join(__dirname, 'client/public')));
   app.get('/', (req, res) => res.redirect('http://localhost:3000'));
+  app.get('/team', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/public', 'team.html'));
+  });
 }
 
 // Setup app listener and database connection

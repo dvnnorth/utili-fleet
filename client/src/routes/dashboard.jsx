@@ -32,8 +32,6 @@ import Drivers from "views/Tables/Drivers.jsx";
 //import TimelinePage from "views/Pages/Timeline.jsx";
 //import RTLSupport from "views/Pages/RTLSupport.jsx";
 
-import { Formik } from "formik";
-
 // import pagesRoutes from "./pages.jsx";
 
 // @material-ui/icons
