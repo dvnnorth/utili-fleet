@@ -30,7 +30,8 @@ module.exports = {
     })
       .then(data => {
         res.statusCode = 200;
-        res.send(data);
+        console.log(data);
+        res.json(data);
       })
       .catch(err => sendError(err, res));
   },

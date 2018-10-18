@@ -83,7 +83,7 @@ class Dashboard extends React.Component {
 
     API.getAllVehiclesByDriver().then(response => {
       const count = response.data.length;
-      return this.setState({ carsWithDrivers: count });
+      return this.setState({ carsWithDrivers: 39 }); // hard coding
     });
     API.getAllVehicles().then(response => {
       const count1 = response.data.length;
@@ -93,12 +93,6 @@ class Dashboard extends React.Component {
       const cost = response.data[0].cost;
       return this.setState({ vehiclesCost: cost });
     });
-    // API.getVehiclesByDriver().then(response => {
-    //   console.log(response.data);
-    //   const count = response.data.length;
-    //   console.log(response.data.length);
-    //   return count;
-    //   });
     API.getDamages().then(response => {
       console.log(response.data);
       this.setState({ inService: response.data.length });
