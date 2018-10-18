@@ -160,7 +160,7 @@ class Vehicles extends Component {
             accessor: "depretiationRateYearly"
           },
           {
-            Header: "TollTagSerial",
+            Header: "TollTagSerial", 
             accessor: "tollTagSerial"
           },
           {
