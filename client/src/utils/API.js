@@ -29,6 +29,9 @@ export default {
   getAllVehiclesByDriver: () => {
     return axios.get(`/api/vehicles/driverss`);
   },
+  getAllVehiclesCost: () => {
+    return axios.get(`/api/vehicles/cost`);
+  },
   postVehicles: data => {
     const vehicleData = {
       UnitNumber: data.UnitNumber,

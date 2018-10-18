@@ -97,8 +97,22 @@ module.exports = {
       })
       .catch(err => sendError(err, res));  
   },
+  
+  getVehiclesCost:(req, res) => {
+    db.Vehicles.findAll({ 
+        // attributes: ['NetCost', [Sequelize.fn('SUM', (Sequelize.fn('COALESCE', (Sequelize.col('NetCost')), 0)))]]
+        attributes: [
+          [Sequelize.fn('SUM', Sequelize.col('NetCost')), 'cost'],
+        ]
+      })
+      .then(data => {
+        res.statusCode = 200;
+        res.send(data);
+      })
+      .catch(err => sendError(err, res));  
+  },
 
-
+  
   getFromVehicleDatabase: (req, res) => {
     const nhtsaEndpoint = new URL('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/' +
       req.params.VIN);

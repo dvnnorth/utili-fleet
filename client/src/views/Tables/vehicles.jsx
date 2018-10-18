@@ -51,13 +51,12 @@ class Vehicles extends Component {
             interiorColor: prop[10],
             licencePlate: prop[11],
             mileage: prop[12],
-            maxMileage: prop[9],
-            MaxMileage: prop[10],
-            NetCost: prop[13],
-            DepretiationStart: prop[14],
-            DepretiationEnd: prop[15],
-            DepretiationRateYearly: prop[16],
-            TollTagSerial: prop[17],
+            maxMileage: prop[13],
+            netCost: prop[14],
+            depretiationStart: prop[15],
+            depretiationEnd: prop[16],
+            depretiationRateYearly: prop[17],
+            tollTagSerial: prop[18],
             actions: (
               // we've added some custom button actions
               <div className="actions-right">
@@ -142,31 +141,27 @@ class Vehicles extends Component {
           },
           {
             Header: "MaxMileage",
-            accessor: "MaxMileage"
-          },
-          {
-            Header: "VehicleType",
-            accessor: "VehicleType"
+            accessor: "maxMileage"
           },
           {
             Header: "NetCost",
-            accessor: "NetCost"
+            accessor: "netCost"
           },
           {
             Header: "DepretiationStart",
-            accessor: "DepretiationStart"
+            accessor: "depretiationStart"
           },
           {
             Header: "DepretiationEnd",
-            accessor: "DepretiationEnd"
+            accessor: "depretiationEnd"
           },
           {
             Header: "DepretiationRateYearly",
-            accessor: "DepretiationRateYearly"
+            accessor: "depretiationRateYearly"
           },
           {
             Header: "TollTagSerial",
-            accessor: "TollTagSerial"
+            accessor: "tollTagSerial"
           },
           {
             Header: "Actions",

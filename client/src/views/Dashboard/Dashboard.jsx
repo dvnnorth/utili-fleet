@@ -86,7 +86,7 @@ class Dashboard extends React.Component {
     goToClaims: false,
     goToDamages: false,
     goToVehicles: false,
-
+    vehiclesCost:0
   };
 
 
@@ -102,7 +102,12 @@ class Dashboard extends React.Component {
       .then(response => {
         const count1 = response.data.length;
         return this.setState({ totalcars: count1 })
-      })
+      });
+    API.getAllVehiclesCost()
+      .then(response => {
+        const cost = response.data[0].cost;
+        return this.setState({ vehiclesCost: cost })
+      });
   
     // API.getVehiclesByDriver().then(response => {
     //   console.log(response.data);
@@ -179,7 +184,7 @@ class Dashboard extends React.Component {
                   <Store />
                 </CardIcon>
                 <p className={classes.cardCategory}>Total Assets</p>
-                <h3 className={classes.cardTitle}>$21,245,099</h3>
+                <h3 className={classes.cardTitle}>${this.state.vehiclesCost}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
