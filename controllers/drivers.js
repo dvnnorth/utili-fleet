@@ -28,7 +28,7 @@ module.exports = {
   },
 
   createDriver: (req, res) => {
-    console.log(req.body)
+   // console.log(req.body)
     db.Drivers.create(req.body)
       .then((data) => {
         res.statusCode = 200;
