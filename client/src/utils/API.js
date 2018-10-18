@@ -14,11 +14,11 @@ export default {
   },
   /////////////////////////// START Vehicles /////////////////////////
 
-  addVehicle: function (data) {
+  addVehicle: function(data) {
     console.log(data);
     return axios.post("/api/vehicles", data);
   },
-  
+
   getAllVehicles: () => {
     return axios.get("/api/vehicles");
   },
@@ -80,7 +80,11 @@ export default {
   },
 
   searchVIN: VIN => {
-    return axios.get(`/api/vinCheck/${VIN}`);
+    const nhtsaEndpoint = new URL(
+      "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/" + VIN
+    );
+    nhtsaEndpoint.searchParams.append("format", "json");
+    return axios.get(nhtsaEndpoint);
   },
 
   /////////////////////////// END Vehicles/////////////////////////
@@ -99,10 +103,10 @@ export default {
   getAllVehicles: () => {
     return axios.get("/api/vehicles");
   },
-  getAllVehiclesByVIN: (VIN) => {
+  getAllVehiclesByVIN: VIN => {
     return axios.get(`/api/vehicle/${VIN}`);
   },
-  postVehicles: (data) => {
+  postVehicles: data => {
     const vehicleData = {
       UnitNumber: data.UnitNumber,
       VIN: data.VIN,
@@ -126,7 +130,7 @@ export default {
     return axios.post("/api/vehicles", vehicleData);
   },
 
-  updateVehicles: (data) => {
+  updateVehicles: data => {
     const vehicleData = {
       UnitNumber: data.UnitNumber,
       VIN: data.VIN,
@@ -147,25 +151,24 @@ export default {
       DepreciationRateYearly: data.DepreciationRateYearly,
       TollTagSerial: data.TollTagSerial
     };
-    return (axios.put(`/api/vehicle/${data.id}`, vehicleData));
+    return axios.put(`/api/vehicle/${data.id}`, vehicleData);
   },
 
-  deleteVehicles: (id) => {
-    return (axios.delete(`/api/vehicle/${id}`));
-
+  deleteVehicles: id => {
+    return axios.delete(`/api/vehicle/${id}`);
   },
 
   /////////////////////////// Vehicles/////////////////////////
 
-   /////////////////////////// Drivers /////////////////////////
+  /////////////////////////// Drivers /////////////////////////
 
   getAllDrivers: () => {
     return axios.get("/api/drivers");
   },
-  getAllDriversByVIN: (VIN) => {
+  getAllDriversByVIN: VIN => {
     return axios.get(`/api/driver/${VIN}`);
   },
-  postDrivers: (data) => {
+  postDrivers: data => {
     const driverData = {
       LastName: data.LastName,
       FirstName: data.FirstName,
@@ -183,7 +186,7 @@ export default {
     return axios.post("/api/drivers", driverData);
   },
 
-  updateDrivers: (data) => {
+  updateDrivers: data => {
     const driverData = {
       LastName: data.LastName,
       FirstName: data.FirstName,
@@ -198,54 +201,17 @@ export default {
       DriversLicenseExpiration: data.DriversLicenseExpiration,
       Email: data.Email
     };
-    return (axios.put(`/api/driver/${data.id}`, driverData));
+    return axios.put(`/api/driver/${data.id}`, driverData);
   },
 
-  deleteDrivers: (id) => {
-    return (axios.delete(`/api/driver/${id}`));
-
+  deleteDrivers: id => {
+    return axios.delete(`/api/driver/${id}`);
   },
 
   /////////////////////////// Drivers/////////////////////////
 
-   /////////////////////////// Employees /////////////////////////
+  /////////////////////////// Employees /////////////////////////
 
-   getAllEmployees: () => {
-    return axios.get("/api/employees");
-  },
-  getAllEmployeesByVIN: (VIN) => {
-    return axios.get(`/api/employee/${VIN}`);
-  },
-  postEmployees: (data) => {
-    const employeeData = {
-      EmployeeNumber: data.EmployeeNumber,
-      JobTitle: data.JobTitle,
-      MVRCheckDate: data.MVRCheckDate,
-      CanDrive: data.CanDrive
-    };
-    return axios.post("/api/employees", employeeData);
-  },
-
-  updateEmployees: (data) => {
-    const employeeData = {
-      EmployeeNumber: data.EmployeeNumber,
-      JobTitle: data.JobTitle,
-      MVRCheckDate: data.MVRCheckDate,
-      CanDrive: data.CanDrive
-    };
-    return (axios.put(`/api/employee/${data.id}`, employeeData));
-  },
-
-  deleteEmployees: (id) => {
-    return (axios.delete(`/api/employee/${id}`));
-
-  },
-
-  ///////////////////////////Employees/////////////////////////
-
-  
-  /////////////////////////// START Employees /////////////////////////
-  
   getAllEmployees: () => {
     return axios.get("/api/employees");
   },
@@ -261,7 +227,7 @@ export default {
     };
     return axios.post("/api/employees", employeeData);
   },
-  
+
   updateEmployees: data => {
     const employeeData = {
       EmployeeNumber: data.EmployeeNumber,
@@ -275,11 +241,45 @@ export default {
   deleteEmployees: id => {
     return axios.delete(`/api/employee/${id}`);
   },
-  
+
+  ///////////////////////////Employees/////////////////////////
+
+  /////////////////////////// START Employees /////////////////////////
+
+  getAllEmployees: () => {
+    return axios.get("/api/employees");
+  },
+  getAllEmployeesByVIN: VIN => {
+    return axios.get(`/api/employee/${VIN}`);
+  },
+  postEmployees: data => {
+    const employeeData = {
+      EmployeeNumber: data.EmployeeNumber,
+      JobTitle: data.JobTitle,
+      MVRCheckDate: data.MVRCheckDate,
+      CanDrive: data.CanDrive
+    };
+    return axios.post("/api/employees", employeeData);
+  },
+
+  updateEmployees: data => {
+    const employeeData = {
+      EmployeeNumber: data.EmployeeNumber,
+      JobTitle: data.JobTitle,
+      MVRCheckDate: data.MVRCheckDate,
+      CanDrive: data.CanDrive
+    };
+    return axios.put(`/api/employee/${data.id}`, employeeData);
+  },
+
+  deleteEmployees: id => {
+    return axios.delete(`/api/employee/${id}`);
+  },
+
   /////////////////////////// END Employees  /////////////////////////
-  
+
   ////////////////////////  START Claims  //////////////////////
-  
+
   getAllClaims: () => {
     return axios.get("/api/claims");
   },
@@ -313,7 +313,7 @@ export default {
     };
     return axios.post(`/api/claim/${data.id}`, claimData);
   },
-  
+
   deleteClaim: id => {
     return axios.delete(`/api/claim/${id}`);
   },

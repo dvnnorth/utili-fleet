@@ -136,6 +136,7 @@ class RegularForms extends React.Component {
     let VIN = this.state.VIN;
     API.searchVIN(VIN)
       .then(results => {
+        console.log(results);
         let carInfo = results.data.Results[0];
         this.setState({
           modelYear: carInfo.ModelYear,
