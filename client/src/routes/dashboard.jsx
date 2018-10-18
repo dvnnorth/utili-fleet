@@ -10,7 +10,7 @@ import Dashboard from "views/Dashboard/Dashboard.jsx";
 //import ExtendedForms from "views/Forms/ExtendedForms.jsx";
 // import ValidationForms from "views/Forms/ValidationForms.jsx";
 import CheckInWizardContainer from "views/Forms/CheckInWizardContainer.jsx";
-import CheckOutWizardContainer from "views/Forms/CheckOutWizardContainer.jsx";
+import CheckOut from "views/Forms/CheckOut.jsx";
 import DriverForm from "views/Forms/DriverForm.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 //import ExtendedTables from "views/Tables/ExtendedTables.jsx";
@@ -31,6 +31,8 @@ import Drivers from "views/Tables/Drivers.jsx";
 //import UserProfile from "views/Pages/UserProfile.jsx";
 //import TimelinePage from "views/Pages/Timeline.jsx";
 //import RTLSupport from "views/Pages/RTLSupport.jsx";
+
+import { Formik } from "formik";
 
 // import pagesRoutes from "./pages.jsx";
 
@@ -96,7 +98,7 @@ var dashRoutes = [
     path: "/checkout",
     name: "Check-out",
     icon: ArrowUpward,
-    component: CheckOutWizardContainer
+    component: CheckOut
   },
   // {
   //   collapse: true,
