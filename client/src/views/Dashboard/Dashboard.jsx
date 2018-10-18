@@ -89,10 +89,10 @@ class Dashboard extends React.Component {
       const count1 = response.data.length;
       return this.setState({ totalcars: count1 });
     });
-    API.getAllVehiclesCost().then(response => {
+   /* API.getAllVehiclesCost().then(response => {
       const cost = response.data[0].cost;
       return this.setState({ vehiclesCost: cost });
-    });
+    }); */
 
     // API.getVehiclesByDriver().then(response => {
     //   console.log(response.data);
@@ -200,15 +200,15 @@ class Dashboard extends React.Component {
                 >
                   <Icon>report</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Vehicles in Service</p>
+                <p className={classes.cardCategory}>Vehicles with damage</p>
                 <h3 className={classes.cardTitle}>
                   {this.state.inService}
-                  /1000
+                  /{this.state.totalcars}
                 </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <Link to="/about">Report Damage</Link>
+                  <Link to="/forms/damages">Report Damage</Link>
                 </div>
               </CardFooter>
             </Card>
@@ -224,12 +224,12 @@ class Dashboard extends React.Component {
                 >
                   <Icon>description</Icon>
                 </CardIcon>
-                <p className={classes.cardCategory}>Open Claims</p>
+                <p className={classes.cardCategory}>Claims</p>
                 <h3 className={classes.cardTitle}>{this.state.claims}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <Link to="/about">Open A New Claim</Link>
+                  <Link to="/forms/claims">Add A New Claim</Link>
                 </div>
               </CardFooter>
             </Card>

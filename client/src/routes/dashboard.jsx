@@ -12,6 +12,8 @@ import Dashboard from "views/Dashboard/Dashboard.jsx";
 import CheckInWizardContainer from "views/Forms/CheckInWizardContainer.jsx";
 import CheckOutWizardContainer from "views/Forms/CheckOutWizardContainer.jsx";
 import DriverForm from "views/Forms/DriverForm.jsx";
+import ClaimForm from "views/Forms/ClaimForm.jsx";
+import DamageForm from "views/Forms/DamageForm.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 //import ExtendedTables from "views/Tables/ExtendedTables.jsx";
 //import ReactTables from "views/Tables/ReactTables.jsx";
@@ -222,6 +224,19 @@ var dashRoutes = [
         mini: "AD",
         component: DriverForm
       },
+      {
+        path: "/forms/claims",
+        name: "New Claim",
+        mini: "AC",
+        component: ClaimForm
+      },
+      {
+        path: "/forms/damages",
+        name: "Report Damage",
+        mini: "RD",
+        component: DamageForm
+      }
+
     ]
   },
   // {
