@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Results from "./Results";
 import Scanner from "./Scanner";
 import vinValidator from 'vin-validator';
+import Button from "components/CustomButtons/Button.jsx";
 
 export default class App extends Component {
   constructor(props) {
@@ -37,9 +38,9 @@ export default class App extends Component {
 
     return (
       <div>
-        <button onClick={this._scan}>
+        <Button color="rose" onClick={this._scan}>
           {this.state.scanning ? "Stop" : "Start"}
-        </button>
+        </Button>
 
         {this.state.scanning ? <Scanner onDetected={(result) => this._onDetected(result)} /> : null}
       </div>

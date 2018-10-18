@@ -16,8 +16,8 @@ export default class Scanner extends Component {
           name: "Live",
           type: "LiveStream",
           constraints: {
-            width: 1920,
-            height: 1080,
+            width: 640,
+            height: 480,
             facingMode: "environment" // or user
           }
         },
