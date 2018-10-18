@@ -31,6 +31,7 @@ const styles = {
 };
 
 class ReactTables extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {

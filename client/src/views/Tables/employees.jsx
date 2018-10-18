@@ -9,94 +9,97 @@ import Close from "@material-ui/icons/Close";
 
 // core components
 import Button from "components/CustomButtons/Button.jsx";
+
 import API from "../../utils/API";
 
-// import { dataTable } from "variables/general.jsx";
-class ReactTables extends Component {
+
+class Employees extends Component {
   state = {
     employees: []
   };
 
   componentDidMount() {
     API.getAllEmployees().then(response => {
-
-      console.log(response.data);
-      const rows = response.data.map(dataValue => {
+      let rows = response.data.map(dataValue => {
         let dataRow = [];
         for (let key in dataValue) {
           dataRow.push(dataValue[key]);
-        }
+        } // poner en key el id del claim
         return dataRow;
       });
+
+
+      rows = rows.map((prop, key) => {
+        return {
+          id: key,
+          dbID: prop[0],
+          employeeNumber: prop[1],
+          jobTitle: prop[2],
+          mVRCheckDate: prop[3],
+          canDrive: prop[4],
+          actions: (
+            // we've added some custom button actions
+            <div className="actions-right">
+              {/* use this button to remove the data row */}
+              <Button
+                justIcon
+                round
+                simple
+                onClick={() =>
+                  API.deleteEmployees(prop[0]).then(() => {
+                    let data = this.state.employees;
+                    data.find((o, i) => {
+                      if (o.id === key) {
+                        // here you should add some custom code so you can delete the data
+                        // from this component and from your server as well
+                        data.splice(i, 1);
+                        return true;
+                      }
+                      return false;
+                    });
+                      this.setState({ employees: data });
+                  })
+                }
+                color="danger"
+                customclass="remove"
+              >
+                <Close />
+              </Button>{" "}
+            </div>
+          )
+        };
+      })
+
       this.setState({ employees: rows });
     });
   }
-
   render() {
     return (
       <ReactTable
-        data={this.state.employees.map((prop, key) => {
-          return {
-            id1: key,
-            id: prop[0],
-            jobTitle: prop[1],
-            MVRCheckDate: prop[2],
-            canDrive: prop[3],
-            actions: (
-              // we've added some custom button actions
-              <div className="actions-right">
-                { /* use this button to add a like kind of action */}
-                { /* use this button to add a edit kind of action */}
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => alert("You've pressed the edit button on colmun id: " + key)}
-                  color="warning"
-                  customClass="edit">
-                  <Dvr />
-                </Button>{" "}
-                { /* use this button to remove the data row */}
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => {
-                    console.log(key);
-                    API.deleteVehicles(key)
-                  }}
-                  color="danger"
-                  customClass="remove">
-                  <Close />
-                </Button>{" "}
-              </div>
-            )
-          };
-        })
-        }
+        data={this.state.employees}
         filterable
         columns={[
           {
-            Header: "Employee Number",
-            accessor: "unitNumber",
+            Header: "Employee No.",
+            accessor: "employeeNumber"
           },
           {
-            Header: "Title",
+            Header: "Job Title",
             accessor: "jobTitle"
           },
           {
             Header: "MVR Check Date",
-            accessor: "MVRCheckDate"
+            accessor: "mVRCheckDate"
           },
           {
-            Header: "Driver",
-            accessor: "canDrive",
+            Header: "Can Drive",
+            accessor: "canDrive"
           },
           {
             Header: "Actions",
             accessor: "actions",
             sortable: false,
-            filterable: false,
+            filterable: false
           }
         ]}
         defaultPageSize={10}
@@ -107,4 +110,5 @@ class ReactTables extends Component {
     );
   }
 }
-export default ReactTables;
+
+export default Employees;

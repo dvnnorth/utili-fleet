@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import cx from "classnames";
 
@@ -31,9 +32,9 @@ function Footer({ ...props }) {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a href="/dashboard" className={block}>
-                {rtlActive ? "الصفحة الرئيسية" : "Dashboard"}
-              </a>
+              <Link to="/dashboard" className={block}>
+                Dashboard
+              </Link>
             </ListItem>
             {/* <ListItem className={classes.inlineBlock}>
               <a href="#company" className={block}>
@@ -46,17 +47,18 @@ function Footer({ ...props }) {
               </a>
             </ListItem> */}
             <ListItem className={classes.inlineBlock}>
-              <a href="/admin" className={block}>
-                {rtlActive ? "مدونة" : "Admin"}
-              </a>
+              {/* the admin link to should change to /admin when admin page is made */}
+              <Link to="/dashboard" className={block}>
+                Admin
+              </Link>
             </ListItem>
           </List>
         </div>
         <p className={classes.right}>
           &copy; {1900 + new Date().getYear()}{" "}
-          <a href="/" className={anchor}>
+          <Link to="/dashboard" className={anchor}>
             {rtlActive ? "توقيت الإبداعية" : "UtiliFleet"}
-          </a>
+          </Link>
           {rtlActive
             ? ", مصنوعة مع الحب لشبكة الإنترنت أفضل"
             : ", moving your business"}

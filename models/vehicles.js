@@ -1,7 +1,7 @@
 
 'use strict';
-module.exports = (sequeliize, DataTypes) => {
-  const Vehicles = sequeliize.define('Vehicles', {
+module.exports = (sequelize, DataTypes) => {
+  const Vehicles = sequelize.define('Vehicles', {
     UnitNumber: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -13,7 +13,7 @@ module.exports = (sequeliize, DataTypes) => {
         notEmpty: true,
         isAlphanumeric: true,
         len: [17, 17],
-        notContains: ['I', 'i', 'O', 'o', 'Q', 'q'],
+        notContains: ['I', 'i', 'o', 'Q', 'q'],
         isVIN(value) {
           // Make sure value is uppercase string
           value = value.toString().toUpperCase();

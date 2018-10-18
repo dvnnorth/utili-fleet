@@ -9,18 +9,20 @@ export default {
   login: data => {
     return axios.post("/api/login", data);
   },
-  logout: function() {
-    return axios.get("/logout");
+  logout: () => {
+    return axios.get("/api/logout");
   },
-  getAllVehicles: function() {
-    return axios.get("/api/vehicles");
-  },
-
   /////////////////////////// START Vehicles /////////////////////////
 
+  addVehicle: function (data) {
+    console.log(data);
+    return axios.post("/api/vehicles", data);
+  },
+  
   getAllVehicles: () => {
     return axios.get("/api/vehicles");
   },
+
   getAllVehiclesByVIN: VIN => {
     return axios.get(`/api/vehicle/${VIN}`);
   },
@@ -77,6 +79,10 @@ export default {
 
   deleteVehicles: id => {
     return axios.delete(`/api/vehicle/${id}`);
+  },
+
+  searchVIN: VIN => {
+    return axios.get(`/api/vinCheck/${VIN}`);
   },
 
   /////////////////////////// END Vehicles/////////////////////////
@@ -329,7 +335,52 @@ export default {
   
   deleteClaim: id => {
     return axios.delete(`/api/claim/${id}`);
-  }
+  },
   ////////////////////////  END Claims  //////////////////////
+
+    ////////////////////////  START Damages  //////////////////////
+  
+    getAllDamages: () => {
+      return axios.get("/api/damages");
+    },
+    getDamagesById: id => {
+      return axios.get(`/api/damage/${id}`);
+    },
+    postDamage: data => {
+      const DamageData = {
+        Section: data.Section,
+        Description: data.Description,
+        ClaimId: data.ClaimId,
+        VehicleId: data.VehicleId
+      };
+      return axios.post("/api/damages", DamageData);
+    },
+  
+    updateDamage: data => {
+        const DamageData = {
+          Section: data.Section,
+          Description: data.Description,
+          ClaimId: data.ClaimId,
+          VehicleId: data.VehicleId
+      };
+      return axios.post(`/api/damage/${data.id}`, DamageData);
+    },
+  
+    deleteDamage: id => {
+      return axios.delete(`/api/damage/${id}`);
+    },
+    ////////////////////////  END Damages  //////////////////////
+  getVehicle: data => {
+    return axios.post("/api/vehicle", data);
+  },
+  getUser: () => {
+    return axios.get("/api/user");
+  },
+  getDamages: () => {
+    return axios.get("/api/damages");
+  },
+  getClaims: () => {
+    return axios.get("/api/claims");
+  }
 };
 

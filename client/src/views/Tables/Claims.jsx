@@ -43,17 +43,6 @@ class Claims extends Component {
           actions: (
             // we've added some custom button actions
             <div className="actions-right">
-              {/* use this button to add a edit kind of action */}
-              <Button
-                justIcon
-                round
-                simple
-                onClick={() => API.updateClaim(prop[0])}
-                color="warning"
-                customclass="edit"
-              >
-                <Dvr />
-              </Button>{" "}
               {/* use this button to remove the data row */}
               <Button
                 justIcon

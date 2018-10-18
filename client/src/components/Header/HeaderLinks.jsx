@@ -1,7 +1,10 @@
 import React from "react";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import { Redirect } from "react-router-dom";
 // import { Manager, Target, Popper } from "react-popper";
+
+import axios from "axios";
 
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
@@ -25,17 +28,27 @@ import LogOff from "@material-ui/icons/PowerSettingsNew";
 // import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 
+import API from "utils/API";
+
 import headerLinksStyle from "assets/jss/material-dashboard-pro-react/components/headerLinksStyle";
 
 class HeaderLinks extends React.Component {
   state = {
-    open: false
+    open: false,
+    toDashboard: true
   };
   handleClick = () => {
     this.setState({ open: !this.state.open });
   };
   handleClose = () => {
     this.setState({ open: false });
+  };
+  logOff = () => {
+    axios.get(`/api/logout`).then(response => {
+      console.log(response);
+        this.setState({ toDashboard: false });
+        console.log(this.state);
+    });
   };
   render() {
     const { classes, rtlActive } = this.props;
@@ -61,177 +74,8 @@ class HeaderLinks extends React.Component {
     // });
     return (
       <div className={wrapper}>
-        Logged in as USERNAME!&nbsp;&nbsp;
-        {/* <CustomInput
-          rtlActive={rtlActive}
-          formControlProps={{
-            className: classes.top + " " + classes.search
-          }}
-          inputProps={{
-            placeholder: rtlActive ? "بحث" : "Search",
-            inputProps: {
-              "aria-label": rtlActive ? "بحث" : "Search",
-              className: classes.searchInput
-            }
-          }}
-        />
-        <Button
-          color="white"
-          aria-label="edit"
-          justIcon
-          round
-          className={searchButton}
-        >
-          <Search
-            className={classes.headerLinksSvg + " " + classes.searchIcon}
-          />
-        </Button> */}
-        {/* <Button
-          color="transparent"
-          simple
-          aria-label="Dashboard"
-          justIcon
-          className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-          muiClasses={{
-            label: rtlActive ? classes.labelRTL : ""
-          }}
-        >
-          <Dashboard
-            className={
-              classes.headerLinksSvg +
-              " " +
-              (rtlActive
-                ? classes.links + " " + classes.linksRTL
-                : classes.links)
-            }
-          />
-          <Hidden mdUp implementation="css">
-            <span className={classes.linkText}>
-              {rtlActive ? "لوحة القيادة" : "Dashboard"}
-            </span>
-          </Hidden>
-        </Button> */}
-        <Button
-          color="transparent"
-          simple
-          aria-label="Lock"
-          justIcon
-          className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-          muiClasses={{
-            label: rtlActive ? classes.labelRTL : ""
-          }}
-        >
-          <Lock
-            className={
-              classes.headerLinksSvg +
-              " " +
-              (rtlActive
-                ? classes.links + " " + classes.linksRTL
-                : classes.links)
-            }
-          />
-          <Hidden mdUp implementation="css">
-            <span className={classes.linkText}>
-              {rtlActive ? "لوحة القيادة" : "Lock"}
-            </span>
-          </Hidden>
-        </Button>
-        {/* <div className={managerClasses}>
-          <Button
-            color="transparent"
-            justIcon
-            aria-label="Notifications"
-            aria-owns={open ? "menu-list" : null}
-            aria-haspopup="true"
-            onClick={this.handleClick}
-            className={rtlActive ? classes.buttonLinkRTL : classes.buttonLink}
-            muiClasses={{
-              label: rtlActive ? classes.labelRTL : ""
-            }}
-            buttonRef={node => {
-              this.anchorEl = node;
-            }}
-          >
-            <Notifications
-              className={
-                classes.headerLinksSvg +
-                " " +
-                (rtlActive
-                  ? classes.links + " " + classes.linksRTL
-                  : classes.links)
-              }
-            />
-            <span className={classes.notifications}>5</span>
-            <Hidden mdUp implementation="css">
-              <span onClick={this.handleClick} className={classes.linkText}>
-                {rtlActive ? "إعلام" : "Notification"}
-              </span>
-            </Hidden>
-          </Button>
-          <Popper
-            open={open}
-            anchorEl={this.anchorEl}
-            transition
-            disablePortal
-            placement="bottom"
-            className={classNames({
-              [classes.popperClose]: !open,
-              [classes.pooperResponsive]: true,
-              [classes.pooperNav]: true
-            })}
-          >
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                id="menu-list"
-                style={{ transformOrigin: "0 0 0" }}
-              >
-                <Paper className={classes.dropdown}>
-                  <ClickAwayListener onClickAway={this.handleClose}>
-                    <MenuList role="menu">
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={dropdownItem}
-                      >
-                        {rtlActive
-                          ? "إجلاء أوزار الأسيوي حين بل, كما"
-                          : "Mike John responded to your email"}
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={dropdownItem}
-                      >
-                        {rtlActive
-                          ? "شعار إعلان الأرضية قد ذلك"
-                          : "You have 5 new tasks"}
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={dropdownItem}
-                      >
-                        {rtlActive
-                          ? "ثمّة الخاصّة و على. مع جيما"
-                          : "You're now friend with Andrew"}
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={dropdownItem}
-                      >
-                        {rtlActive ? "قد علاقة" : "Another Notification"}
-                      </MenuItem>
-                      <MenuItem
-                        onClick={this.handleClose}
-                        className={dropdownItem}
-                      >
-                        {rtlActive ? "قد فاتّبع" : "Another One"}
-                      </MenuItem>
-                    </MenuList>
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper>
-        </div> */}
+        Logged in as {this.props.username}
+        &nbsp;&nbsp;
         <Button
           color="transparent"
           aria-label="Log Off"
@@ -240,6 +84,16 @@ class HeaderLinks extends React.Component {
           muiClasses={{
             label: rtlActive ? classes.labelRTL : ""
           }}
+          onClick={() =>
+            API.logout().then(response => {
+              let url =
+                window.location.protocol + "//" + window.location.hostname;
+              if (window.location.hostname === "localhost") {
+                url += ":3000";
+              }
+              window.location = url;
+            })
+          }
         >
           <LogOff
             className={
@@ -248,7 +102,7 @@ class HeaderLinks extends React.Component {
               (rtlActive
                 ? classes.links + " " + classes.linksRTL
                 : classes.links)
-            }
+            }          
           />
           <Hidden mdUp implementation="css">
             <span className={classes.linkText}>

@@ -2,24 +2,24 @@ import React, { Component } from "react";
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from "react-router-dom";
 
+// Get the routes for the application
 import dashboardRoutes from "routes/dashboard.jsx";
 
+// The two views for the app
 import Pages from "layouts/Pages.jsx";
 import Dashboard from "layouts/Dashboard.jsx";
 
+// Application styling
 import "assets/scss/material-dashboard-pro-react.css?v=1.4.0";
 
 const hist = createBrowserHistory();
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAuthenticated: false
-    };
-  }
-  setAuth = () => {
-    this.setState({ isAuthenticated: true });
+  state = {
+    isAuthenticated: false
+  };
+  setAuth = username => {
+    this.setState({ isAuthenticated: true, username: username });
   };
   render() {
     return (
