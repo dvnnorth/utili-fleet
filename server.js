@@ -46,6 +46,9 @@ if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
   });
+  app.get('/team', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'team.html'));
+  });
 }
 else {
   app.get('/', (req, res) => res.redirect('http://localhost:3000'));
