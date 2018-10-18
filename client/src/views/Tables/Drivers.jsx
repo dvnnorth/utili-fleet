@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect, Link } from "react-router-dom";
 // react component for creating dynamic tables
 import ReactTable from "react-table";
 
@@ -14,7 +15,8 @@ import API from "../../utils/API";
 // import { dataTable } from "variables/general.jsx";
 class Drivers extends Component {
   state = {
-    drivers: []
+    drivers: [],
+    redirect: false
   };
 
   componentDidMount() {
@@ -32,8 +34,16 @@ class Drivers extends Component {
     });
   }
 
+  redirectToDriverForm = () => this.setState({ redirect: true });
+
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/forms/driver" />;
+    }
     return (
+      <React.Fragment>
+      <Button color="rose" onClick={this.redirectToDriverForm}>Create a Driver...</Button>
+      <br /> <br />
       <ReactTable
         data={this.state.drivers.map((prop, key) => {
           return {
@@ -141,6 +151,7 @@ class Drivers extends Component {
         showPaginationBottom={false}
         className="-striped -highlight"
       />
+      </React.Fragment>
     );
   }
 }
