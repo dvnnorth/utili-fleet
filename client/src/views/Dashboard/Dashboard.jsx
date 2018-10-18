@@ -27,6 +27,7 @@ import Edit from "@material-ui/icons/Edit";
 import Place from "@material-ui/icons/Place";
 import ArtTrack from "@material-ui/icons/ArtTrack";
 import Language from "@material-ui/icons/Language";
+import Description from "@material-ui/icons/Description";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
@@ -40,8 +41,9 @@ import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
+
 import API from "../../utils/API";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 import {
   dailySalesChart,
@@ -141,7 +143,7 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="warning" stats icon>
                 <CardIcon color="warning">
-                  <Icon>content_copy</Icon>
+                  <Icon>directions_car</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Vehicle Utilization</p>
                 <h3 className={classes.cardTitle}>
@@ -153,9 +155,9 @@ class Dashboard extends React.Component {
                   {/* <Danger>
                     <Warning />
                   </Danger> */}
-                  <a href="#" onClick={(event) => {this.handleDamages(event)}}>
-                    View Vehicles
-                  </a>
+                 <Link to="/reports/vehicles">
+                  View Vehicles
+                  </Link> 
                 </div>
               </CardFooter>
             </Card>
@@ -164,7 +166,7 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="success" stats icon>
                 <CardIcon color="success">
-                  <Store />
+                <Icon>attach_money</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Total Assets</p>
                 <h3 className={classes.cardTitle}>$21,245,099</h3>
@@ -181,15 +183,16 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="danger" stats icon>
                 <CardIcon color="danger" onClick={(event) => {this.handleDamages(event)}}>
-                  <Icon>info_outline</Icon>
+                  <Icon>report</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Vehicles in Service</p>
                 <h3 className={classes.cardTitle}>{this.state.inService}/1000</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <LocalOffer />
-                  View Vehicle Inventory
+                <Link to="/about">
+                  Report Damage
+                  </Link> 
                 </div>
               </CardFooter>
             </Card>
@@ -198,15 +201,16 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="info" stats icon>
                 <CardIcon color="warning" onClick={(event) => {this.handleClaims(event)}}>
-                  <Icon>content_copy</Icon>
+                  <Icon>description</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Open Claims</p>
                 <h3 className={classes.cardTitle}>{this.state.claims}</h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <Update />
-                  Just Updated
+                  <Link to="/about">
+                  Open A New Claim
+                  </Link> 
                 </div>
               </CardFooter>
             </Card>

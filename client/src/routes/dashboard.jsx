@@ -11,6 +11,7 @@ import Dashboard from "views/Dashboard/Dashboard.jsx";
 // import ValidationForms from "views/Forms/ValidationForms.jsx";
 import CheckInWizardContainer from "views/Forms/CheckInWizardContainer.jsx";
 import CheckOutWizardContainer from "views/Forms/CheckOutWizardContainer.jsx";
+import DriverForm from "views/Forms/DriverForm.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 //import ExtendedTables from "views/Tables/ExtendedTables.jsx";
 //import ReactTables from "views/Tables/ReactTables.jsx";
@@ -155,11 +156,11 @@ var dashRoutes = [
     collapse: true,
     path: "/reports",
     name: "Reports",
-    state: "openForms",
+    state: "openReports",
     icon: "content_paste",
     views: [
       {
-        path: "/forms/agreements",
+        path: "/reports/agreements",
         name: "Agreements",
         mini: "A",
         component: Agreements
@@ -206,6 +207,21 @@ var dashRoutes = [
         mini: "DV",
         component: Drivers
       }
+    ]
+  },
+  {
+    collapse: true,
+    path: "/forms",
+    name: "Forms",
+    state: "openForms",
+    icon: "notes",
+    views: [
+      {
+        path: "/forms/driver",
+        name: "Add Driver",
+        mini: "AD",
+        component: DriverForm
+      },
     ]
   },
   // {

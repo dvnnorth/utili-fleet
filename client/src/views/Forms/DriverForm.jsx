@@ -1,5 +1,6 @@
 import React from "react";
 
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -62,7 +63,7 @@ class RegularForms extends React.Component {
 
   sumbitHandler = event => {
     event.preventDefault();
-    API.addVehicle({
+    API.addDriver({
       LastName: this.state.LastName,
       FirstName: this.state.FirstName,
       Address1: this.state.Address1,
