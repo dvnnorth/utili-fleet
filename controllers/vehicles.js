@@ -79,8 +79,7 @@ module.exports = {
     })
       .then(data => {
         // if (rowsAffected === 1)
-         res.sendStatus(200);
-         res.json(data)
+        res.sendStatus(200);
       })
       .catch(err => sendError(err, res));
   },
@@ -88,7 +87,7 @@ module.exports = {
   getVehiclesByDriver: (req, res) => {
     db.Vehicles.findAll({
       where: {
-        DriverId: {[Op.ne]: null} 
+        DriverId: { [Op.ne]: null }
       }
     })
       .then(data => {

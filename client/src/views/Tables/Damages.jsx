@@ -56,7 +56,7 @@ class Damages extends Component {
                       }
                       return false;
                     });
-                      this.setState({ damages: data });
+                    this.setState({ damages: data });
                   })
                 }
                 color="danger"

@@ -72,8 +72,7 @@ module.exports = {
   deleteDamages: (req, res) => {
     db.Damages.destroy({ where: { id: req.params.id } })
       .then(data => {
-        res.statusCode = 200;
-        res.send(data);
+        res.sendStatus(200);
       })
       .catch(err => sendError(err, res));
   },

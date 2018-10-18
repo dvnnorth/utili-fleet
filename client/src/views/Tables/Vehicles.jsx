@@ -19,15 +19,68 @@ class Vehicles extends Component {
 
   componentDidMount() {
     API.getAllVehicles().then(response => {
-
-      console.log(response.data);
-      const rows = response.data.map(dataValue => {
+      let rows = response.data.map(dataValue => {
         let dataRow = [];
         for (let key in dataValue) {
           dataRow.push(dataValue[key]);
         }
         return dataRow;
       });
+
+      rows = rows.map((prop, key) => {
+        return {
+          id1: key,
+          id: prop[0],
+          unitNumber: prop[1],
+          VIN: prop[2],
+          modelYear: prop[3],
+          make: prop[4],
+          model: prop[5],
+          // series: prop[6],
+          vehicleType: prop[7],
+          bodyClass: prop[8],
+          exteriorColor: prop[9],
+          // interiorColor: prop[10],
+          LicensePlate: prop[11],
+          mileage: prop[12],
+          // maxMileage: prop[9],
+          // MaxMileage: prop[10],
+          // NetCost: prop[13],
+          // DepretiationStart: prop[14],
+          // DepretiationEnd: prop[15],
+          // DepretiationRateYearly: prop[16],
+          // TollTagSerial: prop[17],
+          actions: (
+            // we've added some custom button actions
+            <div className="actions-right">
+              { /* use this button to add a like kind of action */}
+              { /* use this button to add a edit kind of action */}
+              <Button
+                justIcon
+                round
+                simple
+                onClick={() => alert("You've pressed the edit button on colmun id: " + key)}
+                color="warning"
+                customClass="edit">
+                <Dvr />
+              </Button>{" "}
+              { /* use this button to remove the data row */}
+              <Button
+                justIcon
+                round
+                simple
+                onClick={() => {
+                  API.deleteVehicles(prop[0])
+                }}
+                color="danger"
+                customClass="remove">
+                <Close />
+              </Button>{" "}
+            </div>
+          )
+        };
+      });
+
       this.setState({ vehicles: rows });
     });
   }
@@ -35,61 +88,7 @@ class Vehicles extends Component {
   render() {
     return (
       <ReactTable
-        data={this.state.vehicles.map((prop, key) => {
-          return {
-            id1: key,
-            id: prop[0],
-            unitNumber: prop[1],
-            VIN: prop[2],
-            modelYear: prop[3],
-            make: prop[4],
-            model: prop[5],
-            // series: prop[6],
-            vehicleType: prop[7],
-            bodyClass: prop[8],
-            exteriorColor: prop[9],
-            // interiorColor: prop[10],
-            licencePlate: prop[11],
-            mileage: prop[12],
-            // maxMileage: prop[9],
-            // MaxMileage: prop[10],
-            // NetCost: prop[13],
-            // DepretiationStart: prop[14],
-            // DepretiationEnd: prop[15],
-            // DepretiationRateYearly: prop[16],
-            // TollTagSerial: prop[17],
-            actions: (
-              // we've added some custom button actions
-              <div className="actions-right">
-                { /* use this button to add a like kind of action */}
-                { /* use this button to add a edit kind of action */}
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => alert("You've pressed the edit button on colmun id: " + key)}
-                  color="warning"
-                  customClass="edit">
-                  <Dvr />
-                </Button>{" "}
-                { /* use this button to remove the data row */}
-                <Button
-                  justIcon
-                  round
-                  simple
-                  onClick={() => {
-                    console.log(key);
-                    API.deleteVehicles(key)
-                  }}
-                  color="danger"
-                  customClass="remove">
-                  <Close />
-                </Button>{" "}
-              </div>
-            )
-          };
-        })
-        }
+        data={this.state.vehicles}
         filterable
         columns={[
           {
@@ -133,8 +132,8 @@ class Vehicles extends Component {
           //   accessor: "interiorColor"
           // },
           {
-            Header: "LicencePlate",
-            accessor: "licencePlate"
+            Header: "LicensePlate",
+            accessor: "licensePlate"
           },
           {
             Header: "Mileage",

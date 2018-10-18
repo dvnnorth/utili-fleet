@@ -43,17 +43,13 @@ class Step1 extends React.Component {
       VIN: "",
       VINGood: false,
       LicensePlate: "",
-      LicensePlateGood: false
+      LicensePlateGood: false,
+      searched: "",
+      vehicle: {}
     };
   }
   sendState() {
-    let filledState = {};
-    for (let key in this.state) {
-      if (this.state[key] !== "" && !key.includes("Good")) {
-        filledState[key] = this.state[key];
-      }
-    }
-    return filledState;
+    return this.state.vehicle;
   }
   // function that returns true if value is email, false otherwise
   verifyEmail(value) {
@@ -72,27 +68,33 @@ class Step1 extends React.Component {
   }
   change(event) {
     let makeGood = id => this.setState({ [id + "Good"]: true });
+    let numeric = /^[0-9]+$/;
     let value = event.target.value;
     let id = event.target.getAttribute("id");
-    this.setState({ [id]: value });
-    switch (id) {
-      case "UnitNumber":
-        let numeric = /^[0-9]+$/;
-        if (numeric.test(value) && value.length > 0) {
-          makeGood();
-        }
-        break;
-      case "VIN":
-        if (vinValidator.validate(value)) {
-          makeGood();
-        }
-        break;
-      case "LicensePlate":
-
-        break;
-      default:
-        break;
-    }
+    this.setState({ [id]: value }, () => {
+      switch (id) {
+        case "UnitNumber":
+          if (
+            numeric.test(this.state.UnitNumber) &&
+            this.state.UnitNumber.length > 0
+          ) {
+            makeGood(id);
+          }
+          break;
+        case "VIN":
+          if (vinValidator.validate(this.state.VIN)) {
+            makeGood(id);
+          }
+          break;
+        case "LicensePlate":
+          if (this.state.LicensePlate.length > 0) {
+            makeGood(id);
+          }
+          break;
+        default:
+          break;
+      }
+    });
   }
   isValidated() {
     if (
@@ -103,6 +105,9 @@ class Step1 extends React.Component {
       return true;
     }
     return false;
+  }
+  vehicleSearch() {
+    API
   }
   render() {
     const { classes } = this.props;
@@ -115,6 +120,8 @@ class Step1 extends React.Component {
         </GridItem>
         <GridItem xs={10}>
           <CustomInput
+            success={this.state.UnitNumberGood}
+            error={!this.state.UnitNumberGood && this.state.UnitNumber !== ""}
             labelText={<span>Unit Number</span>}
             id="UnitNumber"
             formControlProps={{
@@ -125,7 +132,7 @@ class Step1 extends React.Component {
             }}
           />
           <CustomInput
-            success={this.state.VINGood || this.state.VIN === ""}
+            success={this.state.VINGood}
             error={!this.state.VINGood && this.state.VIN !== ""}
             labelText={<span>VIN</span>}
             id="VIN"
@@ -139,6 +146,7 @@ class Step1 extends React.Component {
         </GridItem>
         <GridItem xs={12} sm={12} md={12} lg={10}>
           <CustomInput
+            success={this.state.LicensePlate !== ""}
             labelText={<span>License Plate</span>}
             id="LicensePlate"
             formControlProps={{
