@@ -111,10 +111,10 @@ class Vehicles extends Component {
             Header: "Model",
             accessor: "model",
           },
-          // {
-          //   Header: "Series",
-          //   accessor: "series"
-          // },
+          {
+            Header: "Series",
+            accessor: "series"
+          },
           {
             Header: "VehicleType",
             accessor: "vehicleType"
@@ -127,10 +127,10 @@ class Vehicles extends Component {
             Header: "ExtColor",
             accessor: "exteriorColor"
           },
-          // {
-          //   Header: "IntColor",
-          //   accessor: "interiorColor"
-          // },
+          {
+            Header: "IntColor",
+            accessor: "interiorColor"
+          },
           {
             Header: "LicensePlate",
             accessor: "licensePlate"
@@ -139,34 +139,30 @@ class Vehicles extends Component {
             Header: "Mileage",
             accessor: "mileage"
           },
-          // {
-          //   Header: "MaxMileage",
-          //   accessor: "MaxMileage"
-          // },
-          // {
-          //   Header: "VehicleType",
-          //   accessor: "VehicleType"
-          // },
-          // {
-          //   Header: "NetCost",
-          //   accessor: "NetCost"
-          // },
-          // {
-          //   Header: "DepretiationStart",
-          //   accessor: "DepretiationStart"
-          // },
-          // {
-          //   Header: "DepretiationEnd",
-          //   accessor: "DepretiationEnd"
-          // },
-          // {
-          //   Header: "DepretiationRateYearly",
-          //   accessor: "DepretiationRateYearly"
-          // },
-          // {
-          //   Header: "TollTagSerial",
-          //   accessor: "TollTagSerial"
-          // },
+          {
+            Header: "MaxMileage",
+            accessor: "maxMileage"
+          },
+          {
+            Header: "NetCost",
+            accessor: "netCost"
+          },
+          {
+            Header: "DepretiationStart",
+            accessor: "depretiationStart"
+          },
+          {
+            Header: "DepretiationEnd",
+            accessor: "depretiationEnd"
+          },
+          {
+            Header: "DepretiationRateYearly",
+            accessor: "depretiationRateYearly"
+          },
+          {
+            Header: "TollTagSerial",
+            accessor: "tollTagSerial"
+          },
           {
             Header: "Actions",
             accessor: "actions",

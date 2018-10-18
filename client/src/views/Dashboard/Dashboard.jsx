@@ -41,7 +41,6 @@ import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
-
 import API from "../../utils/API";
 import { Redirect, Link } from "react-router-dom";
 
@@ -53,21 +52,9 @@ import {
 
 import dashboardStyle from "assets/jss/material-dashboard-pro-react/views/dashboardStyle";
 
-import imagePlaceHolder from "assets/img/image_placeholder.jpg";
-
-var mapData = {
-  AU: 760,
-  BR: 550,
-  CA: 120,
-  DE: 1300,
-  FR: 540,
-  GB: 690,
-  GE: 200,
-  IN: 200,
-  RO: 600,
-  RU: 300,
-  US: 2920
-};
+import card1 from "assets/img/card-1.jpeg";
+import card2 from "assets/img/card-2.jpeg";
+import card3 from "assets/img/card-3.jpeg";
 
 // function countCarDriver () {
 // API.getVehiclesByDriver().then(response => {
@@ -82,33 +69,46 @@ class Dashboard extends React.Component {
   state = {
     value: 0,
     carsWithDrivers: 0,
+    totalcars: 0,
     inService: "",
     claims: "",
     goToClaims: false,
     goToDamages: false,
     goToVehicles: false,
-
+    vehiclesCost: 0
   };
-  
 
-  componentDidMount() {
+  componentWillMount() {
     // const carsWithDrivers = countCarDriver();
-  
+
+    API.getAllVehiclesByDriver().then(response => {
+      const count = response.data.length;
+      return this.setState({ carsWithDrivers: count });
+    });
+    API.getAllVehicles().then(response => {
+      const count1 = response.data.length;
+      return this.setState({ totalcars: count1 });
+    });
+    API.getAllVehiclesCost().then(response => {
+      const cost = response.data[0].cost;
+      return this.setState({ vehiclesCost: cost });
+    });
+
     // API.getVehiclesByDriver().then(response => {
     //   console.log(response.data);
     //   const count = response.data.length;
     //   console.log(response.data.length);
     //   return count;
     //   });
-    API.getDamages().then( response => {
+    API.getDamages().then(response => {
       console.log(response.data);
-      this.setState({inService: response.data.length});
+      this.setState({ inService: response.data.length });
     });
     API.getClaims().then(response => {
       console.log(response.data);
-      this.setState({claims: response.data.length});
+      this.setState({ claims: response.data.length });
     });
-  };
+  }
 
   handleChange = (event, value) => {
     this.setState({ value });
@@ -117,23 +117,23 @@ class Dashboard extends React.Component {
     this.setState({ value: index });
   };
   handleClaims = () => {
-    this.setState({goToClaims: true});
+    this.setState({ goToClaims: true });
   };
   handleDamages = () => {
-    this.setState({goToDamages: true});
+    this.setState({ goToDamages: true });
   };
   handleVehicles = () => {
-    this.setState({goToVehicles: true});
+    this.setState({ goToVehicles: true });
   };
   render() {
-    if(this.state.goToClaims){
-      return <Redirect to='/reports/claims' />
+    if (this.state.goToClaims) {
+      return <Redirect to="/reports/claims" />;
     }
-    if(this.state.goToDamages){
-      return <Redirect to='/reports/damages' />
+    if (this.state.goToDamages) {
+      return <Redirect to="/reports/damages" />;
     }
-    if(this.state.goToVehicles){
-      return <Redirect to='/reports/vehicles' />
+    if (this.state.goToVehicles) {
+      return <Redirect to="/reports/vehicles" />;
     }
     const { classes } = this.props;
     return (
@@ -147,7 +147,7 @@ class Dashboard extends React.Component {
                 </CardIcon>
                 <p className={classes.cardCategory}>Vehicle Utilization</p>
                 <h3 className={classes.cardTitle}>
-                  5/1000 
+                  {this.state.carsWithDrivers}/{this.state.totalcars}
                 </h3>
               </CardHeader>
               <CardFooter stats>
@@ -155,9 +155,7 @@ class Dashboard extends React.Component {
                   {/* <Danger>
                     <Warning />
                   </Danger> */}
-                 <Link to="/reports/vehicles">
-                  View Vehicles
-                  </Link> 
+                  <Link to="/reports/vehicles">View Vehicles</Link>
                 </div>
               </CardFooter>
             </Card>
@@ -166,10 +164,12 @@ class Dashboard extends React.Component {
             <Card>
               <CardHeader color="success" stats icon>
                 <CardIcon color="success">
-                <Icon>attach_money</Icon>
+                  <Icon>attach_money</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Total Assets</p>
-                <h3 className={classes.cardTitle}>$21,245,099</h3>
+                <h3 className={classes.cardTitle}>
+                  ${() => this.state.vehiclesCost.toLocaleString("en")}
+                </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
@@ -182,17 +182,23 @@ class Dashboard extends React.Component {
           <GridItem xs={12} sm={6} md={6} lg={3}>
             <Card>
               <CardHeader color="danger" stats icon>
-                <CardIcon color="danger" onClick={(event) => {this.handleDamages(event)}}>
+                <CardIcon
+                  color="danger"
+                  onClick={event => {
+                    this.handleDamages(event);
+                  }}
+                >
                   <Icon>report</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Vehicles in Service</p>
-                <h3 className={classes.cardTitle}>{this.state.inService}/1000</h3>
+                <h3 className={classes.cardTitle}>
+                  {this.state.inService}
+                  /1000
+                </h3>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                <Link to="/about">
-                  Report Damage
-                  </Link> 
+                  <Link to="/about">Report Damage</Link>
                 </div>
               </CardFooter>
             </Card>
@@ -200,7 +206,12 @@ class Dashboard extends React.Component {
           <GridItem xs={12} sm={6} md={6} lg={3}>
             <Card>
               <CardHeader color="info" stats icon>
-                <CardIcon color="warning" onClick={(event) => {this.handleClaims(event)}}>
+                <CardIcon
+                  color="warning"
+                  onClick={event => {
+                    this.handleClaims(event);
+                  }}
+                >
                   <Icon>description</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Open Claims</p>
@@ -208,101 +219,9 @@ class Dashboard extends React.Component {
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <Link to="/about">
-                  Open A New Claim
-                  </Link> 
+                  <Link to="/about">Open A New Claim</Link>
                 </div>
               </CardFooter>
-            </Card>
-          </GridItem>
-        </GridContainer>
-        <GridContainer>
-          <GridItem xs={12}>
-            <Card>
-              <CardHeader color="success" icon>
-                <CardIcon color="success">
-                  <Language />
-                </CardIcon>
-                <h4 className={classes.cardIconTitle}>
-                  Sales by Top Locations in the US
-                </h4>
-              </CardHeader>
-              <CardBody>
-                <GridContainer justify="space-between">
-                  <GridItem xs={12} sm={12} md={5}>
-                    <Table
-                      tableData={[
-                        [
-                          // <img src={us_flag} alt="us_flag" />,
-                          "Houston",
-                          "2.920",
-                          "53.23%"
-                        ],
-                        [
-                          // <img src={de_flag} alt="us_flag" />,
-                          "Austin",
-                          "1.300",
-                          "20.43%"
-                        ],
-                        [
-                          // <img src={au_flag} alt="us_flag" />,
-                          "Dallas",
-                          "760",
-                          "10.35%"
-                        ],
-                        [
-                          // <img src={gb_flag} alt="us_flag" />,
-                          "San Antonio",
-                          "690",
-                          "7.87%"
-                        ],
-                        [
-                          // <img src={ro_flag} alt="us_flag" />,
-                          "Fort Worth",
-                          "600",
-                          "5.94%"
-                        ],
-                        [
-                          // <img src={br_flag} alt="us_flag" />,
-                          "Galveston",
-                          "550",
-                          "4.34%"
-                        ]
-                      ]}
-                    />
-                  </GridItem>
-                  <GridItem xs={12} sm={12} md={6}>
-                    <VectorMap
-                      map={"world_mill"}
-                      backgroundColor="transparent"
-                      zoomOnScroll={false}
-                      containerStyle={{
-                        width: "100%",
-                        height: "280px"
-                      }}
-                      containerClassName="map"
-                      regionStyle={{
-                        initial: {
-                          fill: "#e4e4e4",
-                          "fill-opacity": 0.9,
-                          stroke: "none",
-                          "stroke-width": 0,
-                          "stroke-opacity": 0
-                        }
-                      }}
-                      series={{
-                        regions: [
-                          {
-                            values: mapData,
-                            scale: ["#AAAAAA", "#444444"],
-                            normalizeFunction: "polynomial"
-                          }
-                        ]
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer>
-              </CardBody>
             </Card>
           </GridItem>
         </GridContainer>
@@ -450,14 +369,14 @@ class Dashboard extends React.Component {
             </Card>
           </GridItem>
         </GridContainer>
-        <h3>Manage Listings</h3>
+        <h3>Vehicles</h3>
         <br />
         <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <Card product className={classes.cardHover}>
               <CardHeader image className={classes.cardHeaderHover}>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
-                  <img src={imagePlaceHolder} alt="..." />
+                  <img src={card1} alt="..." />
                 </a>
               </CardHeader>
               <CardBody>
@@ -499,7 +418,7 @@ class Dashboard extends React.Component {
                   </a>
                 </h4>
                 <p className={classes.cardProductDesciprion}>
-                 Best Selling Vehicle
+                  Best Selling Vehicle
                 </p>
               </CardBody>
               <CardFooter product>
@@ -516,7 +435,7 @@ class Dashboard extends React.Component {
             <Card product className={classes.cardHover}>
               <CardHeader image className={classes.cardHeaderHover}>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
-                  <img src={imagePlaceHolder} alt="..." />
+                  <img src={card2} alt="..." />
                 </a>
               </CardHeader>
               <CardBody>
@@ -575,7 +494,7 @@ class Dashboard extends React.Component {
             <Card product className={classes.cardHover}>
               <CardHeader image className={classes.cardHeaderHover}>
                 <a href="#pablo" onClick={e => e.preventDefault()}>
-                  <img src={imagePlaceHolder} alt="..." />
+                  <img src={card3} alt="..." />
                 </a>
               </CardHeader>
               <CardBody>

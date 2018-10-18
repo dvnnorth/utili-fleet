@@ -84,7 +84,7 @@ module.exports = {
       .catch(err => sendError(err, res));
   },
 
-  getVehiclesByDriver: (req, res) => {
+  getVehiclesByDriver:(req, res) => {
     db.Vehicles.findAll({
       where: {
         DriverId: { [Op.ne]: null }
@@ -92,12 +92,26 @@ module.exports = {
     })
       .then(data => {
         res.statusCode = 200;
+        res.json(data);
+      })
+      .catch(err => sendError(err, res));  
+  },
+  
+  getVehiclesCost:(req, res) => {
+    db.Vehicles.findAll({ 
+        // attributes: ['NetCost', [Sequelize.fn('SUM', (Sequelize.fn('COALESCE', (Sequelize.col('NetCost')), 0)))]]
+        attributes: [
+          [Sequelize.fn('SUM', Sequelize.col('NetCost')), 'cost'],
+        ]
+      })
+      .then(data => {
+        res.statusCode = 200;
         res.send(data);
       })
-      .catch(err => sendError(err, res));
+      .catch(err => sendError(err, res));  
   },
 
-
+  
   getFromVehicleDatabase: (req, res) => {
     const nhtsaEndpoint = new URL('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/' +
       req.params.VIN);

@@ -6,8 +6,8 @@ module.exports = {
     'password': process.env.DB_PASSWORD_DEV || "root",
     'database': 'utilifleetDB_dev',
     'host': '127.0.0.1',
-    'dialect': 'mysql',
-    'port': '8889'
+    'dialect': 'mysql'
+
   },
   'test': {
     'username': process.env.DB_USERNAME_DEV,
