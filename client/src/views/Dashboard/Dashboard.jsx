@@ -177,14 +177,16 @@ class Dashboard extends React.Component {
                   <Icon>attach_money</Icon>
                 </CardIcon>
                 <p className={classes.cardCategory}>Total Assets</p>
-                <h3 className={classes.cardTitle}>
+                <h4 className={classes.cardTitle}>
                   ${this.commafy(this.state.vehiclesCost)}
-                </h3>
+                </h4>
               </CardHeader>
               <CardFooter stats>
                 <div className={classes.stats}>
-                  <DateRange />
-                  Last 24 Hours
+                  {/* <Danger>
+                    <Warning />
+                  </Danger> */}
+                  <Link to="/reports/vehicles">View Vehicles</Link>
                 </div>
               </CardFooter>
             </Card>

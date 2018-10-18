@@ -10,7 +10,7 @@ import Dashboard from "views/Dashboard/Dashboard.jsx";
 //import ExtendedForms from "views/Forms/ExtendedForms.jsx";
 // import ValidationForms from "views/Forms/ValidationForms.jsx";
 import CheckInWizardContainer from "views/Forms/CheckInWizardContainer.jsx";
-import CheckOut from "views/Forms/CheckOut.jsx";
+import CheckOut from "views/Forms/CheckOutWizardContainer.jsx";
 import DriverForm from "views/Forms/DriverForm.jsx";
 // import RegularTables from "views/Tables/RegularTables.jsx";
 //import ExtendedTables from "views/Tables/ExtendedTables.jsx";

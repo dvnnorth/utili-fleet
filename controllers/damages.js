@@ -51,18 +51,7 @@ module.exports = {
   },
 
   createDamages: (req, res) => {
-    console.log({
-      Section: req.body.Section,
-      Description: req.body.Description,
-      ClaimId: req.body.ClaimId,
-      VehicleId: req.body.VehicleId
-    });
-    db.Damages.create({
-      Section: req.body.Section,
-      Description: req.body.Description,
-      ClaimId: req.body.ClaimId,
-      VehicleId: req.body.VehicleId
-    }).then(data => {
+    db.Damages.create(req.body).then(data => {
       res.statusCode = 200;
       res.send(data);
     })

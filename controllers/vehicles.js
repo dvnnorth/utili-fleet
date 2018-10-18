@@ -21,11 +21,11 @@ module.exports = {
       })
       .catch(err => sendError(err, res));
   },
-  
+
   getVehiclesByDriver: (req, res) => {
     db.Vehicles.findAll({
       where: {
-        DriverId: {[Op.ne]: null} 
+        DriverId: { [Op.ne]: null }
       }
     })
       .then(data => {
@@ -55,6 +55,31 @@ module.exports = {
     }
     db.Vehicles.findAll({
       where: constraints
+    })
+      .then(response => {
+        res.statusCode = 200;
+        res.send(response);
+      })
+      .catch(err => sendError(err, res));
+  },
+
+  getUnitNumbers: (req, res) => {
+    db.Vehicles.findAll({
+      attributes: [ 'UnitNumber' ]
+    })
+      .then(response => {
+        res.statusCode = 200;
+        res.send(response);
+      })
+      .catch(err => sendError(err, res));
+  },
+
+  getUnitMileage: (req, res) => {
+    db.Vehicles.findAll({
+      attributes: [ 'Mileage' ],
+      where: {
+        UnitNumber: req.params.unitNumber
+      }
     })
       .then(response => {
         res.statusCode = 200;
@@ -97,7 +122,20 @@ module.exports = {
       .catch(err => sendError(err, res));
   },
 
-  getVehiclesByDriver:(req, res) => {
+  getByUnit: (req, res) => {
+    db.Vehicles.findAll({
+      where: {
+        UnitNumber: req.params.unit
+      }
+    })
+      .then(data => {
+        res.statusCode = 200;
+        res.json(data);
+      })
+      .catch(err => sendError(err, res));
+  },
+
+  getVehiclesByDriver: (req, res) => {
     db.Vehicles.findAll({
       where: {
         DriverId: { [Op.ne]: null }
@@ -107,24 +145,24 @@ module.exports = {
         res.statusCode = 200;
         res.json(data);
       })
-      .catch(err => sendError(err, res));  
+      .catch(err => sendError(err, res));
   },
-  
-  getVehiclesCost:(req, res) => {
-    db.Vehicles.findAll({ 
-        // attributes: ['NetCost', [Sequelize.fn('SUM', (Sequelize.fn('COALESCE', (Sequelize.col('NetCost')), 0)))]]
-        attributes: [
-          [Sequelize.fn('SUM', Sequelize.col('NetCost')), 'cost'],
-        ]
-      })
+
+  getVehiclesCost: (req, res) => {
+    db.Vehicles.findAll({
+      // attributes: ['NetCost', [Sequelize.fn('SUM', (Sequelize.fn('COALESCE', (Sequelize.col('NetCost')), 0)))]]
+      attributes: [
+        [Sequelize.fn('SUM', Sequelize.col('NetCost')), 'cost'],
+      ]
+    })
       .then(data => {
         res.statusCode = 200;
         res.send(data);
       })
-      .catch(err => sendError(err, res));  
+      .catch(err => sendError(err, res));
   },
 
-  
+
   getFromVehicleDatabase: (req, res) => {
     const nhtsaEndpoint = new URL('https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVinValues/' +
       req.params.VIN);

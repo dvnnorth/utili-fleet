@@ -1,19 +1,18 @@
 import React from "react";
 
+// @material-ui/icons
+import DirectionsCar from "@material-ui/icons/DirectionsCar";
+
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Checkbox from "@material-ui/core/Checkbox";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 // core components
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
+import CustomInput from "components/CustomInput/CustomInput.jsx";
 
-import customSelectStyle from "assets/jss/material-dashboard-pro-react/customSelectStyle.jsx";
-import customCheckboxRadioSwitch from "assets/jss/material-dashboard-pro-react/customCheckboxRadioSwitch.jsx";
+import API from "utils/API";
 
 const style = {
   infoText: {
@@ -24,175 +23,109 @@ const style = {
   inputAdornmentIcon: {
     color: "#555"
   },
-  choiche: {
-    textAlign: "center",
-    cursor: "pointer",
-    marginTop: "20px"
-  },
-  ...customSelectStyle,
-  ...customCheckboxRadioSwitch
+  inputAdornment: {
+    position: "relative"
+  }
 };
 
 class Step2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      simpleSelect: "",
-      desgin: false,
-      code: false,
-      develop: false
+      Mileage: "",
+      MileageState: "",
+      currentMileage: ""
     };
   }
   sendState() {
-    return this.state;
+    return { Mileage: this.state.Mileage };
   }
-  handleSimple = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-  handleChange = name => event => {
-    this.setState({ [name]: event.target.checked });
-  };
+
+  change(event, stateName, type) {
+    switch (type) {
+      case "Mileage":
+        console.log(event.target.value);
+        console.log(parseInt(event.target.value));
+        if (parseInt(event.target.value) >= this.state.currentMileage) {
+          this.setState({ [stateName + "State"]: "success" });
+        } else {
+          this.setState({ [stateName + "State"]: "error" });
+        }
+        break;
+      default:
+        break;
+    }
+    this.setState({ [stateName]: event.target.value });
+  }
   isValidated() {
-    return true;
+    if (this.state.MileageState === "success") {
+      return true;
+    } else {
+      if (this.state.MileageState !== "success") {
+        this.setState({ MileageState: "error" });
+      }
+    }
+    return false;
+  }
+  componentDidUpdate() {
+    function isEmpty(obj) {
+      for (var key in obj) {
+        if (obj.hasOwnProperty(key)) return false;
+      }
+      return true;
+    }
+    if (
+      !isEmpty(this.props.getAllStates()) &&
+      this.state.currentMileage === ""
+    ) {
+      let UnitNumber = this.props.getAllStates()[0].vehicle.UnitNumber;
+      console.log("UnitNumber: ", UnitNumber);
+      API.getUnitMileage(UnitNumber)
+        .then(res => {
+          this.setState({ currentMileage: res.data[0].Mileage });
+        })
+        .catch(err => console.error(err));
+    }
   }
   render() {
     const { classes } = this.props;
     return (
-      <div>
-        <h4 className={classes.infoText}>What are you doing? (checkboxes)</h4>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={12} lg={10}>
-            <GridContainer>
-              <GridItem xs={12} sm={4}>
-                <div className={classes.choiche}>
-                  <Checkbox
-                    tabIndex={-1}
-                    onClick={this.handleChange("desgin")}
-                    checkedIcon={
-                      <i
-                        className={
-                          "fas fa-pencil-alt " + classes.iconCheckboxIcon
-                        }
-                      />
-                    }
-                    icon={
-                      <i
-                        className={
-                          "fas fa-pencil-alt " + classes.iconCheckboxIcon
-                        }
-                      />
-                    }
-                    classes={{
-                      checked: classes.iconCheckboxChecked,
-                      root: classes.iconCheckbox
-                    }}
-                  />
-                  <h6>Design</h6>
-                </div>
-              </GridItem>
-              <GridItem xs={12} sm={4}>
-                <div className={classes.choiche}>
-                  <Checkbox
-                    tabIndex={-1}
-                    onClick={this.handleChange("code")}
-                    checkedIcon={
-                      <i
-                        className={
-                          "fas fa-terminal " + classes.iconCheckboxIcon
-                        }
-                      />
-                    }
-                    icon={
-                      <i
-                        className={
-                          "fas fa-terminal " + classes.iconCheckboxIcon
-                        }
-                      />
-                    }
-                    classes={{
-                      checked: classes.iconCheckboxChecked,
-                      root: classes.iconCheckbox
-                    }}
-                  />
-                  <h6>Code</h6>
-                </div>
-              </GridItem>
-              <GridItem xs={12} sm={4}>
-                <div className={classes.choiche}>
-                  <Checkbox
-                    tabIndex={-1}
-                    onClick={this.handleChange("develop")}
-                    checkedIcon={
-                      <i
-                        className={"fas fa-laptop " + classes.iconCheckboxIcon}
-                      />
-                    }
-                    icon={
-                      <i
-                        className={"fas fa-laptop " + classes.iconCheckboxIcon}
-                      />
-                    }
-                    classes={{
-                      checked: classes.iconCheckboxChecked,
-                      root: classes.iconCheckbox
-                    }}
-                  />
-                  <h6>Develop</h6>
-                </div>
-                <FormControl fullWidth className={classes.selectFormControl}>
-                  <InputLabel
-                    htmlFor="simple-select"
-                    className={classes.selectLabel}
-                  >
-                    Choose City
-                  </InputLabel>
-                  <Select
-                    MenuProps={{
-                      className: classes.selectMenu
-                    }}
-                    classes={{
-                      select: classes.select
-                    }}
-                    value={this.state.simpleSelect}
-                    onChange={this.handleSimple}
-                    inputProps={{
-                      name: "simpleSelect",
-                      id: "simple-select"
-                    }}
-                  >
-                    <MenuItem
-                      disabled
-                      classes={{
-                        root: classes.selectMenuItem
-                      }}
-                    >
-                      Choose City
-                    </MenuItem>
-                    <MenuItem
-                      classes={{
-                        root: classes.selectMenuItem,
-                        selected: classes.selectMenuItemSelected
-                      }}
-                      value="2"
-                    >
-                      Paris
-                    </MenuItem>
-                    <MenuItem
-                      classes={{
-                        root: classes.selectMenuItem,
-                        selected: classes.selectMenuItemSelected
-                      }}
-                      value="3"
-                    >
-                      Bucharest
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </GridItem>
-            </GridContainer>
-          </GridItem>
-        </GridContainer>
-      </div>
+      <GridContainer justify="center">
+        <GridItem xs={12} sm={12}>
+          <h4 className={classes.infoText}>Input Updated Mileage</h4>
+        </GridItem>
+        <GridItem xs={12} sm={12}>
+          <h5 className={classes.infoText}>
+            Current Mileage: {this.state.currentMileage}
+          </h5>
+        </GridItem>
+        <GridItem xs={12} sm={6}>
+          <CustomInput
+            success={this.state.MileageState === "success"}
+            error={this.state.MileageState === "error"}
+            labelText={
+              <span>
+                Updated Mileage <small>(required)</small>
+              </span>
+            }
+            id="Mileage"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              onChange: event => this.change(event, "Mileage", "Mileage"),
+              endAdornment: (
+                <InputAdornment
+                  position="end"
+                  className={classes.inputAdornment}
+                >
+                  <DirectionsCar className={classes.inputAdornmentIcon} />
+                </InputAdornment>
+              )
+            }}
+          />
+        </GridItem>
+      </GridContainer>
     );
   }
 }

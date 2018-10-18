@@ -1,7 +1,8 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
 // core components
-import CheckInOutWizard from "components/Wizard/CheckInOutWizard.jsx";
+import Wizard from "components/Wizard/Wizard.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 
@@ -10,37 +11,29 @@ import Step2 from "./DriverForm.jsx";
 import Step3 from "./CheckOutSteps/Step3.jsx";
 
 class CheckOutWizardContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  captureState = otherState => {
-    this.setState({ ...this.state, ...otherState });
+  state = {
+    redirect: false
   };
-
-  submitData = () => {
-    // Check state is as it should be then make API call and send state
+  submitCheckIn = (vehicleData, damage) => {
+    this.setState({ redirect: true });
   };
-
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/dashboard" />;
+    }
     return (
       <GridContainer justify="center">
         <GridItem xs={12} sm={8}>
-          <CheckInOutWizard
+          <Wizard
+            validate
             steps={[
               { stepName: "Client / Employee", stepComponent: Step1, stepId: "driverOrEmployee" },
-              {
-                stepName: "Find / Add Driver",
-                stepComponent: Step2,
-                stepId: "driverInformation"
-              },
+              { stepName: "Find / Add Driver", stepComponent: Step2, stepId: "driverInformation" },
               { stepName: "Notate Damages", stepComponent: Step3, stepId: "damages" }
             ]}
             title="Vehicle Check-Out"
             subtitle="Complete the process to check out a vehicle."
-            captureState={this.captureState}
-            submitData={this.submitData}
+            finishButtonClick={this.submitCheckIn}
           />
         </GridItem>
       </GridContainer>

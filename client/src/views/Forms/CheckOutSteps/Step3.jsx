@@ -11,14 +11,24 @@ import FormControl from "@material-ui/core/FormControl";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
+import DirectionsCar from "@material-ui/icons/DirectionsCar";
+import InputAdornment from "@material-ui/core/InputAdornment";
 
 import customSelectStyle from "assets/jss/material-dashboard-pro-react/customSelectStyle.jsx";
+
+import API from "utils/API";
 
 const style = {
   infoText: {
     fontWeight: "300",
     margin: "10px 0 30px",
     textAlign: "center"
+  },
+  inputAdornmentIcon: {
+    color: "#555"
+  },
+  inputAdornment: {
+    position: "relative"
   },
   ...customSelectStyle
 };
@@ -27,59 +37,63 @@ class Step3 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      simpleSelect: "",
-      desgin: false,
-      code: false,
-      develop: false
+      Section: "",
+      SectionState: "",
+      Description: "",
+      DescriptionState: ""
     };
   }
+
   sendState() {
-    return this.state;
+    return {
+      Section: this.state.Section,
+      Description: this.state.Description
+    };
   }
-  handleSimple = event => {
+
+  handleSelect = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
-  isValidated() {
-    return true;
+
+  change(event, stateName, type) {
+    switch (type) {
+      case "Description":
+        if (event.target.value.length >= 1) {
+          this.setState({ [stateName + "State"]: "success" });
+        } else {
+          this.setState({ [stateName + "State"]: "error" });
+        }
+        break;
+      default:
+        break;
+    }
+    this.setState({ [stateName]: event.target.value });
   }
+  isValidated() {
+    if (
+      this.state.SectionState === "success" &&
+      this.state.DescriptionState === "success"
+    ) {
+      return true;
+    } else {
+      if (this.state.SectionState !== "success") {
+        this.setState({ SectionState: "error" });
+      }
+      if (this.state.DescriptionState !== "success") {
+        this.setState({ DescriptionState: "error" });
+      }
+    }
+    return false;
+  }
+
   render() {
     const { classes } = this.props;
     return (
       <GridContainer justify="center">
-        <GridItem xs={12} sm={12}>
-          <h4 className={classes.infoText}>Are you living in a nice area?</h4>
-        </GridItem>
-        <GridItem xs={12} sm={7}>
-          <CustomInput
-            labelText="Street Name"
-            id="streetname"
-            formControlProps={{
-              fullWidth: true
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={3}>
-          <CustomInput
-            labelText="Street No."
-            id="streetno"
-            formControlProps={{
-              fullWidth: true
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={5}>
-          <CustomInput
-            labelText="City"
-            id="city"
-            formControlProps={{
-              fullWidth: true
-            }}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={5}>
+        <GridItem xs={12} sm={12} md={8}>
           <FormControl fullWidth className={classes.selectFormControl}>
-            <InputLabel htmlFor="simple-select" className={classes.selectLabel}>
-              Choose City
+            <InputLabel htmlFor="Section" className={classes.selectLabel}>
+              Damage Section <small>(required)</small>
             </InputLabel>
             <Select
               MenuProps={{
@@ -88,41 +102,57 @@ class Step3 extends React.Component {
               classes={{
                 select: classes.select
               }}
-              value={this.state.simpleSelect}
-              onChange={this.handleSimple}
+              value={this.state.Section}
+              onChange={this.handleSelect}
               inputProps={{
-                name: "simpleSelect",
-                id: "simple-select"
+                name: "Section",
+                id: "Section"
               }}
             >
-              <MenuItem
-                disabled
-                classes={{
-                  root: classes.selectMenuItem
-                }}
-              >
-                Country
-              </MenuItem>
-              <MenuItem
-                classes={{
-                  root: classes.selectMenuItem,
-                  selected: classes.selectMenuItemSelected
-                }}
-                value="2"
-              >
-                France
-              </MenuItem>
-              <MenuItem
-                classes={{
-                  root: classes.selectMenuItem,
-                  selected: classes.selectMenuItemSelected
-                }}
-                value="3"
-              >
-                Romania
-              </MenuItem>
+              {(() => {
+                let menuItems = [];
+                for (let i = 1; i <= 20; i++) {
+                  menuItems.push(
+                    <MenuItem
+                      key={i}
+                      classes={{
+                        root: classes.selectMenuItem
+                      }}
+                      value={i}
+                    >
+                      {i}
+                    </MenuItem>
+                  );
+                }
+                return menuItems;
+              })()}
             </Select>
           </FormControl>
+          <CustomInput
+            success={this.state.DescriptionState === "success"}
+            error={this.state.DescriptionState === "error"}
+            labelText={
+              <span>
+                Description <small>(required)</small>
+              </span>
+            }
+            id="Mileage"
+            formControlProps={{
+              fullWidth: true
+            }}
+            inputProps={{
+              onChange: event =>
+                this.change(event, "Description", "Description"),
+              endAdornment: (
+                <InputAdornment
+                  position="end"
+                  className={classes.inputAdornment}
+                >
+                  <DirectionsCar className={classes.inputAdornmentIcon} />
+                </InputAdornment>
+              )
+            }}
+          />
         </GridItem>
       </GridContainer>
     );

@@ -22,8 +22,19 @@ export default {
     return axios.get("/api/vehicles");
   },
 
+  getAllUnits: () => {
+    return axios.get("/api/vehicles/units");
+  },
+
+  getUnitMileage: UnitNumber => {
+    return axios.get(`/api/vehicle/${UnitNumber}/mileage`);
+  },
+
   getAllVehiclesByVIN: VIN => {
     return axios.get(`/api/vehicle/${VIN}`);
+  },
+  searchForVehicle: constraints => {
+    return axios.post("/api/vehicle", constraints);
   },
   getAllVehiclesByDriver: () => {
     return axios.get(`/api/vehicles/driverss`);
@@ -55,28 +66,12 @@ export default {
     return axios.post("/api/vehicles", vehicleData);
   },
 
-  updateVehicles: data => {
-    const vehicleData = {
-      UnitNumber: data.UnitNumber,
-      VIN: data.VIN,
-      ModelYear: data.ModelYear,
-      Make: data.Make,
-      Model: data.Model,
-      Series: data.Series,
-      VehicleType: data.VehicleType,
-      BodyClass: data.BodyClass,
-      ExteriorColor: data.ExteriorColor,
-      InteriorColor: data.InteriorColor,
-      LicencePlate: data.LicencePlate,
-      Mileage: data.Mileage,
-      MaxMileage: data.MaxMileage,
-      NetCost: data.NetCost,
-      DepreciationStart: data.DepreciationStart,
-      DepreciationEnd: data.DepreciationEnd,
-      DepreciationRateYearly: data.DepreciationRateYearly,
-      TollTagSerial: data.TollTagSerial
-    };
-    return axios.put(`/api/vehicle/${data.id}`, vehicleData);
+  updateVehicles: (id, data) => {
+    return axios.put(`/api/vehicle/${id}`, data);
+  },
+
+  getByUnit: unit => {
+    return axios.get(`/api/vehicle/unit/${unit}`);
   },
 
   deleteVehicles: id => {
@@ -246,13 +241,7 @@ export default {
     return axios.get(`/api/damage/${id}`);
   },
   postDamage: data => {
-    const DamageData = {
-      Section: data.Section,
-      Description: data.Description,
-      ClaimId: data.ClaimId,
-      VehicleId: data.VehicleId
-    };
-    return axios.post("/api/damages", DamageData);
+    return axios.post("/api/damages", data);
   },
 
   updateDamage: data => {

@@ -77,6 +77,10 @@ module.exports = app => {
   app.get('/api/vehicles', authenticationMiddleware(), controller.vehicles.getAllVehicles);
 
   app.post('/api/vehicle', authenticationMiddleware(), controller.vehicles.getVehicleSearch);
+  
+  app.get('/api/vehicles/units', authenticationMiddleware(), controller.vehicles.getUnitNumbers);
+
+  app.get('/api/vehicle/:unitNumber/mileage', authenticationMiddleware(), controller.vehicles.getUnitMileage);
 
   app.get('/api/vehicles/drivers', authenticationMiddleware(), controller.vehicles.getVehiclesByDriver);
 
@@ -86,6 +90,8 @@ module.exports = app => {
 
   // Post a vehicle into the database
   app.post('/api/vehicles', authenticationMiddleware(), controller.vehicles.createVehicle);
+
+  app.get('/api/vehicle/unit/:unit', authenticationMiddleware(), controller.vehicles.getByUnit)
 
   // Update a vehicle into the database
   app.put('/api/vehicle/:id', authenticationMiddleware(), controller.vehicles.updateVehicle);

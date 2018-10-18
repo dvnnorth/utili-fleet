@@ -10,6 +10,8 @@ import Card from "components/Card/Card.jsx";
 
 import wizardStyle from "assets/jss/material-dashboard-pro-react/components/wizardStyle.jsx";
 
+//import API from "utils/API";
+
 class Wizard extends React.Component {
   constructor(props) {
     super(props);
@@ -49,6 +51,7 @@ class Wizard extends React.Component {
     this.previousButtonClick = this.previousButtonClick.bind(this);
     this.finishButtonClick = this.finishButtonClick.bind(this);
     this.updateWidth = this.updateWidth.bind(this);
+    this.getAllStates = this.getAllStates.bind(this);
   }
   componentDidMount() {
     this.refreshAnimation(0);
@@ -56,6 +59,9 @@ class Wizard extends React.Component {
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateWidth);
+  }
+  getAllStates() {
+    return this.state.allStates;
   }
   updateWidth() {
     this.refreshAnimation(this.state.currentStep);
@@ -162,17 +168,46 @@ class Wizard extends React.Component {
     }
   }
   finishButtonClick() {
-    if (
-      this.props.validate &&
-      ((this[this.props.steps[this.state.currentStep].stepId].isValidated !==
-        undefined &&
-        this[this.props.steps[this.state.currentStep].stepId].isValidated()) ||
-        this[this.props.steps[this.state.currentStep].stepId].isValidated ===
-          undefined) &&
-      this.props.finishButtonClick !== undefined
-    ) {
-      this.props.finishButtonClick();
-    }
+    this.props.finishButtonClick();
+    // this.setState(
+    //   {
+    //     allStates: [
+    //       ...this.state.allStates,
+    //       {
+    //         [this.props.steps[this.state.currentStep].stepId]: this[
+    //           this.props.steps[this.state.currentStep].stepId
+    //         ].sendState()
+    //       }
+    //     ]
+    //   },
+    //   function() {
+    //     API.getByUnit(this.state.allStates[0].vehicle.UnitNumber)
+    //       .then(res => {
+    //         this.props.submitCheckIn(
+    //           res.data[0].id,
+    //           this.state.allStates[2].damage
+    //         );
+    //       })
+    //       .catch(err => {
+    //         console.error(err);
+    //       });
+    //     let data = {
+    //       Mileage: this.state.allStates[1].information.Mileage
+    //     };
+    //   }
+    // );
+    //this.props.submitCheckIn();
+    // if (
+    //   this.props.validate &&
+    //   ((this[this.props.steps[this.state.currentStep].stepId].isValidated !==
+    //     undefined &&
+    //     this[this.props.steps[this.state.currentStep].stepId].isValidated()) ||
+    //     this[this.props.steps[this.state.currentStep].stepId].isValidated ===
+    //       undefined) &&
+    //   this.props.finishButtonClick !== undefined
+    // ) {
+    //   this.props.finishButtonClick();
+    // }
   }
   refreshAnimation(index) {
     var total = this.props.steps.length;
@@ -236,12 +271,7 @@ class Wizard extends React.Component {
                     key={key}
                     style={{ width: this.state.width }}
                   >
-                    <a
-                      className={classes.stepsAnchor}
-                      onClick={() => this.navigationStepChange(key)}
-                    >
-                      {prop.stepName}
-                    </a>
+                    <span className={classes.stepsAnchor}>{prop.stepName}</span>
                   </li>
                 );
               })}
@@ -264,13 +294,14 @@ class Wizard extends React.Component {
                   <prop.stepComponent
                     innerRef={node => (this[prop.stepId] = node)}
                     allStates={this.state.allStates}
+                    getAllStates={this.getAllStates}
                   />
                 </div>
               );
             })}
           </div>
           <div className={classes.footer}>
-            <div className={classes.left}>
+            {/* <div className={classes.left}>
               {this.state.previousButton ? (
                 <Button
                   className={this.props.previousButtonClasses}
@@ -279,7 +310,7 @@ class Wizard extends React.Component {
                   {this.props.previousButtonText}
                 </Button>
               ) : null}
-            </div>
+            </div>  -----> Removing back button, error prone */}
             <div className={classes.right}>
               {this.state.nextButton ? (
                 <Button
@@ -317,7 +348,7 @@ Wizard.defaultProps = {
   nextButtonClasses: "",
   nextButtonText: "Next",
   finishButtonClasses: "",
-  finishButtonText: "Finish"
+  finishButtonText: "Submit"
 };
 
 Wizard.propTypes = {
