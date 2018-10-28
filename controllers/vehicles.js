@@ -3,6 +3,7 @@ const db = require('../models/index');
 const request = require('request-promise');
 
 const Op = Sequelize.Op;
+const $ne = Op.ne;
 
 const sendError = (err, res) => {
   if (err) {
@@ -18,20 +19,6 @@ module.exports = {
       .then(data => {
         res.statusCode = 200;
         res.send(data);
-      })
-      .catch(err => sendError(err, res));
-  },
-
-  getVehiclesByDriver: (req, res) => {
-    db.Vehicles.findAll({
-      where: {
-        DriverId: { [Op.ne]: null }
-      }
-    })
-      .then(data => {
-        res.statusCode = 200;
-        console.log(data);
-        res.json(data);
       })
       .catch(err => sendError(err, res));
   },
@@ -66,7 +53,7 @@ module.exports = {
 
   getUnitNumbers: (req, res) => {
     db.Vehicles.findAll({
-      attributes: [ 'UnitNumber' ]
+      attributes: ['UnitNumber']
     })
       .then(response => {
         res.statusCode = 200;
@@ -77,7 +64,7 @@ module.exports = {
 
   getUnitMileage: (req, res) => {
     db.Vehicles.findAll({
-      attributes: [ 'Mileage' ],
+      attributes: ['Mileage'],
       where: {
         UnitNumber: req.params.unitNumber
       }
@@ -139,7 +126,7 @@ module.exports = {
   getVehiclesByDriver: (req, res) => {
     db.Vehicles.findAll({
       where: {
-        DriverId: { [Op.ne]: null }
+        DriverId: { $ne: null }
       }
     })
       .then(data => {

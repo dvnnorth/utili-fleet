@@ -65,7 +65,22 @@ class LoginPage extends React.Component {
       .then(res => {
         this.props.setAuth(res.data.username);
       })
-      .catch(err => this.setState({ errorMessage: "Login Failed" + err.toString()}));
+      .catch(err =>
+        this.setState({ errorMessage: "Login Failed" + err.toString() })
+      );
+  };
+  demo = event => {
+    event.preventDefault();
+    API.login({
+      username: "test",
+      password: "Test1234"
+    })
+      .then(res => {
+        this.props.setAuth("test");
+      })
+      .catch(err =>
+        this.setState({ errorMessage: "Login Failed" + err.toString() })
+      );
   };
   handleChange = event => {
     this.setState({ [event.target.getAttribute("id")]: event.target.value });
@@ -192,6 +207,15 @@ class LoginPage extends React.Component {
                     block
                   >
                     Let's Go
+                  </Button>
+                  <Button
+                    onClick={event => this.demo(event)}
+                    color="info"
+                    simple
+                    size="lg"
+                    block
+                  >
+                    Demo
                   </Button>
                 </CardFooter>
               </Card>

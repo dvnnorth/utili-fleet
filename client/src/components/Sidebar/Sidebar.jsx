@@ -15,7 +15,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Hidden from "@material-ui/core/Hidden";
 import Collapse from "@material-ui/core/Collapse";
 import Icon from "@material-ui/core/Icon";
-import LogOff from "@material-ui/icons/PowerSettingsNew";
 
 // core components
 import SidebarHeaderLinks from "components/Header/SidebarHeaderLinks.jsx";
@@ -87,49 +86,49 @@ class Sidebar extends React.Component {
       bgColor,
       rtlActive
     } = this.props;
-    const itemText =
-      classes.itemText +
-      " " +
-      cx({
-        [classes.itemTextMini]: this.props.miniActive && this.state.miniActive,
-        [classes.itemTextMiniRTL]:
-          rtlActive && this.props.miniActive && this.state.miniActive,
-        [classes.itemTextRTL]: rtlActive
-      });
-    const collapseItemText =
-      classes.collapseItemText +
-      " " +
-      cx({
-        [classes.collapseItemTextMini]:
-          this.props.miniActive && this.state.miniActive,
-        [classes.collapseItemTextMiniRTL]:
-          rtlActive && this.props.miniActive && this.state.miniActive,
-        [classes.collapseItemTextRTL]: rtlActive
-      });
-    const userWrapperClass =
-      classes.user +
-      " " +
-      cx({
-        [classes.whiteAfter]: bgColor === "white"
-      });
-    const caret =
-      classes.caret +
-      " " +
-      cx({
-        [classes.caretRTL]: rtlActive
-      });
-    const collapseItemMini =
-      classes.collapseItemMini +
-      " " +
-      cx({
-        [classes.collapseItemMiniRTL]: rtlActive
-      });
-    const photo =
-      classes.photo +
-      " " +
-      cx({
-        [classes.photoRTL]: rtlActive
-      });
+    // const itemText =
+    //   classes.itemText +
+    //   " " +
+    //   cx({
+    //     [classes.itemTextMini]: this.props.miniActive && this.state.miniActive,
+    //     [classes.itemTextMiniRTL]:
+    //       rtlActive && this.props.miniActive && this.state.miniActive,
+    //     [classes.itemTextRTL]: rtlActive
+    //   });
+    // const collapseItemText =
+    //   classes.collapseItemText +
+    //   " " +
+    //   cx({
+    //     [classes.collapseItemTextMini]:
+    //       this.props.miniActive && this.state.miniActive,
+    //     [classes.collapseItemTextMiniRTL]:
+    //       rtlActive && this.props.miniActive && this.state.miniActive,
+    //     [classes.collapseItemTextRTL]: rtlActive
+    //   });
+    // const userWrapperClass =
+    //   classes.user +
+    //   " " +
+    //   cx({
+    //     [classes.whiteAfter]: bgColor === "white"
+    //   });
+    // const caret =
+    //   classes.caret +
+    //   " " +
+    //   cx({
+    //     [classes.caretRTL]: rtlActive
+    //   });
+    // const collapseItemMini =
+    //   classes.collapseItemMini +
+    //   " " +
+    //   cx({
+    //     [classes.collapseItemMiniRTL]: rtlActive
+    //   });
+    // const photo =
+    //   classes.photo +
+    //   " " +
+    //   cx({
+    //     [classes.photoRTL]: rtlActive
+    //   });
     var links = (
       <List className={classes.list}>
         {routes.map((prop, key) => {

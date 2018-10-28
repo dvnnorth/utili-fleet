@@ -38,7 +38,7 @@ export default {
     return axios.post("/api/vehicle", constraints);
   },
   getAllVehiclesByDriver: () => {
-    return axios.get(`/api/vehicle/drivers`);
+    return axios.get("/api/vehicles/drivers");
   },
   getAllVehiclesCost: () => {
     return axios.get("/api/vehicles/cost");
@@ -89,77 +89,6 @@ export default {
 
   /////////////////////////// END Vehicles/////////////////////////
 
-  /////////////////////////// START Drivers /////////////////////////
-
-  getAllDrivers: () => {
-    return axios.get("/api/drivers");
-  },
-  getAllDriversByVIN: VIN => {
-    return axios.get(`/api/driver/${VIN}`);
-  },
-
-  /////////////////////////// Vehicles /////////////////////////
-
-  getAllVehicles: () => {
-    return axios.get("/api/vehicles");
-  },
-  getAllVehiclesByVIN: VIN => {
-    return axios.get(`/api/vehicle/${VIN}`);
-  },
-  postVehicles: data => {
-    const vehicleData = {
-      UnitNumber: data.UnitNumber,
-      VIN: data.VIN,
-      ModelYear: data.ModelYear,
-      Make: data.Make,
-      Model: data.Model,
-      Series: data.Series,
-      VehicleType: data.VehicleType,
-      BodyClass: data.BodyClass,
-      ExteriorColor: data.ExteriorColor,
-      InteriorColor: data.InteriorColor,
-      LicencePlate: data.LicencePlate,
-      Mileage: data.Mileage,
-      MaxMileage: data.MaxMileage,
-      NetCost: data.NetCost,
-      DepreciationStart: data.DepreciationStart,
-      DepreciationEnd: data.DepreciationEnd,
-      DepreciationRateYearly: data.DepreciationRateYearly,
-      TollTagSerial: data.TollTagSerial
-    };
-    return axios.post("/api/vehicles", vehicleData);
-  },
-
-  updateVehicles: data => {
-    const vehicleData = {
-      UnitNumber: data.UnitNumber,
-      VIN: data.VIN,
-      ModelYear: data.ModelYear,
-      Make: data.Make,
-      Model: data.Model,
-      Series: data.Series,
-      VehicleType: data.VehicleType,
-      BodyClass: data.BodyClass,
-      ExteriorColor: data.ExteriorColor,
-      InteriorColor: data.InteriorColor,
-      LicencePlate: data.LicencePlate,
-      Mileage: data.Mileage,
-      MaxMileage: data.MaxMileage,
-      NetCost: data.NetCost,
-      DepreciationStart: data.DepreciationStart,
-      DepreciationEnd: data.DepreciationEnd,
-      DepreciationRateYearly: data.DepreciationRateYearly,
-      TollTagSerial: data.TollTagSerial
-    };
-    return axios.put(`/api/vehicle/${data.id}`, vehicleData);
-  },
-
-  deleteVehicles: id => {
-    return axios.delete(`/api/vehicle/${id}`);
-  },
-
-  /////////////////////////// Vehicles/////////////////////////
-
   /////////////////////////// Drivers /////////////////////////
 
   getAllDrivers: () => {
@@ -209,40 +138,6 @@ export default {
   },
 
   /////////////////////////// Drivers/////////////////////////
-
-  /////////////////////////// Employees /////////////////////////
-
-  getAllEmployees: () => {
-    return axios.get("/api/employees");
-  },
-  getAllEmployeesByVIN: VIN => {
-    return axios.get(`/api/employee/${VIN}`);
-  },
-  postEmployees: data => {
-    const employeeData = {
-      EmployeeNumber: data.EmployeeNumber,
-      JobTitle: data.JobTitle,
-      MVRCheckDate: data.MVRCheckDate,
-      CanDrive: data.CanDrive
-    };
-    return axios.post("/api/employees", employeeData);
-  },
-
-  updateEmployees: data => {
-    const employeeData = {
-      EmployeeNumber: data.EmployeeNumber,
-      JobTitle: data.JobTitle,
-      MVRCheckDate: data.MVRCheckDate,
-      CanDrive: data.CanDrive
-    };
-    return axios.put(`/api/employee/${data.id}`, employeeData);
-  },
-
-  deleteEmployees: id => {
-    return axios.delete(`/api/employee/${id}`);
-  },
-
-  ///////////////////////////Employees/////////////////////////
 
   /////////////////////////// START Employees /////////////////////////
 
